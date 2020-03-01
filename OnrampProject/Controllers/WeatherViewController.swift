@@ -15,22 +15,35 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var lastTimeUpdatedLabel: UILabel!
     @IBOutlet weak var hourBlockWeatherSlider: UISlider!
     
+    private var weatherViewModel = WeatherViewModel()
+    
     // MARK: - Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        updateWeather()
+        
     }
     
     @IBAction func onTapRefreshImage(_ sender: UITapGestureRecognizer) {
-        
-        print("Should fetch current weather")
+        updateWeather()
     }
     
     @IBAction func didChangeWeatherBlock(_ sender: UISlider) {
         print("Weather block time changed: \(sender.value)")
     }
     
+    private func updateWeather() {
+        weatherViewModel.updateCurrentWeather(city: "Fresno", state: "California", country: "USA")
+        updateUI()
+    }
+    
+    private func updateUI() {
+        currentWeatherLabel.text = "\(String(describing: weatherViewModel.currentTemp!))°"
+        currentDateLabel.text = weatherViewModel.currentDate
+        lastTimeUpdatedLabel.text = weatherViewModel.lastUpdateTime
+    }
 
 }
 
