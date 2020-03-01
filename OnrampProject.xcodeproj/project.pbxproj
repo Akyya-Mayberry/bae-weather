@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		6030FC7023FF0C79007F0901 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6030FC6F23FF0C79007F0901 /* AppDelegate.swift */; };
 		6030FC7223FF0C79007F0901 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6030FC7123FF0C79007F0901 /* SceneDelegate.swift */; };
-		6030FC7423FF0C79007F0901 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6030FC7323FF0C79007F0901 /* ViewController.swift */; };
+		6030FC7423FF0C79007F0901 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6030FC7323FF0C79007F0901 /* WeatherViewController.swift */; };
 		6030FC7723FF0C79007F0901 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6030FC7523FF0C79007F0901 /* Main.storyboard */; };
 		6030FC7923FF0C7A007F0901 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6030FC7823FF0C7A007F0901 /* Assets.xcassets */; };
 		6030FC7C23FF0C7A007F0901 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6030FC7A23FF0C7A007F0901 /* LaunchScreen.storyboard */; };
@@ -38,7 +38,7 @@
 		6030FC6C23FF0C79007F0901 /* OnrampProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnrampProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6030FC6F23FF0C79007F0901 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6030FC7123FF0C79007F0901 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		6030FC7323FF0C79007F0901 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6030FC7323FF0C79007F0901 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		6030FC7623FF0C79007F0901 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6030FC7823FF0C7A007F0901 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6030FC7B23FF0C7A007F0901 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -99,12 +99,11 @@
 		6030FC6E23FF0C79007F0901 /* OnrampProject */ = {
 			isa = PBXGroup;
 			children = (
+				EB605B0D240B49B4001DFE40 /* Controllers */,
+				EB605B0C240B499C001DFE40 /* Views */,
 				6030FC6F23FF0C79007F0901 /* AppDelegate.swift */,
 				6030FC7123FF0C79007F0901 /* SceneDelegate.swift */,
-				6030FC7323FF0C79007F0901 /* ViewController.swift */,
-				6030FC7523FF0C79007F0901 /* Main.storyboard */,
 				6030FC7823FF0C7A007F0901 /* Assets.xcassets */,
-				6030FC7A23FF0C7A007F0901 /* LaunchScreen.storyboard */,
 				6030FC7D23FF0C7A007F0901 /* Info.plist */,
 			);
 			path = OnrampProject;
@@ -126,6 +125,23 @@
 				6030FC9323FF0C7A007F0901 /* Info.plist */,
 			);
 			path = OnrampProjectUITests;
+			sourceTree = "<group>";
+		};
+		EB605B0C240B499C001DFE40 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6030FC7523FF0C79007F0901 /* Main.storyboard */,
+				6030FC7A23FF0C7A007F0901 /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EB605B0D240B49B4001DFE40 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6030FC7323FF0C79007F0901 /* WeatherViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,7 +274,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6030FC7423FF0C79007F0901 /* ViewController.swift in Sources */,
+				6030FC7423FF0C79007F0901 /* WeatherViewController.swift in Sources */,
 				6030FC7023FF0C79007F0901 /* AppDelegate.swift in Sources */,
 				6030FC7223FF0C79007F0901 /* SceneDelegate.swift in Sources */,
 			);
@@ -434,6 +450,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NUPVHHY28G;
 				INFOPLIST_FILE = OnrampProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -451,6 +468,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NUPVHHY28G;
 				INFOPLIST_FILE = OnrampProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
