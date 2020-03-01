@@ -76,7 +76,7 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="219" image="sample-summer" translatesAutoresizingMaskIntoConstraints="NO" id="c35-Vg-ELG" userLabel="Bae Image View">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="219" image="sample-hot" translatesAutoresizingMaskIntoConstraints="NO" id="c35-Vg-ELG" userLabel="Bae Image View">
                                 <rect key="frame" x="10" y="189.5" width="394" height="543"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="250" axis="vertical" distribution="fillEqually" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="sB0-6P-I9i" userLabel="Hour Weather Block Stack View">
@@ -142,6 +142,7 @@
                         <outlet property="currentWeatherLabel" destination="XNb-aU-Ls9" id="3Eg-tr-C5I"/>
                         <outlet property="hourBlockWeatherSlider" destination="shb-4O-qYl" id="ync-9r-f47"/>
                         <outlet property="lastTimeUpdatedLabel" destination="MbA-cN-4Bv" id="oEl-4L-LwE"/>
+                        <outlet property="modelImageView" destination="c35-Vg-ELG" id="B5r-3v-M5z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -157,7 +158,7 @@
     <resources>
         <image name="arrow.clockwise" catalog="system" width="56" height="64"/>
         <image name="moon" catalog="system" width="64" height="60"/>
-        <image name="sample-summer" width="1920" height="1280"/>
+        <image name="sample-hot" width="1920" height="1280"/>
         <image name="sunrise" catalog="system" width="64" height="48"/>
     </resources>
 </document>

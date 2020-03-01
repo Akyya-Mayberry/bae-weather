@@ -28,14 +28,19 @@ enum TypeOfWeather {
 }
 
 /**
-    Defines a specific set of hourly times within a 24 hour period using military time
+ Defines a specific set of hourly times within a 24 hour period using military time
  
  - Description: Instead of viewing weather for every hour of the day, the weather block time
  will attempt to represent some of the most common important hours of the day for needing a temperature
  */
 enum WeatherBlockTime: Int, CaseIterable {
-    case six, nine, twelve, sixteen, nineteen, twentytwo
+    case six = 6, nine = 9, twelve = 12, sixteen = 16, nineteen = 19, twentytwo = 22
     
+}
+
+struct WeatherBlock {
+    let hour: WeatherBlockTime
+    let temperature: Int
 }
 
 struct Weather {
