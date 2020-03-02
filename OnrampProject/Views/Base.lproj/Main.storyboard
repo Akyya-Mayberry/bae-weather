@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Weather View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="WeatherViewController" customModule="OnrampProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WBv-gh-1a4" userLabel="Current Weather Stack View">
+                                <rect key="frame" x="112" y="59" width="190" height="106.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="300" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="93°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XNb-aU-Ls9">
+                                        <rect key="frame" x="0.0" y="0.0" width="142" height="106.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="89"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="arrow.clockwise" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Uun-cK-MW0">
+                                        <rect key="frame" x="150" y="32.5" width="40" height="40"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="BZx-fj-d1g"/>
+                                            <constraint firstAttribute="height" constant="40" id="VHI-pL-iZe"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="hgV-xI-fLw" appends="YES" id="5bo-bx-NoQ"/>
+                                        </connections>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" distribution="equalCentering" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="52R-aC-VOT" userLabel="Info Stack View">
+                                <rect key="frame" x="15" y="168.5" width="384" height="16"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jBc-Dr-Z1i" userLabel="Date Stack View">
+                                        <rect key="frame" x="0.0" y="0.0" width="102" height="16"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nCb-zC-h8m">
+                                                <rect key="frame" x="0.0" y="0.0" width="28.5" height="16"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="02-29-2020" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nx1-JK-ovd">
+                                                <rect key="frame" x="36.5" y="1.5" width="65.5" height="13.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="GY1-Hd-Gvx" userLabel="Time Stack View">
+                                        <rect key="frame" x="255.5" y="0.0" width="128.5" height="16"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last updated" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xds-dw-SL5">
+                                                <rect key="frame" x="0.0" y="0.0" width="79.5" height="16"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3:45pm" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MbA-cN-4Bv">
+                                                <rect key="frame" x="87.5" y="1.5" width="41" height="13.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="219" image="sample-hot" translatesAutoresizingMaskIntoConstraints="NO" id="c35-Vg-ELG" userLabel="Bae Image View">
+                                <rect key="frame" x="10" y="189.5" width="394" height="543"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="250" axis="vertical" distribution="fillEqually" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="sB0-6P-I9i" userLabel="Hour Weather Block Stack View">
+                                <rect key="frame" x="20" y="747.5" width="374" height="99.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hour Weather Block" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eev-qt-CcW">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="OW4-uA-ORf" userLabel="Weather Block Labels Stack View">
+                                        <rect key="frame" x="0.0" y="39.5" width="374" height="20.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6AM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JXz-3r-UO3">
+                                                <rect key="frame" x="0.0" y="0.0" width="36" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12PM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Tl-Tf-frS">
+                                                <rect key="frame" x="162.5" y="0.0" width="42.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10PM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lg8-TV-pQC">
+                                                <rect key="frame" x="331" y="0.0" width="43" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" continuous="NO" minimumValueImage="sunrise" catalog="system" maximumValueImage="moon" translatesAutoresizingMaskIntoConstraints="NO" id="shb-4O-qYl">
+                                        <rect key="frame" x="-2" y="79" width="378" height="21.5"/>
+                                        <connections>
+                                            <action selector="didChangeWeatherBlock:" destination="BYZ-38-t0r" eventType="valueChanged" id="6xK-ZC-6Il"/>
+                                        </connections>
+                                    </slider>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="WBv-gh-1a4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="00R-Gu-fhv"/>
+                            <constraint firstItem="52R-aC-VOT" firstAttribute="top" secondItem="WBv-gh-1a4" secondAttribute="bottom" constant="3" id="2aD-p4-5BB"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="c35-Vg-ELG" secondAttribute="trailing" constant="10" id="An7-7S-bQi"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="sB0-6P-I9i" secondAttribute="bottom" constant="15" id="DVQ-in-Fz1"/>
+                            <constraint firstItem="c35-Vg-ELG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="N60-RH-EOc"/>
+                            <constraint firstItem="sB0-6P-I9i" firstAttribute="top" secondItem="c35-Vg-ELG" secondAttribute="bottom" constant="15" id="Stj-hG-vMs"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sB0-6P-I9i" secondAttribute="trailing" constant="20" id="Tui-qG-tQ9"/>
+                            <constraint firstItem="WBv-gh-1a4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="V74-X2-dO2"/>
+                            <constraint firstItem="52R-aC-VOT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="aYJ-8b-MpP"/>
+                            <constraint firstItem="sB0-6P-I9i" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="eK2-MJ-QC0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="52R-aC-VOT" secondAttribute="trailing" constant="15" id="fwJ-Qt-u2j"/>
+                            <constraint firstItem="c35-Vg-ELG" firstAttribute="top" secondItem="52R-aC-VOT" secondAttribute="bottom" constant="5" id="vTF-j3-ica"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="currentDateLabel" destination="Nx1-JK-ovd" id="ZZg-76-oEP"/>
+                        <outlet property="currentWeatherLabel" destination="XNb-aU-Ls9" id="3Eg-tr-C5I"/>
+                        <outlet property="hourBlockWeatherSlider" destination="shb-4O-qYl" id="ync-9r-f47"/>
+                        <outlet property="lastTimeUpdatedLabel" destination="MbA-cN-4Bv" id="oEl-4L-LwE"/>
+                        <outlet property="modelImageView" destination="c35-Vg-ELG" id="B5r-3v-M5z"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="hgV-xI-fLw">
+                    <connections>
+                        <action selector="onTapRefreshImage:" destination="BYZ-38-t0r" id="kgj-RC-BAN"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="131.8840579710145" y="138.61607142857142"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="arrow.clockwise" catalog="system" width="56" height="64"/>
+        <image name="moon" catalog="system" width="64" height="60"/>
+        <image name="sample-hot" width="1920" height="1280"/>
+        <image name="sunrise" catalog="system" width="64" height="48"/>
+    </resources>
+</document>
