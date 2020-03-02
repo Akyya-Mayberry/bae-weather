@@ -53,6 +53,15 @@ enum WeatherBlockTime: Int, CaseIterable, Comparable {
     }
 }
 
+struct WeatherData: Codable {
+    let name: String
+    let main: Main
+}
+
+struct Main: Codable {
+    let temp: Float
+}
+
 struct WeatherBlock: Comparable {
     static func < (lhs: WeatherBlock, rhs: WeatherBlock) -> Bool {
         return lhs.hour.rawValue < rhs.hour.rawValue
@@ -68,6 +77,5 @@ struct Weather {
     let hourlyTemps: [Int: Int]
     let city: String
     let state: String
-    let country: String
     let currentHourBlock: WeatherBlockTime
 }

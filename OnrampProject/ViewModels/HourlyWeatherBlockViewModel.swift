@@ -90,15 +90,3 @@ struct HourlyWeatherViewModel {
         return sortedBlockTimes.firstIndex(of: blockTime)!
     }
 }
-
-extension Date {
-    func getHour() -> Int {
-        let formatter = DateFormatter()
-        formatter.timeStyle = .short
-        formatter.dateFormat = "HH"
-        
-        let hour = formatter.string(from: self)
-        
-        return Int(hour)!
-    }
-}

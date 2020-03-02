@@ -8,11 +8,21 @@
 import Foundation
 import Alamofire
 
-class WeatherNetworkService {
+struct WeatherNetworkService {
+    private let baseUrl = Constants.WeatherService.baseUrl
     
-    func getCurrentWeatherIn(city: String, state: String) {
-        AF.request("https://httpbin.org/get").response { response in
-            debugPrint(response)
+    func getCurrentWeather(city: String, state: String, completion: @escaping (WeatherData?, Error?) -> Void) {
+        
+        let urlString = "\(baseUrl)&q=\(city),\(state)"
+        
+        AF.request(urlString).responseDecodable(of: WeatherData.self) { response in
+            if response.error != nil {
+                completion(nil, response.error)
+            } else {
+                completion(response.value, nil)
+            }
         }
     }
 }
+
+
