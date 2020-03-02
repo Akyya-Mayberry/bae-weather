@@ -10,20 +10,22 @@ import UIKit
 class WeatherViewController: UIViewController {
     
     // MARK: - Properties
+    
     @IBOutlet weak var currentWeatherLabel: UILabel!
     @IBOutlet weak var currentDateLabel: UILabel!
     @IBOutlet weak var lastTimeUpdatedLabel: UILabel!
     @IBOutlet weak var hourBlockWeatherSlider: UISlider!
     @IBOutlet weak var modelImageView: UIImageView!
     
-    private var weatherViewModel = WeatherViewModel()
-    
-    private var hourlyWeatherViewModel: HourlyWeatherViewModel? {
+    private var weatherViewModel: WeatherViewModel! {
         didSet {
-            DispatchQueue.main.async {
-                let currentHour = self.hourlyWeatherViewModel!.getCurrentWeatherBlockUsing(date: self.weatherViewModel.date)
-                self.hourBlockWeatherSlider.value = 1.0/Float(currentHour.hour.rawValue)
-            }
+            hourlyWeatherViewModel = HourlyWeatherViewModel(weatherViewModel.getHourlyTemps(), currentDate: weatherViewModel.weather.date)
+        }
+    }
+    
+    private var hourlyWeatherViewModel: HourlyWeatherViewModel! {
+        didSet {
+            updateUI()
         }
     }
     
@@ -32,7 +34,8 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        weatherViewModel.delegate = self
+        hourBlockWeatherSlider.maximumValue = Float(WeatherBlockTime.allCases.count) - 1
+        hourBlockWeatherSlider.minimumValue = 0
         updateWeather()
         
     }
@@ -43,42 +46,32 @@ class WeatherViewController: UIViewController {
     
     @IBAction func didChangeWeatherBlock(_ sender: UISlider) {
         
-        // TODO: Move this out of view controller
+        let index = Int(sender.value)
         
-        let index = Int(round(sender.value *
-            Float(WeatherBlockTime.allCases.count - 1)))
-        print("Weather block time: \(WeatherBlockTime.allCases[index]))")
+        let weatherBlock = hourlyWeatherViewModel!.getCurrentWeatherBlockUsing(hourBlock: WeatherBlockTime.allCases[index])
         
-        let weatherBlock = hourlyWeatherViewModel?.getCurrentWeatherBlockUsing(hourBlock: WeatherBlockTime.allCases[index])
+        let weather = Weather(date: Date(), temperature: weatherBlock.temperature, hourlyTemps: weatherViewModel.getHourlyTemps(), city: "Fresno", state: "California", country: "USA", currentHourBlock: WeatherBlockTime.allCases[index])
         
-        DispatchQueue.main.async {
-            self.currentWeatherLabel.text = "\(weatherBlock!.temperature)°"
-            let modelImage = BaeImage(for: TypeOfWeather(for: weatherBlock!.temperature))
-            self.modelImageView.image = UIImage(named: modelImage.getImage())
-        }
+        weatherViewModel = WeatherViewModel(weather: weather)
+        
     }
     
     private func updateWeather() {
-        weatherViewModel.updateCurrentWeather(city: "Fresno", state: "California", country: "USA")
-        updateUI()
+        weatherViewModel = WeatherViewModel(weather: WeatherViewModel.getNextWeather())
     }
     
     private func updateUI() {
         DispatchQueue.main.async {
-            self.currentWeatherLabel.text = "\(String(describing: self.weatherViewModel.currentTemp!))°"
+            self.currentWeatherLabel.text = "\(self.weatherViewModel.currentTemp)°"
             self.currentDateLabel.text = self.weatherViewModel.currentDateAsString
             self.lastTimeUpdatedLabel.text = self.weatherViewModel.lastUpdateTime
-            self.modelImageView.image = UIImage(named: (self.weatherViewModel.baeImage?.getImage())!)
+            self.modelImageView.image = UIImage(named: (self.weatherViewModel.baeImage.getImage()))
+            
+            let currentHour = self.weatherViewModel.getCurrentWeatherBlock()
+            
+            self.hourBlockWeatherSlider.value = Float(self.hourlyWeatherViewModel.getIndex(for: currentHour))
         }
     }
     
-}
-
-// MARK: - Extensions
-
-extension WeatherViewController: WeatherViewModelDelegate {
-    func didUpdateCurrentWeather(_ weatherViewModel: WeatherViewModel) {
-        hourlyWeatherViewModel = HourlyWeatherViewModel(weatherViewModel.getHourlyTemps())
-    }
 }
 

@@ -15,15 +15,17 @@ struct HourlyWeatherViewModel {
     // MARK: - Properties
     
     private var weatherBlocks: [WeatherBlockTime: Int] = [:]
+    private let sortedBlockTimes: [WeatherBlockTime] = WeatherBlockTime.allCases.sorted()
+    var currentHourBlock: WeatherBlockTime
     
     // MARK: - Methods
     
-    init(_ hourlyTempBlocks: [Int: Int]) {
+    init(_ hourlyTempBlocks: [Int: Int], currentDate: Date) {
+        self.currentHourBlock = HourlyWeatherViewModel.getCurrentWeatherBlockUsing(date: currentDate)
         createWeatherBlocks(from: hourlyTempBlocks)
     }
     
     mutating func createWeatherBlocks(from hourlyTempBlocks: [Int: Int]) {
-        
         // Todo: use reduce
         for (hour, temp) in hourlyTempBlocks {
             let blockTime = WeatherBlockTime(rawValue: hour)
@@ -31,25 +33,34 @@ struct HourlyWeatherViewModel {
         }
     }
     
-    func getCurrentWeatherBlockUsing(date: Date) -> WeatherBlock {
+    static func getCurrentWeatherBlockUsing(date: Date) -> WeatherBlockTime {
         
         let time = date.getHour()
+        var hourBlock: WeatherBlockTime
         
-        for (hour, temp) in weatherBlocks {
-            print("Hour raw value: \(hour.rawValue)")
-            if hour.rawValue >= time {
-                return WeatherBlock(hour: hour, temperature: temp)
-            }
+        switch true {
+        case time <= WeatherBlockTime.six.rawValue:
+            hourBlock = .six
+        case time <= WeatherBlockTime.nine.rawValue:
+            hourBlock = .nine
+        case time <= WeatherBlockTime.twelve.rawValue:
+            hourBlock = .twelve
+        case time <= WeatherBlockTime.sixteen.rawValue:
+            hourBlock = .sixteen
+        case time <= WeatherBlockTime.nineteen.rawValue:
+            hourBlock = .nineteen
+        case time <= WeatherBlockTime.twentytwo.rawValue:
+            hourBlock = .twentytwo
+        default:
+            hourBlock = .twelve
         }
         
-        return WeatherBlock(hour: .twelve, temperature: weatherBlocks[.twelve]!)
+        return hourBlock
     }
     
     func getCurrentWeatherBlockUsing(hour h: Int) -> WeatherBlock {
         
-        
         for (hour, temp) in weatherBlocks {
-            print("Hour raw value: \(hour.rawValue)")
             if hour.rawValue >= h {
                 return WeatherBlock(hour: hour, temperature: temp)
             }
@@ -70,6 +81,14 @@ struct HourlyWeatherViewModel {
         let hour = date.getHour()
         return hour
     }
+    
+    func getSortedBlockTimes() -> [WeatherBlockTime] {
+        return sortedBlockTimes
+    }
+    
+    func getIndex(for blockTime: WeatherBlockTime) -> Int {
+        return sortedBlockTimes.firstIndex(of: blockTime)!
+    }
 }
 
 extension Date {
@@ -79,6 +98,7 @@ extension Date {
         formatter.dateFormat = "HH"
         
         let hour = formatter.string(from: self)
+        
         return Int(hour)!
     }
 }
