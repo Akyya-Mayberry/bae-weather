@@ -10,11 +10,10 @@ import UIKit
 class SettingsViewController: UIViewController {
 
     // MARK: - Properties
-    
-    @IBOutlet weak var tableView: UITableView!
+
+    @IBOutlet weak var collectionView: UICollectionView!
     
     var modelImages = [UIImage]()
-
     
     // MARK: - Methods
     
@@ -26,28 +25,34 @@ class SettingsViewController: UIViewController {
         modelImages.append(UIImage(named: "sample-warm")!)
         modelImages.append(UIImage(named: "sample-hot")!)
         
-        tableView.dataSource = self
-        tableView.delegate = self
+        collectionView.dataSource = self
+        collectionView.delegate = self
 
     }
 }
 
-extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension SettingsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ModelGalleryCell", for: indexPath) as! ModelGalleryTableViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        cell.backgroundColor = .red
         return cell
     }
     
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.frame.height
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
+        let width = collectionView.bounds.width
+        let height = collectionView.bounds.height
+        
+        return CGSize(width: width, height: height)
     }
-
-    
 }
 
