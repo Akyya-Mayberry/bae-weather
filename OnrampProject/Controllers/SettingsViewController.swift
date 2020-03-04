@@ -33,8 +33,8 @@ class SettingsViewController: UIViewController {
         
     }
     
-    private func createImageSet() -> ModelImageSetView {
-        let imageSetView = ModelImageSetView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: collectionView.frame.height))
+    private func createImageSet() -> ModelImageView {
+        let imageSetView = ModelImageView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: collectionView.frame.height))
         imageSetView.clipsToBounds = true
         imageSetView.contentMode = .scaleAspectFill
         
@@ -53,7 +53,7 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ModelImageSetCell.self), for: indexPath) as! ModelImageSetCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ModelImageCell.self), for: indexPath) as! ModelImageCell
         
         let imageSet = collections[0]
         let modelView = createImageSet()

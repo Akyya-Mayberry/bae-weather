@@ -7,6 +7,6 @@
 
 import UIKit
 
-class ModelImageSetCell: UICollectionViewCell {
-    var modelView: ModelImageSetView!
+class ModelImageCell: UICollectionViewCell {
+    var modelView: ModelImageView!
 }

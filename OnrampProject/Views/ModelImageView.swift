@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ModelImageSetView: UIView {
+class ModelImageView: UIView {
     
     // MARK: - Properties
     

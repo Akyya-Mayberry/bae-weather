@@ -238,7 +238,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Yd3-Qr-Xbl" userLabel="Current Image Set Stack View">
                                 <rect key="frame" x="15" y="229.5" width="384" height="75"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5cM-tB-Xqr" userLabel="Freezing Image View" customClass="ModelImageSetView" customModule="OnrampProject" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5cM-tB-Xqr" userLabel="Freezing Image View" customClass="ModelImageView" customModule="OnrampProject" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="90" height="75"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
@@ -246,7 +246,7 @@
                                             <constraint firstAttribute="height" constant="50" id="KlS-jr-GZd"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mMs-a9-3NS" userLabel="Cold View" customClass="ModelImageSetView" customModule="OnrampProject" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mMs-a9-3NS" userLabel="Cold View" customClass="ModelImageView" customModule="OnrampProject" customModuleProvider="target">
                                         <rect key="frame" x="98" y="0.0" width="90" height="75"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
@@ -254,7 +254,7 @@
                                             <constraint firstAttribute="height" constant="50" id="jIz-Lt-Ye9"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BaP-GW-9x9" userLabel="Warm View" customClass="ModelImageSetView" customModule="OnrampProject" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BaP-GW-9x9" userLabel="Warm View" customClass="ModelImageView" customModule="OnrampProject" customModuleProvider="target">
                                         <rect key="frame" x="196" y="0.0" width="90" height="75"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
@@ -262,7 +262,7 @@
                                             <constraint firstAttribute="width" constant="50" id="sTx-Ss-Rcy"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PFj-wG-wty" userLabel="Hot View" customClass="ModelImageSetView" customModule="OnrampProject" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PFj-wG-wty" userLabel="Hot View" customClass="ModelImageView" customModule="OnrampProject" customModuleProvider="target">
                                         <rect key="frame" x="294" y="0.0" width="90" height="75"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
@@ -285,7 +285,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ModelImageSetCell" id="00E-3M-q7S" customClass="ModelImageSetCell" customModule="OnrampProject" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ModelImageCell" id="00E-3M-q7S" userLabel="ModelImageCell" customClass="ModelImageCell" customModule="OnrampProject" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="97" width="408" height="300"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="VWc-lV-YDA">
