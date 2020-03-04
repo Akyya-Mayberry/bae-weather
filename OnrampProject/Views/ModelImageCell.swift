@@ -10,3 +10,9 @@ import UIKit
 class ModelImageCell: UICollectionViewCell {
     var modelView: ModelImageView!
 }
+
+extension ModelImageCell: ModelImageViewDelegate {
+    func didTapModelImageView(_ modelImageView: ModelImageView) {
+        print("Should show model details/edit view")
+    }
+}

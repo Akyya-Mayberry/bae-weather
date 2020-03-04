@@ -7,12 +7,17 @@
 
 import UIKit
 
+protocol ModelImageViewDelegate {
+    func didTapModelImageView(_ modelImageView: ModelImageView)
+}
 class ModelImageView: UIView {
     
     // MARK: - Properties
     
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var modelImageView: UIImageView!
+    
+    var delegate: ModelImageViewDelegate?
     
     var image: UIImage? {
         get { return modelImageView.image }
@@ -41,6 +46,13 @@ class ModelImageView: UIView {
         initNib()
         contentView.frame = bounds
         addSubview(contentView)
+    }
+    
+    @IBAction func didTapModelImage(_ sender: UITapGestureRecognizer) {
+        
+        print("tapped model image: \(sender)")
+        
+        delegate?.didTapModelImageView(self)
     }
     
 }

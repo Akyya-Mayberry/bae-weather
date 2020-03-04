@@ -12,6 +12,7 @@ class SettingsViewController: UIViewController {
     // MARK: - Properties
     
     @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet var modelSetImageViews: [ModelImageView]!
     
     private let modelImages = [
         UIImage(named: "sample-freezing")!,
@@ -31,12 +32,19 @@ class SettingsViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
+        modelSetImageViews.forEach { (modelImageView) in
+            modelImageView.delegate = self
+        }
     }
     
-    private func createImageSet() -> ModelImageView {
+    private func createImageSet(using image: UIImage?) -> ModelImageView {
         let imageSetView = ModelImageView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: collectionView.frame.height))
         imageSetView.clipsToBounds = true
         imageSetView.contentMode = .scaleAspectFill
+        
+        if let image = image {
+            imageSetView.image = image
+        }
         
         return imageSetView
     }
@@ -56,9 +64,9 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ModelImageCell.self), for: indexPath) as! ModelImageCell
         
         let imageSet = collections[0]
-        let modelView = createImageSet()
+        let modelView = createImageSet(using: imageSet[indexPath.row])
         
-        modelView.image = imageSet[indexPath.row]
+        modelView.delegate = self
         
         cell.addSubview(modelView)
         cell.modelView = modelView
@@ -73,5 +81,13 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
         
         return CGSize(width: width, height: height)
     }
+}
+
+extension SettingsViewController: ModelImageViewDelegate {
+    func didTapModelImageView(_ modelImageView: ModelImageView) {
+        print("Should update the model preview image")
+    }
+    
+    
 }
 

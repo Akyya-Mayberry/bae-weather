@@ -311,6 +311,10 @@
                     <tabBarItem key="tabBarItem" title="Settings" id="Jze-HQ-XL9"/>
                     <connections>
                         <outlet property="collectionView" destination="MYM-0y-rvb" id="Pud-4d-1ff"/>
+                        <outletCollection property="modelSetImageViews" destination="5cM-tB-Xqr" collectionClass="NSMutableArray" id="zO0-ks-QUn"/>
+                        <outletCollection property="modelSetImageViews" destination="mMs-a9-3NS" collectionClass="NSMutableArray" id="R2h-MZ-w8v"/>
+                        <outletCollection property="modelSetImageViews" destination="BaP-GW-9x9" collectionClass="NSMutableArray" id="vC8-hS-Tcz"/>
+                        <outletCollection property="modelSetImageViews" destination="PFj-wG-wty" collectionClass="NSMutableArray" id="pFH-52-NHm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f3a-BM-PQA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
