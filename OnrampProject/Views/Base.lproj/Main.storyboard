@@ -236,47 +236,40 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Yd3-Qr-Xbl" userLabel="Current Image Set Stack View">
-                                <rect key="frame" x="15" y="229.5" width="384" height="75"/>
+                                <rect key="frame" x="15" y="229.5" width="384" height="90"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5cM-tB-Xqr" userLabel="Freezing Image View" customClass="ModelImageView" customModule="OnrampProject" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="90" height="75"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                        <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="KgH-5C-a8h"/>
-                                            <constraint firstAttribute="height" constant="50" id="KlS-jr-GZd"/>
+                                            <constraint firstAttribute="width" secondItem="5cM-tB-Xqr" secondAttribute="height" multiplier="1:1" id="Daw-IS-j1K"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mMs-a9-3NS" userLabel="Cold View" customClass="ModelImageView" customModule="OnrampProject" customModuleProvider="target">
-                                        <rect key="frame" x="98" y="0.0" width="90" height="75"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <rect key="frame" x="98" y="0.0" width="90" height="90"/>
+                                        <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="IZZ-ke-NqI"/>
-                                            <constraint firstAttribute="height" constant="50" id="jIz-Lt-Ye9"/>
+                                            <constraint firstAttribute="width" secondItem="mMs-a9-3NS" secondAttribute="height" multiplier="1:1" id="47i-d4-fy9"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BaP-GW-9x9" userLabel="Warm View" customClass="ModelImageView" customModule="OnrampProject" customModuleProvider="target">
-                                        <rect key="frame" x="196" y="0.0" width="90" height="75"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <rect key="frame" x="196" y="0.0" width="90" height="90"/>
+                                        <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="2jD-Be-cq8"/>
-                                            <constraint firstAttribute="width" constant="50" id="sTx-Ss-Rcy"/>
+                                            <constraint firstAttribute="width" secondItem="BaP-GW-9x9" secondAttribute="height" multiplier="1:1" id="I9O-ei-SLd"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PFj-wG-wty" userLabel="Hot View" customClass="ModelImageView" customModule="OnrampProject" customModuleProvider="target">
-                                        <rect key="frame" x="294" y="0.0" width="90" height="75"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <rect key="frame" x="294" y="0.0" width="90" height="90"/>
+                                        <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="XB4-rN-zyP"/>
-                                            <constraint firstAttribute="width" constant="50" id="clx-bY-jUF"/>
+                                            <constraint firstAttribute="width" secondItem="PFj-wG-wty" secondAttribute="height" multiplier="1:1" id="uMt-M6-rfA"/>
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="EjR-kq-jol"/>
-                                </constraints>
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MYM-0y-rvb">
-                                <rect key="frame" x="0.0" y="319.5" width="414" height="493.5"/>
+                                <rect key="frame" x="0.0" y="334.5" width="414" height="478.5"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="gZ1-qr-WTM">
                                     <size key="itemSize" width="408" height="573"/>
@@ -286,7 +279,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ModelImageCell" id="00E-3M-q7S" userLabel="ModelImageCell" customClass="ModelImageCell" customModule="OnrampProject" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="97" width="408" height="300"/>
+                                        <rect key="frame" x="0.0" y="89.5" width="408" height="300"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="VWc-lV-YDA">
                                             <rect key="frame" x="0.0" y="0.0" width="408" height="300"/>
@@ -301,9 +294,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="jqP-VD-Lu7" firstAttribute="leading" secondItem="Emi-7S-xzQ" secondAttribute="leading" constant="8" id="41d-v1-neA"/>
-                            <constraint firstItem="MYM-0y-rvb" firstAttribute="top" secondItem="Yd3-Qr-Xbl" secondAttribute="bottom" constant="15" id="63u-n3-0pZ"/>
+                            <constraint firstItem="Yd3-Qr-Xbl" firstAttribute="top" secondItem="jqP-VD-Lu7" secondAttribute="bottom" constant="15" id="56P-Hb-vbI"/>
                             <constraint firstItem="Emi-7S-xzQ" firstAttribute="trailing" secondItem="Yd3-Qr-Xbl" secondAttribute="trailing" constant="15" id="DWr-bk-ihw"/>
                             <constraint firstItem="jqP-VD-Lu7" firstAttribute="top" secondItem="Bxo-M2-KWb" secondAttribute="bottom" constant="20" id="Jqq-vA-Cct"/>
+                            <constraint firstItem="MYM-0y-rvb" firstAttribute="top" secondItem="Yd3-Qr-Xbl" secondAttribute="bottom" constant="15" id="QHW-Et-a4s"/>
                             <constraint firstItem="Yd3-Qr-Xbl" firstAttribute="leading" secondItem="Emi-7S-xzQ" secondAttribute="leading" constant="15" id="Yak-96-bo5"/>
                             <constraint firstItem="Emi-7S-xzQ" firstAttribute="bottom" secondItem="MYM-0y-rvb" secondAttribute="bottom" id="anc-Xb-tPi"/>
                             <constraint firstItem="Bxo-M2-KWb" firstAttribute="centerX" secondItem="62X-I2-Axu" secondAttribute="centerX" id="gCR-PY-WT0"/>
@@ -311,7 +305,6 @@
                             <constraint firstItem="Emi-7S-xzQ" firstAttribute="trailing" secondItem="jqP-VD-Lu7" secondAttribute="trailing" constant="8" id="oIH-Yl-nVu"/>
                             <constraint firstItem="Emi-7S-xzQ" firstAttribute="trailing" secondItem="MYM-0y-rvb" secondAttribute="trailing" id="sWi-aR-6pM"/>
                             <constraint firstItem="Bxo-M2-KWb" firstAttribute="top" secondItem="Emi-7S-xzQ" secondAttribute="top" constant="20" id="twp-rM-bvP"/>
-                            <constraint firstItem="Yd3-Qr-Xbl" firstAttribute="top" secondItem="jqP-VD-Lu7" secondAttribute="bottom" constant="15" id="zF9-Gv-WPB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Emi-7S-xzQ"/>
                     </view>
