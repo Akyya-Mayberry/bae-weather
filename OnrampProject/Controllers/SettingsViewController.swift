@@ -8,42 +8,61 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
-
-    // MARK: - Properties
-
-    @IBOutlet weak var collectionView: UICollectionView!
     
-    var modelImages = [UIImage]()
+    // MARK: - Properties
+    
+    @IBOutlet private weak var collectionView: UICollectionView!
+    
+    private let modelImages = [
+        UIImage(named: "sample-freezing")!,
+        UIImage(named: "sample-cold")!,
+        UIImage(named: "sample-warm")!,
+        UIImage(named: "sample-hot")!
+    ]
+    
+    private var collections: [[UIImage]] = []
     
     // MARK: - Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        modelImages.append(UIImage(named: "sample-freezing")!)
-        modelImages.append(UIImage(named: "sample-cold")!)
-        modelImages.append(UIImage(named: "sample-warm")!)
-        modelImages.append(UIImage(named: "sample-hot")!)
         
+        collections.append(modelImages)
         collectionView.dataSource = self
         collectionView.delegate = self
-
+        
+    }
+    
+    private func createImageSet() -> ModelImageSetView {
+        let imageSetView = ModelImageSetView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: collectionView.frame.height))
+        imageSetView.clipsToBounds = true
+        imageSetView.contentMode = .scaleAspectFill
+        
+        return imageSetView
     }
 }
 
 extension SettingsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 4
+        return collections.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return collections[0].count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .red
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ModelImageSetCell.self), for: indexPath) as! ModelImageSetCell
+        
+        let imageSet = collections[0]
+        let modelView = createImageSet()
+        
+        modelView.image = imageSet[indexPath.row]
+        
+        cell.addSubview(modelView)
+        cell.modelView = modelView
+        
         return cell
     }
     

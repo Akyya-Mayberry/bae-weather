@@ -211,7 +211,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="Adg-k7-imf" userLabel="Pic Settings Stack View">
                                         <rect key="frame" x="0.0" y="54" width="398" height="31"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="740" verticalCompressionResistancePriority="740" text="Pics:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BE9-z1-BGV">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="740" verticalCompressionResistancePriority="740" text="Pics: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BE9-z1-BGV">
                                                 <rect key="frame" x="0.0" y="0.0" width="253" height="31"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -235,25 +235,65 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Yd3-Qr-Xbl" userLabel="Current Image Set Stack View">
+                                <rect key="frame" x="15" y="229.5" width="384" height="75"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5cM-tB-Xqr" userLabel="Freezing Image View" customClass="ModelImageSetView" customModule="OnrampProject" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="90" height="75"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="KgH-5C-a8h"/>
+                                            <constraint firstAttribute="height" constant="50" id="KlS-jr-GZd"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mMs-a9-3NS" userLabel="Cold View" customClass="ModelImageSetView" customModule="OnrampProject" customModuleProvider="target">
+                                        <rect key="frame" x="98" y="0.0" width="90" height="75"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="IZZ-ke-NqI"/>
+                                            <constraint firstAttribute="height" constant="50" id="jIz-Lt-Ye9"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BaP-GW-9x9" userLabel="Warm View" customClass="ModelImageSetView" customModule="OnrampProject" customModuleProvider="target">
+                                        <rect key="frame" x="196" y="0.0" width="90" height="75"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="2jD-Be-cq8"/>
+                                            <constraint firstAttribute="width" constant="50" id="sTx-Ss-Rcy"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PFj-wG-wty" userLabel="Hot View" customClass="ModelImageSetView" customModule="OnrampProject" customModuleProvider="target">
+                                        <rect key="frame" x="294" y="0.0" width="90" height="75"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="XB4-rN-zyP"/>
+                                            <constraint firstAttribute="width" constant="50" id="clx-bY-jUF"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="EjR-kq-jol"/>
+                                </constraints>
+                            </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MYM-0y-rvb">
-                                <rect key="frame" x="0.0" y="234.5" width="414" height="578.5"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gZ1-qr-WTM">
-                                    <size key="itemSize" width="413" height="474"/>
+                                <rect key="frame" x="0.0" y="319.5" width="414" height="493.5"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="gZ1-qr-WTM">
+                                    <size key="itemSize" width="408" height="573"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="00E-3M-q7S">
-                                        <rect key="frame" x="0.0" y="52.5" width="413" height="474"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ModelImageSetCell" id="00E-3M-q7S" customClass="ModelImageSetCell" customModule="OnrampProject" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="97" width="408" height="300"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="VWc-lV-YDA">
-                                            <rect key="frame" x="0.0" y="0.0" width="413" height="474"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="408" height="300"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="413" height="474"/>
+                                        <size key="customSize" width="408" height="300"/>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -261,14 +301,17 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="jqP-VD-Lu7" firstAttribute="leading" secondItem="Emi-7S-xzQ" secondAttribute="leading" constant="8" id="41d-v1-neA"/>
+                            <constraint firstItem="MYM-0y-rvb" firstAttribute="top" secondItem="Yd3-Qr-Xbl" secondAttribute="bottom" constant="15" id="63u-n3-0pZ"/>
+                            <constraint firstItem="Emi-7S-xzQ" firstAttribute="trailing" secondItem="Yd3-Qr-Xbl" secondAttribute="trailing" constant="15" id="DWr-bk-ihw"/>
                             <constraint firstItem="jqP-VD-Lu7" firstAttribute="top" secondItem="Bxo-M2-KWb" secondAttribute="bottom" constant="20" id="Jqq-vA-Cct"/>
+                            <constraint firstItem="Yd3-Qr-Xbl" firstAttribute="leading" secondItem="Emi-7S-xzQ" secondAttribute="leading" constant="15" id="Yak-96-bo5"/>
                             <constraint firstItem="Emi-7S-xzQ" firstAttribute="bottom" secondItem="MYM-0y-rvb" secondAttribute="bottom" id="anc-Xb-tPi"/>
-                            <constraint firstItem="MYM-0y-rvb" firstAttribute="top" secondItem="jqP-VD-Lu7" secondAttribute="bottom" constant="20" id="e5h-3j-I0F"/>
                             <constraint firstItem="Bxo-M2-KWb" firstAttribute="centerX" secondItem="62X-I2-Axu" secondAttribute="centerX" id="gCR-PY-WT0"/>
                             <constraint firstItem="MYM-0y-rvb" firstAttribute="leading" secondItem="Emi-7S-xzQ" secondAttribute="leading" id="mTm-bV-3Xv"/>
                             <constraint firstItem="Emi-7S-xzQ" firstAttribute="trailing" secondItem="jqP-VD-Lu7" secondAttribute="trailing" constant="8" id="oIH-Yl-nVu"/>
                             <constraint firstItem="Emi-7S-xzQ" firstAttribute="trailing" secondItem="MYM-0y-rvb" secondAttribute="trailing" id="sWi-aR-6pM"/>
                             <constraint firstItem="Bxo-M2-KWb" firstAttribute="top" secondItem="Emi-7S-xzQ" secondAttribute="top" constant="20" id="twp-rM-bvP"/>
+                            <constraint firstItem="Yd3-Qr-Xbl" firstAttribute="top" secondItem="jqP-VD-Lu7" secondAttribute="bottom" constant="15" id="zF9-Gv-WPB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Emi-7S-xzQ"/>
                     </view>
