@@ -41,6 +41,9 @@ class SettingsViewController: UIViewController {
             let modelImageDetails = modelImageViewModel.getImagefor(typeOfWeather: typeOfWeather!)
             modelView.image = UIImage(named: modelImageDetails.image)
         }
+        
+        modelSetImageViews.first?.select()
+        
     }
     
     private func createImageSet(using image: UIImage?) -> ModelImageView {
@@ -53,6 +56,12 @@ class SettingsViewController: UIViewController {
         }
         
         return imageSetView
+    }
+    
+    func updateUI() {
+        for (_, modelView) in modelSetImageViews.enumerated() {
+            modelView.deselect()
+        }
     }
 }
 
@@ -77,9 +86,7 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
         modelView.typeOfWeatherLimited = modelImageDetails.typeOfWeather
         modelView.delegate = self
         
-        
         cell.addSubview(modelView)
-        
         
         return cell
     }
@@ -99,13 +106,32 @@ extension SettingsViewController: ModelImageViewDelegate {
         if (modelImageView.superview?.isKind(of: UICollectionViewCell.self))! {
             performSegue(withIdentifier: "ModelImageDetailsSegue", sender: self)
         } else {
-            
             DispatchQueue.main.async {
+                self.updateUI()
+                modelImageView.select()
+                
                 let indexPath = IndexPath(row: modelImageView.typeOfWeatherLimited!.rawValue, section: 0)
                 self.collectionView.scrollToItem(at: indexPath, at: [.centeredHorizontally], animated: true)
             }
         }
         
+    }
+}
+
+extension SettingsViewController: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        DispatchQueue.main.async {
+            let offsetFromOriginOfScrollView = self.collectionView.contentOffset
+            let frameSize = self.collectionView.bounds.size
+            let currentCellFrame = CGRect(origin: offsetFromOriginOfScrollView, size: frameSize)
+            
+            let centerOfFrame = CGPoint(x: currentCellFrame.midX, y: currentCellFrame.midY)
+            let indexPath = self.collectionView.indexPathForItem(at: centerOfFrame)
+            
+            self.updateUI()
+            
+            self.modelSetImageViews[indexPath!.row].select()
+        }
     }
 }
 

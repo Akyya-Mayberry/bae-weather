@@ -17,6 +17,7 @@ class ModelImageView: UIView {
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var modelImageView: UIImageView!
     
+    private(set) var isSelected = false
     var delegate: ModelImageViewDelegate?
     var typeOfWeatherLimited: WeatherCategory?
     
@@ -51,6 +52,18 @@ class ModelImageView: UIView {
     
     @IBAction func didTapModelImage(_ sender: UITapGestureRecognizer) {
         delegate?.didTapModelImageView(self)
+    }
+    
+    func select() {
+        modelImageView.layer.borderColor = UIColor.systemPink.cgColor
+        modelImageView.layer.borderWidth = 3
+        isSelected = true
+    }
+    
+    func deselect() {
+        modelImageView.layer.borderColor = nil
+        modelImageView.layer.borderWidth = 0
+        isSelected = false
     }
     
 }
