@@ -13,11 +13,11 @@ import Foundation
  - Returns: An image representing a genralized weather category
  */
 struct BaeImage {
-    private(set) var image: String
+    private(set) var imageName: String
     private(set) var typeOfWeather: WeatherCategory
     
     init(_ image: String, for weatherCategory: WeatherCategory) {
-        self.image = image
+        self.imageName = image
         self.typeOfWeather = weatherCategory
     }
 }

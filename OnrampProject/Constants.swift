@@ -2,12 +2,18 @@
 //  Constants.swift
 //  OnrampProject
 //
-//  Created by Chris Hurley on 3/4/20.
+//  Created by Chris Hurley on 3/1/20.
 //
 
 import Foundation
 
-class Constants {
+struct Constants {
+    
+    struct WeatherService {
+        static let apiKey = "9c5a3d7c65785e89e4937eee59400c75"
+        static let baseUrl = "https://api.openweathermap.org/data/2.5/weather?appid=9c5a3d7c65785e89e4937eee59400c75&units=imperial"
+    }
+    
     struct defaults {
         static let modelImages: [WeatherCategory: String] =
             [
@@ -26,3 +32,5 @@ class Constants {
         }
     }
 }
+    
+

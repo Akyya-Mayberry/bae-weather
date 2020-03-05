@@ -43,28 +43,16 @@ struct Weather {
     let hourlyTemps: [Int: Int]
     let city: String
     let state: String
-    let country: String
     let currentHourBlock: WeatherBlockTime
 }
 
-/**
- Takes a temperature and maps it to a generalized weather category
- */
-struct TypeOfWeather {
-    let typeOfWeatherLimited: WeatherCategory
-    
-    init(for temp: Int) {
-        switch true {
-        case temp < 50:
-            typeOfWeatherLimited = .freezing
-        case temp < 65:
-            typeOfWeatherLimited = .cold
-        case temp < 75:
-            typeOfWeatherLimited = .warm
-        default:
-            typeOfWeatherLimited = .hot
-        }
-    }
+struct WeatherData: Codable {
+    let name: String
+    let main: Main
+}
+
+struct Main: Codable {
+    let temp: Float
 }
 
 struct WeatherBlock: Comparable {
@@ -75,3 +63,24 @@ struct WeatherBlock: Comparable {
     let hour: WeatherBlockTime
     let temperature: Int
 }
+
+/**
+ Takes a temperature and maps it to a generalized weather category
+ */
+struct TypeOfWeather {
+    let category: WeatherCategory
+    
+    init(for temp: Int) {
+        switch true {
+        case temp < 50:
+            category = .freezing
+        case temp < 65:
+            category = .cold
+        case temp < 75:
+            category = .warm
+        default:
+            category = .hot
+        }
+    }
+}
+
