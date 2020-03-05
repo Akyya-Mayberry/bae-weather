@@ -15,13 +15,14 @@ class SettingsViewController: UIViewController {
     @IBOutlet var modelSetImageViews: [ModelImageView]!
     
     private let modelImages = [
-        UIImage(named: "sample-freezing")!,
-        UIImage(named: "sample-cold")!,
-        UIImage(named: "sample-warm")!,
-        UIImage(named: "sample-hot")!
+        BaeImage("sample-freezing", for: .freezing),
+        BaeImage("sample-cold", for: .freezing),
+        BaeImage("sample-warm", for: .freezing),
+        BaeImage("sample-hot", for: .freezing)
     ]
     
-    private var collections: [[UIImage]] = []
+    private var collections: [[BaeImage]] = []
+    var modelImageViewModel = ModelImageViewModel()
     
     // MARK: - Methods
     
@@ -32,8 +33,13 @@ class SettingsViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        modelSetImageViews.forEach { (modelImageView) in
-            modelImageView.delegate = self
+        for (index, modelView) in modelSetImageViews.enumerated() {
+            let typeOfWeather = WeatherCategory(rawValue: index)
+            modelView.delegate = self
+            modelView.typeOfWeatherLimited = typeOfWeather
+            
+            let modelImageDetails = modelImageViewModel.getImagefor(typeOfWeather: typeOfWeather!)
+            modelView.image = UIImage(named: modelImageDetails.image)
         }
     }
     
@@ -63,10 +69,13 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ModelImageCell.self), for: indexPath) as! ModelImageCell
         
-        let imageSet = collections[0]
-        let modelView = createImageSet(using: imageSet[indexPath.row])
+        let typeOfWeather = WeatherCategory(rawValue: indexPath.row)!
+        let modelImageDetails = modelImageViewModel.getImagefor(typeOfWeather: typeOfWeather)
+        
+        let modelView = createImageSet(using: UIImage(named: modelImageDetails.image))
         
         modelView.delegate = self
+        modelView.typeOfWeatherLimited = modelImageDetails.typeOfWeather
         
         cell.addSubview(modelView)
         cell.modelView = modelView
@@ -85,9 +94,10 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
 
 extension SettingsViewController: ModelImageViewDelegate {
     func didTapModelImageView(_ modelImageView: ModelImageView) {
-        print("Should update the model preview image")
+        DispatchQueue.main.async {
+            let indexPath = IndexPath(row: modelImageView.typeOfWeatherLimited!.rawValue, section: 0)
+            self.collectionView.scrollToItem(at: indexPath, at: [.centeredHorizontally], animated: true)
+        }
     }
-    
-    
 }
 

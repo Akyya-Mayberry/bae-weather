@@ -65,7 +65,7 @@ class WeatherViewController: UIViewController {
             self.currentWeatherLabel.text = "\(self.weatherViewModel.currentTemp)°"
             self.currentDateLabel.text = self.weatherViewModel.currentDateAsString
             self.lastTimeUpdatedLabel.text = self.weatherViewModel.lastUpdateTime
-            self.modelImageView.image = UIImage(named: (self.weatherViewModel.baeImage.getImage()))
+            self.modelImageView.image = UIImage(named: self.weatherViewModel.baeImage.image)
             
             let currentHour = self.weatherViewModel.getCurrentWeatherBlock()
             

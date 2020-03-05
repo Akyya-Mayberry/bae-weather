@@ -18,6 +18,7 @@ class ModelImageView: UIView {
     @IBOutlet weak var modelImageView: UIImageView!
     
     var delegate: ModelImageViewDelegate?
+    var typeOfWeatherLimited: WeatherCategory?
     
     var image: UIImage? {
         get { return modelImageView.image }
@@ -49,9 +50,6 @@ class ModelImageView: UIView {
     }
     
     @IBAction func didTapModelImage(_ sender: UITapGestureRecognizer) {
-        
-        print("tapped model image: \(sender)")
-        
         delegate?.didTapModelImageView(self)
     }
     
