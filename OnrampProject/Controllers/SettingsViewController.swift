@@ -37,6 +37,7 @@ class SettingsViewController: UIViewController {
         
         // temporary - sets default images
         modelSetImageViews.first?.select()
+        modelImageViewModel.selectedThumbnailIndex = 0
     }
     
     private func createImageSet(using image: UIImage?) -> ModelImageView {
@@ -68,9 +69,13 @@ class SettingsViewController: UIViewController {
             self.nameTextField.placeholder = ModelImageViewModel.getModelName()
             self.modelNameLabel.text = ModelImageViewModel.getModelName()
             
-            // deselects thumbnails
-            for (_, modelView) in self.modelSetImageViews.enumerated() {
-                modelView.deselect()
+            // sets selected thumbnail
+            for (index, modelView) in self.modelSetImageViews.enumerated() {
+                if index != self.modelImageViewModel.selectedThumbnailIndex {
+                    modelView.deselect()
+                } else {
+                    modelView.select()
+                }
             }
         }
     }
@@ -137,6 +142,7 @@ extension SettingsViewController: ModelImageViewDelegate {
             DispatchQueue.main.async {
                 self.updateUI()
                 modelImageView.select()
+                self.modelImageViewModel.selectedThumbnailIndex = modelImageView.typeOfWeather!.rawValue
                 
                 let indexPath = IndexPath(row: modelImageView.typeOfWeather!.rawValue, section: 0)
                 self.collectionView.scrollToItem(at: indexPath, at: [.centeredHorizontally], animated: true)
@@ -162,9 +168,10 @@ extension SettingsViewController: UIScrollViewDelegate {
             let centerOfFrame = CGPoint(x: currentCellFrame.midX, y: currentCellFrame.midY)
             let indexPath = self.collectionView.indexPathForItem(at: centerOfFrame)
             
-            self.updateUI()
-            
             self.modelSetImageViews[indexPath!.row].select()
+            self.modelImageViewModel.selectedThumbnailIndex = indexPath!.row
+            
+            self.updateUI()
         }
     }
 }

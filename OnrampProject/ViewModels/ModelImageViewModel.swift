@@ -17,6 +17,7 @@ struct ModelImageViewModel {
     
     private let userDefaults = UserDefaults.standard
     var delegate: ModelImageViewModelDelegate?
+    var selectedThumbnailIndex = 0
     
     fileprivate var images: [BaeImage] {
         return getImagesSorted()
