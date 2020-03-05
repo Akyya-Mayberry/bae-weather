@@ -13,22 +13,11 @@ import Foundation
  - Returns: An image representing a genralized weather category
  */
 struct BaeImage {
-    private let image: String
+    private(set) var image: String
+    private(set) var typeOfWeather: WeatherCategory
     
-    init(for typeOfWeather: TypeOfWeather) {
-        switch typeOfWeather {
-        case .freezing:
-            image = "sample-freezing"
-        case .cold:
-            image = "sample-cold"
-        case .warm:
-            image = "sample-warm"
-        case .hot:
-            image = "sample-hot"
-        }
-    }
-    
-    func getImage() -> String {
-        return image
+    init(_ image: String, for weatherCategory: WeatherCategory) {
+        self.image = image
+        self.typeOfWeather = weatherCategory
     }
 }

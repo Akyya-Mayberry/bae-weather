@@ -20,13 +20,14 @@ class WeatherViewModel {
     // MARK: - Properties
     
     private let weatherNetworkService = WeatherNetworkService()
-    
-    private(set) var baeImage: BaeImage?
-    private(set) var lastUpdateTime: String?
-    private(set) var currentTemp: Int?
     private(set) var currentDate: String?
     private(set) var weatherCity: String
     private(set) var weatherState: String
+    private(set) var baeImage: BaeImage
+    private(set) var lastUpdateTime: String
+    private(set) var currentTemp: Int
+    private(set) var weather: Weather
+    var modelImageViewModel = ModelImageViewModel()
     
     private(set) var weather: Weather? {
         didSet {
@@ -61,6 +62,11 @@ class WeatherViewModel {
         self.weatherCity = city
         self.weatherState = state
         updateCurrentWeather(city: city, state: state)
+        let typeOfWeather = TypeOfWeather(for: weather.temperature).typeOfWeatherLimited
+        baeImage = modelImageViewModel.getImagefor(typeOfWeather: typeOfWeather)
+        currentTemp = weather.temperature
+        
+        lastUpdateTime = weather.date.getTimeAsString()
     }
     
     func updateCurrentWeather(city: String, state: String) {
@@ -91,7 +97,6 @@ class WeatherViewModel {
     func getCurrentWeatherBlock() -> WeatherBlockTime {
         return weather!.currentHourBlock
     }
-    
 }
 
 // MARK: - Extensions
