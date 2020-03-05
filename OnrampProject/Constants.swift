@@ -16,5 +16,7 @@ class Constants {
                 .warm: "sample-warm",
                 .hot: "sample-hot"
         ]
+        
+        static let modelName = "Bae"
     }
 }

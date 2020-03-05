@@ -185,7 +185,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="bae" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mht-rF-1sl">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="bae" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Mht-rF-1sl">
                                                         <rect key="frame" x="60" y="0.0" width="191" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -203,6 +203,9 @@
                                                     </label>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XVL-Ty-Yes">
                                                         <rect key="frame" x="62.5" y="0.0" width="57.5" height="31"/>
+                                                        <connections>
+                                                            <action selector="didSwitchDefaultName:" destination="Gnv-4n-e6Z" eventType="valueChanged" id="aGo-Nf-AN9"/>
+                                                        </connections>
                                                     </switch>
                                                 </subviews>
                                             </stackView>
@@ -311,6 +314,10 @@
                     <tabBarItem key="tabBarItem" title="Settings" id="Jze-HQ-XL9"/>
                     <connections>
                         <outlet property="collectionView" destination="MYM-0y-rvb" id="Pud-4d-1ff"/>
+                        <outlet property="defaultNameSwitch" destination="XVL-Ty-Yes" id="G8O-fx-PF6"/>
+                        <outlet property="defaultPicsSwitch" destination="b6T-xT-fZo" id="WNV-93-luM"/>
+                        <outlet property="modelNameLabel" destination="Bxo-M2-KWb" id="l7Q-BM-UTs"/>
+                        <outlet property="nameTextField" destination="Mht-rF-1sl" id="VEx-9B-RXp"/>
                         <outletCollection property="modelSetImageViews" destination="5cM-tB-Xqr" collectionClass="NSMutableArray" id="zO0-ks-QUn"/>
                         <outletCollection property="modelSetImageViews" destination="mMs-a9-3NS" collectionClass="NSMutableArray" id="R2h-MZ-w8v"/>
                         <outletCollection property="modelSetImageViews" destination="BaP-GW-9x9" collectionClass="NSMutableArray" id="vC8-hS-Tcz"/>

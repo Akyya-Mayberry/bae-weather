@@ -13,6 +13,10 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet var modelSetImageViews: [ModelImageView]!
+    @IBOutlet weak var defaultNameSwitch: UISwitch!
+    @IBOutlet weak var defaultPicsSwitch: UISwitch!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var modelNameLabel: UILabel!
     
     private let modelImages = [
         BaeImage("sample-freezing", for: .freezing),
@@ -32,6 +36,7 @@ class SettingsViewController: UIViewController {
         collections.append(modelImages)
         collectionView.dataSource = self
         collectionView.delegate = self
+        nameTextField.delegate = self
         
         for (index, modelView) in modelSetImageViews.enumerated() {
             let typeOfWeather = WeatherCategory(rawValue: index)
@@ -42,7 +47,11 @@ class SettingsViewController: UIViewController {
             modelView.image = UIImage(named: modelImageDetails.image)
         }
         
+        updateUI()
         modelSetImageViews.first?.select()
+        defaultNameSwitch.isOn = true
+        nameTextField.text = Constants.defaults.modelName
+        nameTextField.placeholder = Constants.defaults.modelName
         
     }
     
@@ -59,8 +68,20 @@ class SettingsViewController: UIViewController {
     }
     
     func updateUI() {
+        nameTextField.isEnabled = !defaultNameSwitch.isOn
+        
+        // deselects thumbnails
         for (_, modelView) in modelSetImageViews.enumerated() {
             modelView.deselect()
+        }
+    }
+    
+    @IBAction func didSwitchDefaultName(_ sender: UISwitch) {
+        nameTextField.isEnabled = !sender.isOn
+        
+        if sender.isOn {
+            nameTextField.text = Constants.defaults.modelName
+            modelNameLabel.text = Constants.defaults.modelName
         }
     }
 }
@@ -135,3 +156,40 @@ extension SettingsViewController: UIScrollViewDelegate {
     }
 }
 
+extension SettingsViewController: UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        return !defaultNameSwitch.isOn
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        nameTextField.placeholder = modelNameLabel.text!.isEmpty ? Constants.defaults.modelName : modelNameLabel.text
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        DispatchQueue.main.async {
+            if let text = textField.text, let rangeOfChangedText = Range(range, in: text) {
+                
+                let updatedText = text.replacingCharacters(in: rangeOfChangedText, with: string)
+                
+                self.modelNameLabel.text = !updatedText.isEmpty ? updatedText : "enter name"
+                self.nameTextField.placeholder = !updatedText.isEmpty ? updatedText : "enter name"
+                
+            } else {
+                self.nameTextField.text = "enter name"
+            }
+        }
+        
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if modelNameLabel.text!.isEmpty {
+            modelNameLabel.text = Constants.defaults.modelName
+            textField.placeholder = Constants.defaults.modelName
+        }
+        
+        textField.resignFirstResponder()
+        return true
+    }
+}
