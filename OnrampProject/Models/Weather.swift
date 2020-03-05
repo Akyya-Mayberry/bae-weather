@@ -7,24 +7,8 @@
 
 import Foundation
 
-/**
- Takes a temperature and maps it to a generalized weather category
- */
-enum TypeOfWeather {
-    case hot, warm, cold, freezing
-    
-    init(for temp: Int) {
-        switch true {
-        case temp < 50:
-            self = .freezing
-        case temp < 65:
-            self = .cold
-        case temp < 75:
-            self = .warm
-        default:
-            self = .hot
-        }
-    }
+enum WeatherCategory: Int {
+    case freezing = 0, cold, warm, hot
 }
 
 /**
@@ -53,15 +37,6 @@ enum WeatherBlockTime: Int, CaseIterable, Comparable {
     }
 }
 
-struct WeatherBlock: Comparable {
-    static func < (lhs: WeatherBlock, rhs: WeatherBlock) -> Bool {
-        return lhs.hour.rawValue < rhs.hour.rawValue
-    }
-    
-    let hour: WeatherBlockTime
-    let temperature: Int
-}
-
 struct Weather {
     let date: Date
     let temperature: Int
@@ -70,4 +45,33 @@ struct Weather {
     let state: String
     let country: String
     let currentHourBlock: WeatherBlockTime
+}
+
+/**
+ Takes a temperature and maps it to a generalized weather category
+ */
+struct TypeOfWeather {
+    let typeOfWeatherLimited: WeatherCategory
+    
+    init(for temp: Int) {
+        switch true {
+        case temp < 50:
+            typeOfWeatherLimited = .freezing
+        case temp < 65:
+            typeOfWeatherLimited = .cold
+        case temp < 75:
+            typeOfWeatherLimited = .warm
+        default:
+            typeOfWeatherLimited = .hot
+        }
+    }
+}
+
+struct WeatherBlock: Comparable {
+    static func < (lhs: WeatherBlock, rhs: WeatherBlock) -> Bool {
+        return lhs.hour.rawValue < rhs.hour.rawValue
+    }
+    
+    let hour: WeatherBlockTime
+    let temperature: Int
 }

@@ -18,6 +18,7 @@ struct WeatherViewModel {
     private(set) var lastUpdateTime: String
     private(set) var currentTemp: Int
     private(set) var weather: Weather
+    var modelImageViewModel = ModelImageViewModel()
     
     fileprivate static var testWeatherIndex = 0 {
         didSet {
@@ -40,8 +41,8 @@ struct WeatherViewModel {
     init(weather: Weather) {
         self.weather = weather
         
-        let typeOfWeather = TypeOfWeather(for: weather.temperature)
-        baeImage = BaeImage(for: typeOfWeather)
+        let typeOfWeather = TypeOfWeather(for: weather.temperature).typeOfWeatherLimited
+        baeImage = modelImageViewModel.getImagefor(typeOfWeather: typeOfWeather)
         currentTemp = weather.temperature
         
         lastUpdateTime = weather.date.getTimeAsString()
