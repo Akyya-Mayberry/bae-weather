@@ -37,6 +37,15 @@ enum WeatherBlockTime: Int, CaseIterable, Comparable {
     }
 }
 
+struct Weather {
+    let date: Date
+    let temperature: Int
+    let hourlyTemps: [Int: Int]
+    let city: String
+    let state: String
+    let currentHourBlock: WeatherBlockTime
+}
+
 struct WeatherData: Codable {
     let name: String
     let main: Main
@@ -55,40 +64,23 @@ struct WeatherBlock: Comparable {
     let temperature: Int
 }
 
-struct Weather {
-    let date: Date
-    let temperature: Int
-    let hourlyTemps: [Int: Int]
-    let city: String
-    let state: String
-    let currentHourBlock: WeatherBlockTime
-}
-
 /**
  Takes a temperature and maps it to a generalized weather category
  */
 struct TypeOfWeather {
-    let typeOfWeatherLimited: WeatherCategory
+    let category: WeatherCategory
     
     init(for temp: Int) {
         switch true {
         case temp < 50:
-            typeOfWeatherLimited = .freezing
+            category = .freezing
         case temp < 65:
-            typeOfWeatherLimited = .cold
+            category = .cold
         case temp < 75:
-            typeOfWeatherLimited = .warm
+            category = .warm
         default:
-            typeOfWeatherLimited = .hot
+            category = .hot
         }
     }
 }
 
-struct WeatherBlock: Comparable {
-    static func < (lhs: WeatherBlock, rhs: WeatherBlock) -> Bool {
-        return lhs.hour.rawValue < rhs.hour.rawValue
-    }
-    
-    let hour: WeatherBlockTime
-    let temperature: Int
-}

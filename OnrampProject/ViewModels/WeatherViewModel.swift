@@ -10,6 +10,7 @@ import Foundation
 protocol WeatherViewModelDelegate {
     func didUpdateWeather(_ weatherViewModel: WeatherViewModel)
     func didFailWithError(_ weatherViewModel: WeatherViewModel, _ error: Error)
+    func didUpdateModelImageDetails(_ weatherViewModel: WeatherViewModel, modelImageViewModel: ModelImageViewModel)
 }
 
 /**
@@ -20,33 +21,43 @@ class WeatherViewModel {
     // MARK: - Properties
     
     private let weatherNetworkService = WeatherNetworkService()
-    private(set) var currentDate: String?
     private(set) var weatherCity: String
     private(set) var weatherState: String
-    private(set) var baeImage: BaeImage
-    private(set) var lastUpdateTime: String
-    private(set) var currentTemp: Int
-    private(set) var weather: Weather
+    private(set) var lastUpdateTime: String?
     var modelImageViewModel = ModelImageViewModel()
+    var delegate: WeatherViewModelDelegate?
     
     private(set) var weather: Weather? {
         didSet {
             guard weather != nil else {
                 return
             }
-            
-            let typeOfWeather = TypeOfWeather(for: weather!.temperature)
-            baeImage = BaeImage(for: typeOfWeather)
-            
-            lastUpdateTime = currentTimeAsString
-            currentTemp = weather?.temperature
-            currentDate = currentDateAsString
-            
             delegate?.didUpdateWeather(self)
         }
     }
     
-    var delegate: WeatherViewModelDelegate?
+    var currentTemp: Int? {
+        guard weather != nil else {
+            return nil
+        }
+        
+        return weather?.temperature
+    }
+    
+    var getCurrentDate: String {
+        return currentDateAsString
+    }
+    
+    var modelImageDetails: BaeImage? {
+        
+        guard weather != nil else {
+            return nil
+        }
+        
+        let typeOfWeather = TypeOfWeather(for: weather!.temperature).category
+        
+        return modelImageViewModel.getImagefor(typeOfWeather: typeOfWeather)
+    }
     
     var currentDateAsString: String {
         return (weather?.date.getDateAsString())!
@@ -61,12 +72,8 @@ class WeatherViewModel {
     init(city: String, state: String) {
         self.weatherCity = city
         self.weatherState = state
+        modelImageViewModel.delegate = self
         updateCurrentWeather(city: city, state: state)
-        let typeOfWeather = TypeOfWeather(for: weather.temperature).typeOfWeatherLimited
-        baeImage = modelImageViewModel.getImagefor(typeOfWeather: typeOfWeather)
-        currentTemp = weather.temperature
-        
-        lastUpdateTime = weather.date.getTimeAsString()
     }
     
     func updateCurrentWeather(city: String, state: String) {
@@ -97,6 +104,10 @@ class WeatherViewModel {
     func getCurrentWeatherBlock() -> WeatherBlockTime {
         return weather!.currentHourBlock
     }
+    
+    
+    
+    
 }
 
 // MARK: - Extensions
@@ -128,5 +139,11 @@ extension Date {
         let hour = formatter.string(from: self)
         
         return Int(hour)!
+    }
+}
+
+extension WeatherViewModel: ModelImageViewModelDelegate {
+    func modelName(_ modelImageViewModel: ModelImageViewModel, didChange: Bool) {
+        delegate?.didUpdateModelImageDetails(self, modelImageViewModel: modelImageViewModel)
     }
 }

@@ -7,12 +7,28 @@
 
 import Foundation
 
+protocol ModelImageViewModelDelegate {
+    func modelName(_ modelImageViewModel: ModelImageViewModel, didChange: Bool)
+}
+
 struct ModelImageViewModel {
     
     // MARK: - Properties
     
+    var delegate: ModelImageViewModelDelegate?
+    
     fileprivate var images: [BaeImage] {
         return getImagesSorted()
+    }
+    
+    var modelName: String = "" {
+        didSet {
+            if oldValue != modelName {
+                delegate?.modelName(self, didChange: true)
+            } else {
+                delegate?.modelName(self, didChange: false)
+            }
+        }
     }
     
     // MARK: - Methods

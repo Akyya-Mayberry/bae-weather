@@ -83,7 +83,7 @@ class SettingsViewController: UIViewController {
             modelView.typeOfWeather = typeOfWeather
             
             let modelImageDetails = modelImageViewModel.getImagefor(typeOfWeather: typeOfWeather!)
-            modelView.image = UIImage(named: modelImageDetails.image)
+            modelView.image = UIImage(named: modelImageDetails.imageName)
         }
     }
 }
@@ -104,7 +104,7 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
         let typeOfWeather = WeatherCategory(rawValue: indexPath.row)!
         let modelImageDetails = modelImageViewModel.getImagefor(typeOfWeather: typeOfWeather)
         
-        let modelView = createImageSet(using: UIImage(named: modelImageDetails.image))
+        let modelView = createImageSet(using: UIImage(named: modelImageDetails.imageName))
         
         modelView.typeOfWeather = modelImageDetails.typeOfWeather
         modelView.delegate = self
@@ -194,7 +194,9 @@ extension SettingsViewController: UITextFieldDelegate {
             textField.placeholder = Constants.defaults.modelName
         }
         
+        modelImageViewModel.modelName = modelNameLabel.text!
         textField.resignFirstResponder()
+        
         return true
     }
 }
