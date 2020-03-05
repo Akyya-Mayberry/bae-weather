@@ -15,6 +15,7 @@ struct ModelImageViewModel {
     
     // MARK: - Properties
     
+    private let userDefaults = UserDefaults.standard
     var delegate: ModelImageViewModelDelegate?
     
     fileprivate var images: [BaeImage] {
@@ -24,6 +25,15 @@ struct ModelImageViewModel {
     var modelName: String = "" {
         didSet {
             if oldValue != modelName {
+                
+                let useDefaultName = userDefaults.bool(forKey: Constants.userDefaultKeys.useDefaultName)
+                
+                if  useDefaultName {
+                    userDefaults.set(Constants.defaults.modelName, forKey: Constants.userDefaultKeys.modelName)
+                } else {
+                    userDefaults.set(modelName, forKey: Constants.userDefaultKeys.modelName)
+                }
+                
                 delegate?.modelName(self, didChange: true)
             } else {
                 delegate?.modelName(self, didChange: false)
@@ -53,5 +63,33 @@ struct ModelImageViewModel {
         }
         
         return images
+    }
+    
+    func useDefaultImages(to on: Bool) {
+        userDefaults.set(on, forKey: Constants.userDefaultKeys.useDefaultImages)
+    }
+    
+    mutating func useDefaultName(to on: Bool) {
+        userDefaults.set(on, forKey: Constants.userDefaultKeys.useDefaultName)
+        
+        if on {
+            modelName = Constants.defaults.modelName
+        }
+    }
+    
+    func isUsingDefaultName() -> Bool {
+        return userDefaults.bool(forKey: Constants.userDefaultKeys.useDefaultName)
+    }
+    
+    mutating func setModel(name: String) {
+        userDefaults.set(name, forKey: Constants.userDefaultKeys.modelName)
+        modelName = name
+    }
+}
+
+extension ModelImageViewModel {
+    static func getModelName() -> String? {
+        let userDefaults = UserDefaults.standard
+        return userDefaults.string(forKey: Constants.userDefaultKeys.modelName)
     }
 }

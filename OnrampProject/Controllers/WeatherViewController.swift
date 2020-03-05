@@ -25,10 +25,10 @@ class WeatherViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        modelNameLabel.text = Constants.defaults.modelName
+
         hourBlockWeatherSlider.maximumValue = Float(WeatherBlockTime.allCases.count) - 1
         hourBlockWeatherSlider.minimumValue = 0
+        modelNameLabel.text = ModelImageViewModel.getModelName()
         updateWeather()
         
     }
@@ -48,7 +48,6 @@ class WeatherViewController: UIViewController {
     private func updateWeather() {
         weatherViewModel = WeatherViewModel(city: "Fresno", state: "california")
         weatherViewModel.delegate = self
-        weatherViewModel.modelImageViewModel.modelName = "fatso"
     }
     
     private func updateUI() {
@@ -62,6 +61,7 @@ class WeatherViewController: UIViewController {
             self.currentDateLabel.text = self.weatherViewModel.currentDateAsString
             self.lastTimeUpdatedLabel.text = self.weatherViewModel.lastUpdateTime
             self.modelImageView.image = UIImage(named: self.weatherViewModel.modelImageDetails!.imageName)
+            self.modelNameLabel.text = ModelImageViewModel.getModelName()
         }
     }
     

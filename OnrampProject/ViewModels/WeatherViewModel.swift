@@ -24,7 +24,7 @@ class WeatherViewModel {
     private(set) var weatherCity: String
     private(set) var weatherState: String
     private(set) var lastUpdateTime: String?
-    var modelImageViewModel = ModelImageViewModel()
+    private var modelImageViewModel = ModelImageViewModel()
     var delegate: WeatherViewModelDelegate?
     
     private(set) var weather: Weather? {
@@ -89,6 +89,9 @@ class WeatherViewModel {
                 let currentHourBlock = HourlyWeatherViewModel.getCurrentWeatherBlockUsing(date: date)
                 
                 self.weather = Weather(date: date, temperature: Int(data.main.temp), hourlyTemps: [:], city: city, state: state, currentHourBlock: currentHourBlock)
+                
+                let userDefaults = UserDefaults.standard
+                userDefaults.object(forKey: "lastKnownWeather")
             }
         }
     }
@@ -104,9 +107,6 @@ class WeatherViewModel {
     func getCurrentWeatherBlock() -> WeatherBlockTime {
         return weather!.currentHourBlock
     }
-    
-    
-    
     
 }
 

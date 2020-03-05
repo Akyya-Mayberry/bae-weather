@@ -31,6 +31,12 @@ struct Constants {
             static let placeholderText = "enter name"
         }
     }
+    
+    struct userDefaultKeys {
+        static let modelName = "modelName"
+        static let useDefaultName = "useDefaultName"
+        static let useDefaultImages = "useDefaultImages"
+    }
 }
     
 

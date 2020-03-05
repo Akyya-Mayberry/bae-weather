@@ -192,7 +192,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="bae" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Mht-rF-1sl">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Mht-rF-1sl">
                                                         <rect key="frame" x="60" y="0.0" width="191" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -211,7 +211,7 @@
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XVL-Ty-Yes">
                                                         <rect key="frame" x="62.5" y="0.0" width="57.5" height="31"/>
                                                         <connections>
-                                                            <action selector="didSwitchDefaultName:" destination="Gnv-4n-e6Z" eventType="valueChanged" id="aGo-Nf-AN9"/>
+                                                            <action selector="didChangeUseDefaultNameSwitch:" destination="Gnv-4n-e6Z" eventType="valueChanged" id="Hgt-1l-ddV"/>
                                                         </connections>
                                                     </switch>
                                                 </subviews>
@@ -236,8 +236,11 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b6T-xT-fZo">
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b6T-xT-fZo">
                                                         <rect key="frame" x="62.5" y="0.0" width="57.5" height="31"/>
+                                                        <connections>
+                                                            <action selector="didChangeUseDefaultImagesSwitch:" destination="Gnv-4n-e6Z" eventType="valueChanged" id="MAc-gM-YBB"/>
+                                                        </connections>
                                                     </switch>
                                                 </subviews>
                                             </stackView>

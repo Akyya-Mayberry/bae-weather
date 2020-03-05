@@ -10,10 +10,14 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        for (k, v) in UserDefaults.standard.dictionaryRepresentation() {
+            print("\(k) : \(v)")
+        }
+        
+        loadDefaults()
         return true
     }
 
@@ -32,5 +36,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+}
+
+extension AppDelegate {
+    func loadDefaults() {
+        let userDefaults = UserDefaults.standard
+        
+        // use default name if none is set or using default flag is set
+        if userDefaults.string(forKey: Constants.userDefaultKeys.modelName) == nil {
+            userDefaults.set(true, forKey: Constants.userDefaultKeys.useDefaultName)
+        }
+        
+        if userDefaults.bool(forKey: Constants.userDefaultKeys.useDefaultName) {
+            userDefaults.set(Constants.defaults.modelName, forKey: Constants.userDefaultKeys.modelName)
+        }
+    }
 }
 
