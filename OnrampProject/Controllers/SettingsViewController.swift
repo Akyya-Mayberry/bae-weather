@@ -74,11 +74,12 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
         
         let modelView = createImageSet(using: UIImage(named: modelImageDetails.image))
         
-        modelView.delegate = self
         modelView.typeOfWeatherLimited = modelImageDetails.typeOfWeather
+        modelView.delegate = self
+        
         
         cell.addSubview(modelView)
-        cell.modelView = modelView
+        
         
         return cell
     }
@@ -94,10 +95,17 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
 
 extension SettingsViewController: ModelImageViewDelegate {
     func didTapModelImageView(_ modelImageView: ModelImageView) {
-        DispatchQueue.main.async {
-            let indexPath = IndexPath(row: modelImageView.typeOfWeatherLimited!.rawValue, section: 0)
-            self.collectionView.scrollToItem(at: indexPath, at: [.centeredHorizontally], animated: true)
+        
+        if (modelImageView.superview?.isKind(of: UICollectionViewCell.self))! {
+            performSegue(withIdentifier: "ModelImageDetailsSegue", sender: self)
+        } else {
+            
+            DispatchQueue.main.async {
+                let indexPath = IndexPath(row: modelImageView.typeOfWeatherLimited!.rawValue, section: 0)
+                self.collectionView.scrollToItem(at: indexPath, at: [.centeredHorizontally], animated: true)
+            }
         }
+        
     }
 }
 

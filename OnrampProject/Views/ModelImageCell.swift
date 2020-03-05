@@ -7,12 +7,10 @@
 
 import UIKit
 
-class ModelImageCell: UICollectionViewCell {
-    var modelView: ModelImageView!
+protocol ModelImageCellDelegate {
+    func didTapModelImageCell(_ modelImageCell: ModelImageCell)
 }
 
-extension ModelImageCell: ModelImageViewDelegate {
-    func didTapModelImageView(_ modelImageView: ModelImageView) {
-        print("Should show model details/edit view")
-    }
+class ModelImageCell: UICollectionViewCell {
+    var delegate: ModelImageCellDelegate?
 }

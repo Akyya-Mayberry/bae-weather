@@ -315,11 +315,27 @@
                         <outletCollection property="modelSetImageViews" destination="mMs-a9-3NS" collectionClass="NSMutableArray" id="R2h-MZ-w8v"/>
                         <outletCollection property="modelSetImageViews" destination="BaP-GW-9x9" collectionClass="NSMutableArray" id="vC8-hS-Tcz"/>
                         <outletCollection property="modelSetImageViews" destination="PFj-wG-wty" collectionClass="NSMutableArray" id="pFH-52-NHm"/>
+                        <segue destination="LpK-ob-xFc" kind="presentation" identifier="ModelImageDetailsSegue" id="KH8-lr-6w9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f3a-BM-PQA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1092.753623188406" y="594.64285714285711"/>
+        </scene>
+        <!--Model Image Details View Controller-->
+        <scene sceneID="eGv-o9-82v">
+            <objects>
+                <viewController id="LpK-ob-xFc" customClass="ModelImageDetailsViewController" customModule="OnrampProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DkK-xV-XC1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="tTA-Wq-DMZ"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6E5-l0-Jqe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1874" y="598"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="8dW-sy-Vjp">
