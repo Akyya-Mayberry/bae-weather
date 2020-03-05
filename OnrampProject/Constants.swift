@@ -18,5 +18,11 @@ class Constants {
         ]
         
         static let modelName = "Bae"
+        static let numberOfImageCollections = 1
+        static let numberOfImagesInSet = 4
+        
+        struct settings {
+            static let placeholderText = "enter name"
+        }
     }
 }

@@ -18,13 +18,6 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var modelNameLabel: UILabel!
     
-    private let modelImages = [
-        BaeImage("sample-freezing", for: .freezing),
-        BaeImage("sample-cold", for: .freezing),
-        BaeImage("sample-warm", for: .freezing),
-        BaeImage("sample-hot", for: .freezing)
-    ]
-    
     private var collections: [[BaeImage]] = []
     var modelImageViewModel = ModelImageViewModel()
     
@@ -33,21 +26,16 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collections.append(modelImages)
+        collections.append(modelImageViewModel.getImages())
         collectionView.dataSource = self
         collectionView.delegate = self
         nameTextField.delegate = self
         
-        for (index, modelView) in modelSetImageViews.enumerated() {
-            let typeOfWeather = WeatherCategory(rawValue: index)
-            modelView.delegate = self
-            modelView.typeOfWeatherLimited = typeOfWeather
-            
-            let modelImageDetails = modelImageViewModel.getImagefor(typeOfWeather: typeOfWeather!)
-            modelView.image = UIImage(named: modelImageDetails.image)
-        }
+        createThumbnails()
         
         updateUI()
+        
+        // temporary - sets defaults
         modelSetImageViews.first?.select()
         defaultNameSwitch.isOn = true
         nameTextField.text = Constants.defaults.modelName
@@ -56,7 +44,10 @@ class SettingsViewController: UIViewController {
     }
     
     private func createImageSet(using image: UIImage?) -> ModelImageView {
-        let imageSetView = ModelImageView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: collectionView.frame.height))
+        let imageSetView = ModelImageView(frame: CGRect(x: 0, y: 0,
+                                                        width: view.frame.width,
+                                                        height: collectionView.frame.height))
+        
         imageSetView.clipsToBounds = true
         imageSetView.contentMode = .scaleAspectFill
         
@@ -84,6 +75,17 @@ class SettingsViewController: UIViewController {
             modelNameLabel.text = Constants.defaults.modelName
         }
     }
+    
+    private func createThumbnails() {
+        for (index, modelView) in modelSetImageViews.enumerated() {
+            let typeOfWeather = WeatherCategory(rawValue: index)
+            modelView.delegate = self
+            modelView.typeOfWeather = typeOfWeather
+            
+            let modelImageDetails = modelImageViewModel.getImagefor(typeOfWeather: typeOfWeather!)
+            modelView.image = UIImage(named: modelImageDetails.image)
+        }
+    }
 }
 
 extension SettingsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -104,7 +106,7 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
         
         let modelView = createImageSet(using: UIImage(named: modelImageDetails.image))
         
-        modelView.typeOfWeatherLimited = modelImageDetails.typeOfWeather
+        modelView.typeOfWeather = modelImageDetails.typeOfWeather
         modelView.delegate = self
         
         cell.addSubview(modelView)
@@ -113,11 +115,7 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let width = collectionView.bounds.width
-        let height = collectionView.bounds.height
-        
-        return CGSize(width: width, height: height)
+        return CGSize(width: collectionView.bounds.width, height:collectionView.bounds.height)
     }
 }
 
@@ -131,7 +129,7 @@ extension SettingsViewController: ModelImageViewDelegate {
                 self.updateUI()
                 modelImageView.select()
                 
-                let indexPath = IndexPath(row: modelImageView.typeOfWeatherLimited!.rawValue, section: 0)
+                let indexPath = IndexPath(row: modelImageView.typeOfWeather!.rawValue, section: 0)
                 self.collectionView.scrollToItem(at: indexPath, at: [.centeredHorizontally], animated: true)
             }
         }
@@ -140,6 +138,12 @@ extension SettingsViewController: ModelImageViewDelegate {
 }
 
 extension SettingsViewController: UIScrollViewDelegate {
+    /**
+     Updates the selected thumbnail to the current previewed model image
+     
+     Description: User is able to swipe left and right to cylce through model preview images.
+     This ensures that when user swipes to view a different model image, the selected thumbnail updates to match it
+     */
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         DispatchQueue.main.async {
             let offsetFromOriginOfScrollView = self.collectionView.contentOffset
@@ -172,11 +176,11 @@ extension SettingsViewController: UITextFieldDelegate {
                 
                 let updatedText = text.replacingCharacters(in: rangeOfChangedText, with: string)
                 
-                self.modelNameLabel.text = !updatedText.isEmpty ? updatedText : "enter name"
-                self.nameTextField.placeholder = !updatedText.isEmpty ? updatedText : "enter name"
+                self.modelNameLabel.text = !updatedText.isEmpty ? updatedText : Constants.defaults.settings.placeholderText
+                self.nameTextField.placeholder = !updatedText.isEmpty ? updatedText : Constants.defaults.settings.placeholderText
                 
             } else {
-                self.nameTextField.text = "enter name"
+                self.nameTextField.text = Constants.defaults.settings.placeholderText
             }
         }
         
@@ -184,7 +188,8 @@ extension SettingsViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if modelNameLabel.text!.isEmpty {
+        if modelNameLabel.text!.isEmpty
+            ||  modelNameLabel.text == Constants.defaults.settings.placeholderText {
             modelNameLabel.text = Constants.defaults.modelName
             textField.placeholder = Constants.defaults.modelName
         }

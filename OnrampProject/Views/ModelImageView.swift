@@ -19,7 +19,7 @@ class ModelImageView: UIView {
     
     private(set) var isSelected = false
     var delegate: ModelImageViewDelegate?
-    var typeOfWeatherLimited: WeatherCategory?
+    var typeOfWeather: WeatherCategory?
     
     var image: UIImage? {
         get { return modelImageView.image }
