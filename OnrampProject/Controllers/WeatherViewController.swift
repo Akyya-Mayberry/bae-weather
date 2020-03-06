@@ -28,7 +28,8 @@ class WeatherViewController: UIViewController {
         
         hourBlockWeatherSlider.maximumValue = Float(WeatherBlockTime.allCases.count) - 1
         hourBlockWeatherSlider.minimumValue = 0
-
+        modelNameLabel.text = ModelImageViewModel.getModelName()!
+        
         updateWeather()
         updateUI()
     }

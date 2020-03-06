@@ -11,7 +11,7 @@ protocol ModelImageViewModelDelegate {
     func modelName(_ modelImageViewModel: ModelImageViewModel, didChange: Bool)
 }
 
-struct ModelImageViewModel {
+class ModelImageViewModel {
     
     // MARK: - Properties
     
@@ -23,7 +23,7 @@ struct ModelImageViewModel {
         return getImagesSorted()
     }
     
-    private var modelName: String = "" {
+    @objc dynamic private(set) var modelName: String = "" {
         didSet {
             if oldValue != modelName {
                 
@@ -70,7 +70,7 @@ struct ModelImageViewModel {
         userDefaults.set(on, forKey: Constants.userDefaultKeys.useDefaultImages)
     }
     
-    mutating func useDefaultName(to on: Bool) {
+    func useDefaultName(to on: Bool) {
         userDefaults.set(on, forKey: Constants.userDefaultKeys.useDefaultName)
         
         if on {
@@ -82,7 +82,7 @@ struct ModelImageViewModel {
         return userDefaults.bool(forKey: Constants.userDefaultKeys.useDefaultName)
     }
     
-    mutating func setModel(name: String) {
+    func setModel(name: String) {
         let settings = Settings(modelName: name, modelImageSet: nil)
         WeatherViewModel.storeInUserDefaults(item: settings)
         modelName = name
@@ -92,7 +92,8 @@ struct ModelImageViewModel {
 extension ModelImageViewModel {
     static func getModelName() -> String? {
         if let settings = WeatherViewModel.getFromUserDefaults(item: Constants.userDefaultKeys.settings) as? Settings {
-            return settings.modelName
+            let modelName = settings.modelName
+            return modelName
         } else {
             return nil
         }
