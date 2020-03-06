@@ -15,6 +15,7 @@ class ModelImageViewModel {
     
     // MARK: - Properties
     
+    private let userDefaultsService = UserDefaultsService()
     private let userDefaults = UserDefaults.standard
     var delegate: ModelImageViewModelDelegate?
     var selectedThumbnailIndex = 0
@@ -85,14 +86,15 @@ class ModelImageViewModel {
     
     func setModel(name: String) {
         let settings = Settings(modelName: name, modelImageSet: nil)
-        WeatherViewModel.storeInUserDefaults(item: settings)
+        userDefaultsService.storeInUserDefaults(item: settings)
         modelName = name
     }
 }
 
 extension ModelImageViewModel {
+    static let userDefaultsService = UserDefaultsService()
     static func getModelName() -> String? {
-        if let settings = WeatherViewModel.getFromUserDefaults(item: Constants.userDefaultKeys.settings) as? Settings {
+        if let settings = userDefaultsService.getFromUserDefaults(item: Constants.userDefaultKeys.settings) as? Settings {
             let modelName = settings.modelName
             return modelName
         } else {

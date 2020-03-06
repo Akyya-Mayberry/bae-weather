@@ -41,14 +41,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate {
     func loadDefaults() {
-        let userDefaults = UserDefaults.standard
+        let userDefaultsService = UserDefaultsService()
         
         // load defaults if user has not change settings or wants to them
         
-        if WeatherViewModel.getFromUserDefaults(item: Constants.userDefaultKeys.settings) == nil ||
-            userDefaults.bool(forKey: Constants.userDefaultKeys.useDefaultName) {
+        if userDefaultsService.getFromUserDefaults(item: Constants.userDefaultKeys.settings) == nil ||
+            UserDefaults.standard.bool(forKey: Constants.userDefaultKeys.useDefaultName) {
             let settings = Settings(modelName: Constants.defaults.modelName, modelImageSet: nil)
-            WeatherViewModel.storeInUserDefaults(item: settings)
+            userDefaultsService.storeInUserDefaults(item: settings)
         }
     }
 }
