@@ -12,7 +12,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+//        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+//             UserDefaults.standard.synchronize()
         for (k, v) in UserDefaults.standard.dictionaryRepresentation() {
             print("\(k) : \(v)")
         }
@@ -49,6 +50,11 @@ extension AppDelegate {
         
         if userDefaults.bool(forKey: Constants.userDefaultKeys.useDefaultName) {
             userDefaults.set(Constants.defaults.modelName, forKey: Constants.userDefaultKeys.modelName)
+        }
+        
+        if WeatherViewModel.getFromUserDefaults(item: Constants.userDefaultKeys.settings) == nil {
+            let settings = Settings(modelName: Constants.defaults.modelName, modelImageSet: nil)
+            WeatherViewModel.storeInUserDefaults(item: settings)
         }
     }
 }

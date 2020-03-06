@@ -21,6 +21,7 @@ class WeatherViewModel {
     // MARK: - Properties
     
     private let weatherNetworkService = WeatherNetworkService()
+    fileprivate let userDefaults = UserDefaults.standard
     private(set) var weatherCity: String
     private(set) var weatherState: String
     private(set) var lastUpdateTime: String?
@@ -32,6 +33,10 @@ class WeatherViewModel {
             guard weather != nil else {
                 return
             }
+            
+            lastUpdateTime = currentTimeAsString
+            
+            WeatherViewModel.storeInUserDefaults(item: weather)
             delegate?.didUpdateWeather(self)
         }
     }
@@ -73,7 +78,14 @@ class WeatherViewModel {
         self.weatherCity = city
         self.weatherState = state
         modelImageViewModel.delegate = self
-        updateCurrentWeather(city: city, state: state)
+        
+        if let lastKnownWeather = WeatherViewModel.getFromUserDefaults(item: Constants.userDefaultKeys.lastKnownWeather) as? Weather {
+            self.weather = lastKnownWeather
+            lastUpdateTime = self.weather?.date.getTimeAsString()
+            delegate?.didUpdateWeather(self)
+        }
+        
+//        updateCurrentWeather(city: city, state: state)
     }
     
     func updateCurrentWeather(city: String, state: String) {
@@ -90,8 +102,7 @@ class WeatherViewModel {
                 
                 self.weather = Weather(date: date, temperature: Int(data.main.temp), hourlyTemps: [:], city: city, state: state, currentHourBlock: currentHourBlock)
                 
-                let userDefaults = UserDefaults.standard
-                userDefaults.object(forKey: "lastKnownWeather")
+                WeatherViewModel.storeInUserDefaults(item: self.weather)
             }
         }
     }
@@ -145,5 +156,69 @@ extension Date {
 extension WeatherViewModel: ModelImageViewModelDelegate {
     func modelName(_ modelImageViewModel: ModelImageViewModel, didChange: Bool) {
         delegate?.didUpdateModelImageDetails(self, modelImageViewModel: modelImageViewModel)
+    }
+}
+
+// TODO: Move to userdefault service or shared instance
+extension WeatherViewModel {
+    
+    static func storeInUserDefaults(item: Any?) {
+        let userDefaults = UserDefaults.standard
+        
+        if let item = item as? Weather {
+            let encoder = JSONEncoder()
+            
+            do {
+                let data = try encoder.encode(item)
+                userDefaults.set(data, forKey: Constants.userDefaultKeys.lastKnownWeather)
+            } catch {
+                print("error storing data in user defaults: \(error)")
+            }
+        }
+        
+        if let item = item as? Settings {
+            let encoder = JSONEncoder()
+            
+            do {
+                let data = try encoder.encode(item)
+                userDefaults.set(data, forKey: Constants.userDefaultKeys.settings)
+            } catch {
+                print("error storing data in user defaults: \(error)")
+            }
+        }
+    }
+    
+    static func getFromUserDefaults(item: String) -> Any? {
+        let userDefaults = UserDefaults.standard
+        let decoder = JSONDecoder()
+        
+        guard let data = userDefaults.data(forKey: item) else {
+            print("items has not been stored in defaults yet")
+            return nil
+        }
+        
+        if item == Constants.userDefaultKeys.lastKnownWeather {
+            do {
+                
+                let lastKnownWeather = try decoder.decode(Weather.self, from: data)
+                return lastKnownWeather
+            } catch {
+                print("error retrieving last known weather in user defaults: \(error)")
+                return nil
+            }
+        }
+        
+        if item == Constants.userDefaultKeys.settings {
+            do {
+                let data = userDefaults.object(forKey: item) as! Data
+                let settings = try decoder.decode(Settings.self, from: data)
+                return settings
+            } catch {
+                print("error retrieving settings in user defaults")
+                return nil
+            }
+        }
+        
+        return nil
     }
 }

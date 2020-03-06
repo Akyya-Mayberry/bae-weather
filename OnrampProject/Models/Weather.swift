@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum WeatherCategory: Int {
+enum WeatherCategory: Int, Codable {
     case freezing = 0, cold, warm, hot
 }
 
@@ -17,7 +17,7 @@ enum WeatherCategory: Int {
  - Description: Instead of viewing weather for every hour of the day, the weather block time
  will attempt to represent some of the most common important hours of the day for needing a temperature
  */
-enum WeatherBlockTime: Int, CaseIterable, Comparable {
+enum WeatherBlockTime: Int, CaseIterable, Comparable, Codable {
     static func < (lhs: WeatherBlockTime, rhs: WeatherBlockTime) -> Bool {
         return lhs.self.rawValue < rhs.self.rawValue
     }
@@ -37,7 +37,7 @@ enum WeatherBlockTime: Int, CaseIterable, Comparable {
     }
 }
 
-struct Weather {
+struct Weather: Codable {
     let date: Date
     let temperature: Int
     let hourlyTemps: [Int: Int]
@@ -67,7 +67,7 @@ struct WeatherBlock: Comparable {
 /**
  Takes a temperature and maps it to a generalized weather category
  */
-struct TypeOfWeather {
+struct TypeOfWeather: Codable {
     let category: WeatherCategory
     
     init(for temp: Int) {

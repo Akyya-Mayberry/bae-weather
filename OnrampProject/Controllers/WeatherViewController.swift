@@ -25,12 +25,12 @@ class WeatherViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         hourBlockWeatherSlider.maximumValue = Float(WeatherBlockTime.allCases.count) - 1
         hourBlockWeatherSlider.minimumValue = 0
-        modelNameLabel.text = ModelImageViewModel.getModelName()
+
         updateWeather()
-        
+        updateUI()
     }
     
     @IBAction func onTapRefreshImage(_ sender: UITapGestureRecognizer) {
@@ -47,7 +47,6 @@ class WeatherViewController: UIViewController {
     
     private func updateWeather() {
         weatherViewModel = WeatherViewModel(city: "Fresno", state: "california")
-        weatherViewModel.delegate = self
     }
     
     private func updateUI() {
@@ -61,24 +60,17 @@ class WeatherViewController: UIViewController {
             self.currentDateLabel.text = self.weatherViewModel.currentDateAsString
             self.lastTimeUpdatedLabel.text = self.weatherViewModel.lastUpdateTime
             self.modelImageView.image = UIImage(named: self.weatherViewModel.modelImageDetails!.imageName)
-            self.modelNameLabel.text = ModelImageViewModel.getModelName()
+            self.modelNameLabel.text = ModelImageViewModel.getModelName()!
         }
     }
-    
 }
 
-extension WeatherViewController: WeatherViewModelDelegate {
+extension WeatherViewController {
     func didUpdateWeather(_ weatherViewModel: WeatherViewModel) {
         updateUI()
     }
     
     func didFailWithError(_ weatherViewModel: WeatherViewModel, _ error: Error) {
         print("Error with viewModel: \(error)")
-    }
-    
-    func didUpdateModelImageDetails(_ weatherViewModel: WeatherViewModel, modelImageViewModel: ModelImageViewModel) {
-        DispatchQueue.main.async {
-            self.modelNameLabel.text = modelImageViewModel.modelName
-        }
     }
 }

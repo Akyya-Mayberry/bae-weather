@@ -23,7 +23,7 @@ struct ModelImageViewModel {
         return getImagesSorted()
     }
     
-    var modelName: String = "" {
+    private var modelName: String = "" {
         didSet {
             if oldValue != modelName {
                 
@@ -83,14 +83,18 @@ struct ModelImageViewModel {
     }
     
     mutating func setModel(name: String) {
-        userDefaults.set(name, forKey: Constants.userDefaultKeys.modelName)
+        let settings = Settings(modelName: name, modelImageSet: nil)
+        WeatherViewModel.storeInUserDefaults(item: settings)
         modelName = name
     }
 }
 
 extension ModelImageViewModel {
     static func getModelName() -> String? {
-        let userDefaults = UserDefaults.standard
-        return userDefaults.string(forKey: Constants.userDefaultKeys.modelName)
+        if let settings = WeatherViewModel.getFromUserDefaults(item: Constants.userDefaultKeys.settings) as? Settings {
+            return settings.modelName
+        } else {
+            return nil
+        }
     }
 }

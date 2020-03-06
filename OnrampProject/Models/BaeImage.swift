@@ -12,7 +12,7 @@ import Foundation
  - Parameter typeOfWeather: An object that describes weather based on generalized weather categories
  - Returns: An image representing a genralized weather category
  */
-struct BaeImage {
+struct BaeImage: Codable {
     private(set) var imageName: String
     private(set) var typeOfWeather: WeatherCategory
     
