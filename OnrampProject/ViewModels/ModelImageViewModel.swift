@@ -20,7 +20,7 @@ class ModelImageViewModel {
     var delegate: ModelImageViewModelDelegate?
     var selectedThumbnailIndex = 0
     
-    fileprivate var images: [BaeImage] {
+    static var images: [BaeImage] {
         return getImagesSorted()
     }
     
@@ -47,14 +47,16 @@ class ModelImageViewModel {
     // MARK: - Methods
     
     func getImagefor(typeOfWeather: WeatherCategory) -> BaeImage {
-        return images[typeOfWeather.rawValue]
+        let currentSettings = userDefaultsService.getFromUserDefaults(item: Constants.userDefaultKeys.settings) as? Settings
+        let images = currentSettings?.modelImageSet
+        return images![typeOfWeather.rawValue]
     }
     
-    func getImages() -> [BaeImage] {
+    static func getImages() -> [BaeImage] {
         return images
     }
     
-    private func getImagesSorted() -> [BaeImage] {
+    static func getImagesSorted() -> [BaeImage] {
         let modelImagesSortedByKey = Constants.defaults.modelImages.sorted { (arg0, arg1) -> Bool in
             let (key2, _) = arg1
             let (key1, _) = arg0
@@ -88,6 +90,42 @@ class ModelImageViewModel {
         let settings = Settings(modelName: name, modelImageSet: nil)
         userDefaultsService.storeInUserDefaults(item: settings)
         modelName = name
+    }
+    
+    func getCategory(for typeOfWeather: WeatherCategory) -> String {
+        switch typeOfWeather {
+        case .freezing:
+            return "Freezing"
+        case .cold:
+            return "Cold"
+        case .warm:
+            return "Warm"
+        default:
+            return "Hot"
+        }
+    }
+    
+    func getIconName(for typeOfWeather: WeatherCategory) -> String {
+        switch typeOfWeather {
+        case .freezing:
+            return Constants.weatherCategoryIcons.freezing
+        case .cold:
+            return Constants.weatherCategoryIcons.cold
+        case .warm:
+            return Constants.weatherCategoryIcons.warm
+        default:
+            return Constants.weatherCategoryIcons.hot
+        }
+    }
+    
+    func update(image: BaeImage) {
+        if let currentSettings = userDefaultsService.getFromUserDefaults(item: Constants.userDefaultKeys.settings) as? Settings {
+            var currentImages = currentSettings.modelImageSet
+            currentImages![image.typeOfWeather.rawValue] = image
+            
+            let settings = Settings(modelName: currentSettings.modelName, modelImageSet: currentImages)
+            userDefaultsService.storeInUserDefaults(item: settings)
+        }
     }
 }
 

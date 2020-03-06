@@ -11,6 +11,7 @@
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="h7M-qo-6HP"/>
                 <outlet property="modelImageView" destination="gT0-tu-gfZ" id="exV-yq-Fd7"/>
+                <outlet property="weatherCategoryView" destination="Lsf-7A-jW8" id="UbW-Lf-Gcc"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -25,6 +26,14 @@
                         <outletCollection property="gestureRecognizers" destination="M4l-Kg-Odr" appends="YES" id="Ohn-k2-H7u"/>
                     </connections>
                 </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lsf-7A-jW8" customClass="WeatherCategoryView" customModule="OnrampProject" customModuleProvider="target">
+                    <rect key="frame" x="333" y="24" width="50" height="150"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="gu6-ue-F2G"/>
+                        <constraint firstAttribute="width" constant="50" id="s3X-GK-FVC"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
@@ -32,6 +41,8 @@
                 <constraint firstItem="gT0-tu-gfZ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="BqP-Hx-Gu3"/>
                 <constraint firstItem="gT0-tu-gfZ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="PNv-5N-GGi"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="gT0-tu-gfZ" secondAttribute="trailing" id="POM-L0-dJg"/>
+                <constraint firstItem="Lsf-7A-jW8" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="-20" id="akh-qI-4au"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Lsf-7A-jW8" secondAttribute="trailing" constant="30" id="tJb-Iz-HNC"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

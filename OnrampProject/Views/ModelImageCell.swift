@@ -13,4 +13,5 @@ protocol ModelImageCellDelegate {
 
 class ModelImageCell: UICollectionViewCell {
     var delegate: ModelImageCellDelegate?
+    var modelView: ModelImageView!
 }
