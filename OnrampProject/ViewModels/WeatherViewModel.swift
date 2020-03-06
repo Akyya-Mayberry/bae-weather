@@ -21,10 +21,11 @@ class WeatherViewModel {
     // MARK: - Properties
     
     private let weatherNetworkService = WeatherNetworkService()
+    fileprivate let userDefaultsService = UserDefaultsService()
     private(set) var weatherCity: String
     private(set) var weatherState: String
     private(set) var lastUpdateTime: String?
-    var modelImageViewModel = ModelImageViewModel()
+    private var modelImageViewModel = ModelImageViewModel()
     var delegate: WeatherViewModelDelegate?
     
     private(set) var weather: Weather? {
@@ -32,6 +33,10 @@ class WeatherViewModel {
             guard weather != nil else {
                 return
             }
+            
+            lastUpdateTime = currentTimeAsString
+            
+            userDefaultsService.storeInUserDefaults(item: weather)
             delegate?.didUpdateWeather(self)
         }
     }
@@ -73,6 +78,13 @@ class WeatherViewModel {
         self.weatherCity = city
         self.weatherState = state
         modelImageViewModel.delegate = self
+        
+        if let lastKnownWeather = userDefaultsService.getFromUserDefaults(item: Constants.userDefaultKeys.lastKnownWeather) as? Weather {
+            self.weather = lastKnownWeather
+            lastUpdateTime = self.weather?.date.getTimeAsString()
+            delegate?.didUpdateWeather(self)
+        }
+        
         updateCurrentWeather(city: city, state: state)
     }
     
@@ -89,6 +101,8 @@ class WeatherViewModel {
                 let currentHourBlock = HourlyWeatherViewModel.getCurrentWeatherBlockUsing(date: date)
                 
                 self.weather = Weather(date: date, temperature: Int(data.main.temp), hourlyTemps: [:], city: city, state: state, currentHourBlock: currentHourBlock)
+                
+                self.userDefaultsService.storeInUserDefaults(item: self.weather)
             }
         }
     }
@@ -104,9 +118,6 @@ class WeatherViewModel {
     func getCurrentWeatherBlock() -> WeatherBlockTime {
         return weather!.currentHourBlock
     }
-    
-    
-    
     
 }
 

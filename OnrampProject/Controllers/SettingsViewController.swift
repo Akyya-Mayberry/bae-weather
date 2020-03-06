@@ -35,12 +35,9 @@ class SettingsViewController: UIViewController {
         
         updateUI()
         
-        // temporary - sets defaults
+        // temporary - sets default images
         modelSetImageViews.first?.select()
-        defaultNameSwitch.isOn = true
-        nameTextField.text = Constants.defaults.modelName
-        nameTextField.placeholder = Constants.defaults.modelName
-        
+        modelImageViewModel.selectedThumbnailIndex = 0
     }
     
     private func createImageSet(using image: UIImage?) -> ModelImageView {
@@ -59,21 +56,38 @@ class SettingsViewController: UIViewController {
     }
     
     func updateUI() {
-        nameTextField.isEnabled = !defaultNameSwitch.isOn
-        
-        // deselects thumbnails
-        for (_, modelView) in modelSetImageViews.enumerated() {
-            modelView.deselect()
+        DispatchQueue.main.async {
+            if self.modelImageViewModel.isUsingDefaultName() {
+                self.nameTextField.isEnabled = false
+                self.defaultNameSwitch.isOn = true
+            } else {
+                self.nameTextField.isEnabled = true
+                self.defaultNameSwitch.isOn = false
+            }
+            
+            self.nameTextField.placeholder = ""
+            self.nameTextField.placeholder = ModelImageViewModel.getModelName()
+            self.modelNameLabel.text = ModelImageViewModel.getModelName()
+            
+            // sets selected thumbnail
+            for (index, modelView) in self.modelSetImageViews.enumerated() {
+                if index != self.modelImageViewModel.selectedThumbnailIndex {
+                    modelView.deselect()
+                } else {
+                    modelView.select()
+                }
+            }
         }
     }
     
-    @IBAction func didSwitchDefaultName(_ sender: UISwitch) {
+    @IBAction func didChangeUseDefaultNameSwitch(_ sender: UISwitch) {
         nameTextField.isEnabled = !sender.isOn
-        
-        if sender.isOn {
-            nameTextField.text = Constants.defaults.modelName
-            modelNameLabel.text = Constants.defaults.modelName
-        }
+        modelImageViewModel.useDefaultName(to: sender.isOn)
+        updateUI()
+    }
+    
+    @IBAction func didChangeUseDefaultImagesSwitch(_ sender: Any) {
+        print("Did change default images switch")
     }
     
     private func createThumbnails() {
@@ -128,6 +142,7 @@ extension SettingsViewController: ModelImageViewDelegate {
             DispatchQueue.main.async {
                 self.updateUI()
                 modelImageView.select()
+                self.modelImageViewModel.selectedThumbnailIndex = modelImageView.typeOfWeather!.rawValue
                 
                 let indexPath = IndexPath(row: modelImageView.typeOfWeather!.rawValue, section: 0)
                 self.collectionView.scrollToItem(at: indexPath, at: [.centeredHorizontally], animated: true)
@@ -153,9 +168,10 @@ extension SettingsViewController: UIScrollViewDelegate {
             let centerOfFrame = CGPoint(x: currentCellFrame.midX, y: currentCellFrame.midY)
             let indexPath = self.collectionView.indexPathForItem(at: centerOfFrame)
             
-            self.updateUI()
-            
             self.modelSetImageViews[indexPath!.row].select()
+            self.modelImageViewModel.selectedThumbnailIndex = indexPath!.row
+            
+            self.updateUI()
         }
     }
 }
@@ -165,12 +181,7 @@ extension SettingsViewController: UITextFieldDelegate {
         return !defaultNameSwitch.isOn
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        nameTextField.placeholder = modelNameLabel.text!.isEmpty ? Constants.defaults.modelName : modelNameLabel.text
-    }
-    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
         DispatchQueue.main.async {
             if let text = textField.text, let rangeOfChangedText = Range(range, in: text) {
                 
@@ -188,13 +199,8 @@ extension SettingsViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if modelNameLabel.text!.isEmpty
-            ||  modelNameLabel.text == Constants.defaults.settings.placeholderText {
-            modelNameLabel.text = Constants.defaults.modelName
-            textField.placeholder = Constants.defaults.modelName
-        }
         
-        modelImageViewModel.modelName = modelNameLabel.text!
+        modelImageViewModel.setModel(name: textField.text!)
         textField.resignFirstResponder()
         
         return true

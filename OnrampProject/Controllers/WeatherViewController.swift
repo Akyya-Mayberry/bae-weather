@@ -26,11 +26,13 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        modelNameLabel.text = Constants.defaults.modelName
+        NotificationCenter.default.addObserver(self, selector: #selector(onUpdateModelName(_:)), name: .didSetModelName, object: nil)
         hourBlockWeatherSlider.maximumValue = Float(WeatherBlockTime.allCases.count) - 1
         hourBlockWeatherSlider.minimumValue = 0
-        updateWeather()
+        modelNameLabel.text = ModelImageViewModel.getModelName()!
         
+        updateWeather()
+        updateUI()
     }
     
     @IBAction func onTapRefreshImage(_ sender: UITapGestureRecognizer) {
@@ -47,8 +49,6 @@ class WeatherViewController: UIViewController {
     
     private func updateWeather() {
         weatherViewModel = WeatherViewModel(city: "Fresno", state: "california")
-        weatherViewModel.delegate = self
-        weatherViewModel.modelImageViewModel.modelName = "fatso"
     }
     
     private func updateUI() {
@@ -62,23 +62,31 @@ class WeatherViewController: UIViewController {
             self.currentDateLabel.text = self.weatherViewModel.currentDateAsString
             self.lastTimeUpdatedLabel.text = self.weatherViewModel.lastUpdateTime
             self.modelImageView.image = UIImage(named: self.weatherViewModel.modelImageDetails!.imageName)
+            self.modelNameLabel.text = ModelImageViewModel.getModelName()!
         }
     }
     
+    @objc func onUpdateModelName(_ notification: Notification) {
+        if let modelInfo = notification.userInfo as? [String: String] {
+            if let modelName = modelInfo["name"] {
+                DispatchQueue.main.async {
+                    self.modelNameLabel.text = modelName
+                }
+            }
+        }
+    }
 }
 
 extension WeatherViewController: WeatherViewModelDelegate {
+    func didUpdateModelImageDetails(_ weatherViewModel: WeatherViewModel, modelImageViewModel: ModelImageViewModel) {
+        //
+    }
+    
     func didUpdateWeather(_ weatherViewModel: WeatherViewModel) {
         updateUI()
     }
     
     func didFailWithError(_ weatherViewModel: WeatherViewModel, _ error: Error) {
         print("Error with viewModel: \(error)")
-    }
-    
-    func didUpdateModelImageDetails(_ weatherViewModel: WeatherViewModel, modelImageViewModel: ModelImageViewModel) {
-        DispatchQueue.main.async {
-            self.modelNameLabel.text = modelImageViewModel.modelName
-        }
     }
 }
