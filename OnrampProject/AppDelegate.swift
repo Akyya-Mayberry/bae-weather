@@ -48,18 +48,17 @@ extension AppDelegate {
         
         // load defaults if user has not change settings or wants to them
         let currentSettings = userDefaultsService.getFromUserDefaults(item: Constants.userDefaultKeys.settings) as? Settings
-        let modelImages = ModelImageViewModel.getImages()
         
         if currentSettings == nil {
-            let settings = Settings(modelName: Constants.defaults.modelName, modelImageSet: modelImages)
+            let settings = Settings(modelName: Constants.defaults.modelName, modelImageSet: nil)
             userDefaults.set(true, forKey: Constants.userDefaultKeys.useDefaultImages)
             userDefaults.set(true, forKey: Constants.userDefaultKeys.useDefaultName)
             userDefaultsService.storeInUserDefaults(item: settings)
         } else if UserDefaults.standard.bool(forKey: Constants.userDefaultKeys.useDefaultName) {
-            let settings = Settings(modelName: Constants.defaults.modelName, modelImageSet: currentSettings?.modelImageSet)
+            let settings = Settings(modelName: Constants.defaults.modelName, modelImageSet: nil)
             userDefaultsService.storeInUserDefaults(item: settings)
         } else if UserDefaults.standard.bool(forKey: Constants.userDefaultKeys.useDefaultImages ) {
-            let settings = Settings(modelName: currentSettings!.modelName, modelImageSet: modelImages)
+            let settings = Settings(modelName: currentSettings!.modelName, modelImageSet: nil)
             userDefaultsService.storeInUserDefaults(item: settings)
         }
     }

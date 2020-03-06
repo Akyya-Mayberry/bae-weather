@@ -20,7 +20,7 @@ class ModelImageViewModel {
     var delegate: ModelImageViewModelDelegate?
     var selectedThumbnailIndex = 0
     
-    static var images: [BaeImage] {
+    fileprivate var images: [BaeImage] {
         return getImagesSorted()
     }
     
@@ -47,16 +47,14 @@ class ModelImageViewModel {
     // MARK: - Methods
     
     func getImagefor(typeOfWeather: WeatherCategory) -> BaeImage {
-        let currentSettings = userDefaultsService.getFromUserDefaults(item: Constants.userDefaultKeys.settings) as? Settings
-        let images = currentSettings?.modelImageSet
-        return images![typeOfWeather.rawValue]
+        return images[typeOfWeather.rawValue]
     }
     
-    static func getImages() -> [BaeImage] {
+    func getImages() -> [BaeImage] {
         return images
     }
     
-    static func getImagesSorted() -> [BaeImage] {
+    func getImagesSorted() -> [BaeImage] {
         let modelImagesSortedByKey = Constants.defaults.modelImages.sorted { (arg0, arg1) -> Bool in
             let (key2, _) = arg1
             let (key1, _) = arg0
