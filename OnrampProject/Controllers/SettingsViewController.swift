@@ -26,7 +26,7 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collections.append(modelImageViewModel.getImages())
+        collections.append(ModelImageViewModel.getImages())
         collectionView.dataSource = self
         collectionView.delegate = self
         nameTextField.delegate = self

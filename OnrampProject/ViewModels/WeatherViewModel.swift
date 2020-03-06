@@ -85,7 +85,7 @@ class WeatherViewModel {
             delegate?.didUpdateWeather(self)
         }
         
-//        updateCurrentWeather(city: city, state: state)
+        updateCurrentWeather(city: city, state: state)
     }
     
     func updateCurrentWeather(city: String, state: String) {
