@@ -95,6 +95,7 @@ class SettingsViewController: UIViewController {
             let typeOfWeather = WeatherCategory(rawValue: index)
             modelView.delegate = self
             modelView.typeOfWeather = typeOfWeather
+            modelView.hideWeatherCategory(true)
             
             let modelImageDetails = modelImageViewModel.getImagefor(typeOfWeather: typeOfWeather!)
             modelView.image = UIImage(named: modelImageDetails.imageName)
@@ -122,6 +123,10 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
         
         modelView.typeOfWeather = modelImageDetails.typeOfWeather
         modelView.delegate = self
+        modelView.weatherCategoryView.category = modelImageViewModel.getCategory(for: typeOfWeather)
+        modelView.weatherCategoryView.image = UIImage(named: modelImageViewModel.getIconName(for: typeOfWeather))!.withRenderingMode(
+            UIImage.RenderingMode.alwaysTemplate)
+        modelView.weatherCategoryView.tintColor = UIColor.white
         
         cell.addSubview(modelView)
         

@@ -16,6 +16,7 @@ class ModelImageView: UIView {
     
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var modelImageView: UIImageView!
+    @IBOutlet weak var weatherCategoryView: WeatherCategoryView!
     
     private(set) var isSelected = false
     var delegate: ModelImageViewDelegate?
@@ -66,4 +67,7 @@ class ModelImageView: UIView {
         isSelected = false
     }
     
+    func hideWeatherCategory(_ hide: Bool) {
+        weatherCategoryView.isHidden = hide
+    }
 }

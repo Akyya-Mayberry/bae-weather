@@ -89,6 +89,32 @@ class ModelImageViewModel {
         userDefaultsService.storeInUserDefaults(item: settings)
         modelName = name
     }
+    
+    func getCategory(for typeOfWeather: WeatherCategory) -> String {
+        switch typeOfWeather {
+        case .freezing:
+            return "Freezing"
+        case .cold:
+            return "Cold"
+        case .warm:
+            return "Warm"
+        default:
+            return "Hot"
+        }
+    }
+    
+    func getIconName(for typeOfWeather: WeatherCategory) -> String {
+        switch typeOfWeather {
+        case .freezing:
+            return Constants.weatherCategoryIcons.freezing
+        case .cold:
+            return Constants.weatherCategoryIcons.cold
+        case .warm:
+            return Constants.weatherCategoryIcons.warm
+        default:
+            return Constants.weatherCategoryIcons.hot
+        }
+    }
 }
 
 extension ModelImageViewModel {

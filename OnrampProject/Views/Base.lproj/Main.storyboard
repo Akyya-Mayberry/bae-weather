@@ -194,7 +194,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Mht-rF-1sl">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" background="moon.stars.fill" catalog="system" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Mht-rF-1sl">
                                                         <rect key="frame" x="60" y="0.0" width="191" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -299,7 +299,7 @@
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="VWc-lV-YDA">
                                             <rect key="frame" x="0.0" y="0.0" width="408" height="300"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="408" height="300"/>
                                     </collectionViewCell>
@@ -379,6 +379,7 @@
     <resources>
         <image name="arrow.clockwise" catalog="system" width="56" height="64"/>
         <image name="moon" catalog="system" width="64" height="60"/>
+        <image name="moon.stars.fill" catalog="system" width="64" height="62"/>
         <image name="sample-hot" width="1920" height="1280"/>
         <image name="sunrise" catalog="system" width="64" height="48"/>
     </resources>

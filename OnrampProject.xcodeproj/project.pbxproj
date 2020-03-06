@@ -32,6 +32,8 @@
 		EBE9EF75240D0FEA002817C7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE9EF74240D0FEA002817C7 /* SettingsViewController.swift */; };
 		EBF176DC240B9D3E005AB1F8 /* HourlyWeatherBlockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF176DB240B9D3E005AB1F8 /* HourlyWeatherBlockViewModel.swift */; };
 		EBF176E0240CA19F005AB1F8 /* WeatherNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF176DF240CA19F005AB1F8 /* WeatherNetworkService.swift */; };
+		EBFC751224122D2F00FE3E5C /* WeatherCategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBFC751124122D2F00FE3E5C /* WeatherCategoryView.xib */; };
+		EBFC751424122D4500FE3E5C /* WeatherCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFC751324122D4500FE3E5C /* WeatherCategoryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +89,8 @@
 		EBE9EF74240D0FEA002817C7 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		EBF176DB240B9D3E005AB1F8 /* HourlyWeatherBlockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherBlockViewModel.swift; sourceTree = "<group>"; };
 		EBF176DF240CA19F005AB1F8 /* WeatherNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherNetworkService.swift; sourceTree = "<group>"; };
+		EBFC751124122D2F00FE3E5C /* WeatherCategoryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeatherCategoryView.xib; sourceTree = "<group>"; };
+		EBFC751324122D4500FE3E5C /* WeatherCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCategoryView.swift; sourceTree = "<group>"; };
 		EFBDCB4EB90E79F599947BFB /* Pods-OnrampProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnrampProject.release.xcconfig"; path = "Target Support Files/Pods-OnrampProject/Pods-OnrampProject.release.xcconfig"; sourceTree = "<group>"; };
 		F205FEDC3417D736E9D44C50 /* Pods-OnrampProject-OnrampProjectUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnrampProject-OnrampProjectUITests.debug.xcconfig"; path = "Target Support Files/Pods-OnrampProject-OnrampProjectUITests/Pods-OnrampProject-OnrampProjectUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -207,6 +211,8 @@
 				EB2D0250240F076C005C2241 /* ModelImageCell.swift */,
 				EB2D0256240F0AAE005C2241 /* ModelImageView.swift */,
 				EB2D0258240F0AC3005C2241 /* ModelImageView.xib */,
+				EBFC751124122D2F00FE3E5C /* WeatherCategoryView.xib */,
+				EBFC751324122D4500FE3E5C /* WeatherCategoryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -366,6 +372,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBFC751224122D2F00FE3E5C /* WeatherCategoryView.xib in Resources */,
 				6030FC7C23FF0C7A007F0901 /* LaunchScreen.storyboard in Resources */,
 				EB2D0259240F0AC3005C2241 /* ModelImageView.xib in Resources */,
 				6030FC7923FF0C7A007F0901 /* Assets.xcassets in Resources */,
@@ -504,6 +511,7 @@
 				6030FC7423FF0C79007F0901 /* WeatherViewController.swift in Sources */,
 				EB950EA4240B6F4F00096825 /* BaeImage.swift in Sources */,
 				6030FC7023FF0C79007F0901 /* AppDelegate.swift in Sources */,
+				EBFC751424122D4500FE3E5C /* WeatherCategoryView.swift in Sources */,
 				EB2D0251240F076C005C2241 /* ModelImageCell.swift in Sources */,
 				EB950EA7240B7ADD00096825 /* Weather.swift in Sources */,
 				EBD469CF2411B717004E80DC /* Settings.swift in Sources */,

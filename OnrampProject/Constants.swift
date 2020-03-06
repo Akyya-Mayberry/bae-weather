@@ -43,6 +43,13 @@ struct Constants {
     struct notifications {
         static let modelNameSet = "didSetModelName"
     }
+    
+    struct weatherCategoryIcons {
+        static let freezing = "icon-freezing"
+        static let cold = "icon-cold"
+        static let warm = "icon-warm"
+        static let hot = "icon-hot"
+    }
 }
     
 
