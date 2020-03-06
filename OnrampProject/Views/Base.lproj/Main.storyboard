@@ -341,20 +341,91 @@
             </objects>
             <point key="canvasLocation" x="1092.753623188406" y="594.64285714285711"/>
         </scene>
-        <!--Model Image Details View Controller-->
+        <!--ModelImageDetailsViewController-->
         <scene sceneID="eGv-o9-82v">
             <objects>
-                <viewController id="LpK-ob-xFc" customClass="ModelImageDetailsViewController" customModule="OnrampProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ModelImageDetailsViewController" title="ModelImageDetailsViewController" id="LpK-ob-xFc" customClass="ModelImageDetailsViewController" customModule="OnrampProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DkK-xV-XC1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sample-hot" translatesAutoresizingMaskIntoConstraints="NO" id="USs-8j-vRk">
+                                <rect key="frame" x="20" y="100" width="374" height="363"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="363" id="ISn-Wu-rMC"/>
+                                    <constraint firstAttribute="width" constant="374" id="c9T-V2-88x"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nhe-Ca-riW">
+                                <rect key="frame" x="182" y="20" width="50" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="AbD-Qe-3Ex"/>
+                                    <constraint firstAttribute="height" constant="50" id="spf-oQ-p4M"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="tintColor" red="1" green="0.4051257875" blue="0.3453042228" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="edit"/>
+                                <connections>
+                                    <action selector="didTapEdit:" destination="LpK-ob-xFc" eventType="touchUpInside" id="ioR-Cu-bIB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vnL-TU-ewP">
+                                <rect key="frame" x="334" y="20" width="50" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="AZX-1m-wCM"/>
+                                    <constraint firstAttribute="width" constant="50" id="FCx-K8-7g3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="tintColor" red="1" green="0.4051257875" blue="0.3453042228" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="save"/>
+                                <connections>
+                                    <action selector="didTapSave:" destination="LpK-ob-xFc" eventType="touchUpInside" id="XvY-fv-Zmq"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-hot" translatesAutoresizingMaskIntoConstraints="NO" id="fPi-ze-Sjx">
+                                <rect key="frame" x="87" y="483" width="240" height="128"/>
+                                <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="jGU-in-X97"/>
+                                    <constraint firstAttribute="width" constant="240" id="voq-sw-nsb"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z9p-el-7EP">
+                                <rect key="frame" x="30" y="25.5" width="52" height="39.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Nhe-Ca-riW" firstAttribute="centerX" secondItem="DkK-xV-XC1" secondAttribute="centerX" id="9ew-0b-5eU"/>
+                            <constraint firstItem="tTA-Wq-DMZ" firstAttribute="trailing" secondItem="USs-8j-vRk" secondAttribute="trailing" constant="20" id="Eb0-9n-T44"/>
+                            <constraint firstItem="fPi-ze-Sjx" firstAttribute="centerX" secondItem="DkK-xV-XC1" secondAttribute="centerX" id="FNW-J8-coG"/>
+                            <constraint firstItem="Nhe-Ca-riW" firstAttribute="top" secondItem="tTA-Wq-DMZ" secondAttribute="top" constant="20" id="Vva-HS-R1M"/>
+                            <constraint firstItem="USs-8j-vRk" firstAttribute="top" secondItem="Nhe-Ca-riW" secondAttribute="bottom" constant="30" id="Wud-UF-n1D"/>
+                            <constraint firstItem="z9p-el-7EP" firstAttribute="centerY" secondItem="Nhe-Ca-riW" secondAttribute="centerY" id="ePO-Es-Nki"/>
+                            <constraint firstItem="fPi-ze-Sjx" firstAttribute="top" secondItem="USs-8j-vRk" secondAttribute="bottom" constant="20" id="gnh-8j-Rww"/>
+                            <constraint firstItem="z9p-el-7EP" firstAttribute="leading" secondItem="tTA-Wq-DMZ" secondAttribute="leading" constant="30" id="hnU-TL-Xic"/>
+                            <constraint firstItem="vnL-TU-ewP" firstAttribute="top" secondItem="tTA-Wq-DMZ" secondAttribute="top" constant="20" id="jcf-MO-B8K"/>
+                            <constraint firstItem="USs-8j-vRk" firstAttribute="leading" secondItem="tTA-Wq-DMZ" secondAttribute="leading" constant="20" id="koT-63-diC"/>
+                            <constraint firstItem="tTA-Wq-DMZ" firstAttribute="trailing" secondItem="vnL-TU-ewP" secondAttribute="trailing" constant="30" id="uO5-eI-xYD"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="tTA-Wq-DMZ"/>
                     </view>
+                    <connections>
+                        <outlet property="categoryImageView" destination="fPi-ze-Sjx" id="QhK-pt-h4M"/>
+                        <outlet property="categoryLabel" destination="z9p-el-7EP" id="19s-GX-SiW"/>
+                        <outlet property="editButton" destination="Nhe-Ca-riW" id="NOr-xm-mLy"/>
+                        <outlet property="previewImageView" destination="USs-8j-vRk" id="OsG-fe-IN2"/>
+                        <outlet property="saveButton" destination="vnL-TU-ewP" id="FYW-HV-QoJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6E5-l0-Jqe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1874" y="598"/>
+            <point key="canvasLocation" x="1873.913043478261" y="597.99107142857144"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="8dW-sy-Vjp">
@@ -378,9 +449,12 @@
     </scenes>
     <resources>
         <image name="arrow.clockwise" catalog="system" width="56" height="64"/>
+        <image name="edit" width="100" height="100"/>
+        <image name="icon-hot" width="100" height="100"/>
         <image name="moon" catalog="system" width="64" height="60"/>
         <image name="moon.stars.fill" catalog="system" width="64" height="62"/>
         <image name="sample-hot" width="1920" height="1280"/>
+        <image name="save" width="100" height="100"/>
         <image name="sunrise" catalog="system" width="64" height="48"/>
     </resources>
 </document>

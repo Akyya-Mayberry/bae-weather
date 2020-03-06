@@ -27,11 +27,11 @@
                     </connections>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lsf-7A-jW8" customClass="WeatherCategoryView" customModule="OnrampProject" customModuleProvider="target">
-                    <rect key="frame" x="283" y="24" width="100" height="200"/>
+                    <rect key="frame" x="333" y="24" width="50" height="150"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="200" id="gu6-ue-F2G"/>
-                        <constraint firstAttribute="width" constant="100" id="s3X-GK-FVC"/>
+                        <constraint firstAttribute="height" constant="150" id="gu6-ue-F2G"/>
+                        <constraint firstAttribute="width" constant="50" id="s3X-GK-FVC"/>
                     </constraints>
                 </view>
             </subviews>

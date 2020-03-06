@@ -127,6 +127,7 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
         modelView.weatherCategoryView.image = UIImage(named: modelImageViewModel.getIconName(for: typeOfWeather))!.withRenderingMode(
             UIImage.RenderingMode.alwaysTemplate)
         modelView.weatherCategoryView.tintColor = UIColor.white
+        cell.modelView = modelView
         
         cell.addSubview(modelView)
         
@@ -142,7 +143,12 @@ extension SettingsViewController: ModelImageViewDelegate {
     func didTapModelImageView(_ modelImageView: ModelImageView) {
         
         if (modelImageView.superview?.isKind(of: UICollectionViewCell.self))! {
-            performSegue(withIdentifier: "ModelImageDetailsSegue", sender: self)
+            
+            let modelImageDetailsVC = storyboard?.instantiateViewController(identifier: String(describing: ModelImageDetailsViewController.self)) as! ModelImageDetailsViewController
+            modelImageDetailsVC.modelImageView = modelImageView
+            modelImageDetailsVC.delegate = self
+            
+            show(modelImageDetailsVC, sender: self)
         } else {
             DispatchQueue.main.async {
                 self.updateUI()
@@ -209,5 +215,14 @@ extension SettingsViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         
         return true
+    }
+}
+
+extension SettingsViewController: ModelImageDetailsViewControllerDelegate {
+    func didUpdateCategory(_ modelImageDetailsViewController: ModelImageDetailsViewController, image: UIImage, for typeOfWeather: WeatherCategory) {
+        DispatchQueue.main.async {
+            let cell = self.collectionView.cellForItem(at: IndexPath(row: typeOfWeather.rawValue, section: 0)) as! ModelImageCell
+            cell.modelView.image = image
+        }
     }
 }
