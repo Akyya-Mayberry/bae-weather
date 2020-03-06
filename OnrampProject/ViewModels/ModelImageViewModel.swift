@@ -39,6 +39,7 @@ class ModelImageViewModel {
             } else {
                 delegate?.modelName(self, didChange: false)
             }
+            NotificationCenter.default.post(name: .didSetModelName, object: self, userInfo: ["name": modelName])
         }
     }
     
@@ -98,4 +99,8 @@ extension ModelImageViewModel {
             return nil
         }
     }
+}
+
+extension Notification.Name {
+    static let didSetModelName = Notification.Name(Constants.notifications.modelNameSet)
 }

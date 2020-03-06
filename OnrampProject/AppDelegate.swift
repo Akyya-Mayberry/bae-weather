@@ -14,9 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
 //        UserDefaults.standard.synchronize()
-//        for (k, v) in UserDefaults.standard.dictionaryRepresentation() {
-//            print("\(k) : \(v)")
-//        }
+        for (k, v) in UserDefaults.standard.dictionaryRepresentation() {
+            print("\(k) : \(v)")
+        }
         
         loadDefaults()
         return true

@@ -26,6 +26,7 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(onUpdateModelName(_:)), name: .didSetModelName, object: nil)
         hourBlockWeatherSlider.maximumValue = Float(WeatherBlockTime.allCases.count) - 1
         hourBlockWeatherSlider.minimumValue = 0
         modelNameLabel.text = ModelImageViewModel.getModelName()!
@@ -64,9 +65,23 @@ class WeatherViewController: UIViewController {
             self.modelNameLabel.text = ModelImageViewModel.getModelName()!
         }
     }
+    
+    @objc func onUpdateModelName(_ notification: Notification) {
+        if let modelInfo = notification.userInfo as? [String: String] {
+            if let modelName = modelInfo["name"] {
+                DispatchQueue.main.async {
+                    self.modelNameLabel.text = modelName
+                }
+            }
+        }
+    }
 }
 
-extension WeatherViewController {
+extension WeatherViewController: WeatherViewModelDelegate {
+    func didUpdateModelImageDetails(_ weatherViewModel: WeatherViewModel, modelImageViewModel: ModelImageViewModel) {
+        //
+    }
+    
     func didUpdateWeather(_ weatherViewModel: WeatherViewModel) {
         updateUI()
     }
