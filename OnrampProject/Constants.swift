@@ -50,6 +50,11 @@ struct Constants {
     static let warm = "icon-warm"
     static let hot = "icon-hot"
   }
+  
+  struct tabBarItems {
+    static let weather = "thermometer"
+    static let settings = "settings"
+  }
 }
 
 

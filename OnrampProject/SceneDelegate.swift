@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     guard let _ = (scene as? UIWindowScene) else { return }
     
-    loadRootTabBarController()
+    loadTabBarController()
   }
   
   func sceneDidDisconnect(_ scene: UIScene) {
@@ -53,7 +53,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 extension SceneDelegate {
   
-  func loadRootTabBarController() {
+  func loadTabBarController() {
     
     // load weather view controller with last known weather
     
@@ -67,6 +67,7 @@ extension SceneDelegate {
     weatherVC.weatherViewModel.delegate = weatherVC.self
     
     let settingsVC = storyboard.instantiateViewController(identifier: String(describing: SettingsViewController.self)) as! SettingsViewController
+    
     
     let tabBarController = UITabBarController()
     tabBarController.viewControllers = [weatherVC, settingsVC]

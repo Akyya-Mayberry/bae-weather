@@ -13,14 +13,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
     // Deletes user defaults
-            UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
-            UserDefaults.standard.synchronize()
+    //            UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+    //            UserDefaults.standard.synchronize()
     
-//    for (k, v) in UserDefaults.standard.dictionaryRepresentation() {
-//      print("\(k) : \(v)")
-//    }
+    //    for (k, v) in UserDefaults.standard.dictionaryRepresentation() {
+    //      print("\(k) : \(v)")
+    //    }
     
+    configureTabControllerAppearance()
     loadDefaults()
+    
     return true
   }
   
@@ -42,6 +44,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate {
+  func configureTabControllerAppearance() {
+    UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.darkGray], for: .normal)
+    UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.darkGray], for: .selected)
+    
+    UITabBar.appearance().tintColor = UIColor.darkGray
+    UITabBar.appearance().isTranslucent = false
+  }
+  
   func loadDefaults() {
     let userDefaultsService = UserDefaultsService()
     let userDefaults = UserDefaults.standard
