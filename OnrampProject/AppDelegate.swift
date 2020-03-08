@@ -13,8 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
     // Deletes user defaults
-//            UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
-//            UserDefaults.standard.synchronize()
+            UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+            UserDefaults.standard.synchronize()
     
 //    for (k, v) in UserDefaults.standard.dictionaryRepresentation() {
 //      print("\(k) : \(v)")
@@ -50,12 +50,12 @@ extension AppDelegate {
     let currentSettings = userDefaultsService.getFromUserDefaults(item: Constants.userDefaultKeys.settings) as? Settings
     
     if currentSettings == nil {
-      let settings = Settings(modelName: Constants.defaults.modelName, modelImageSet: nil)
+      let settings = Settings(modelName: "\(Constants.defaults.modelName)", modelImageSet: nil)
       userDefaults.set(true, forKey: Constants.userDefaultKeys.useDefaultImages)
       userDefaults.set(true, forKey: Constants.userDefaultKeys.useDefaultName)
       userDefaultsService.storeInUserDefaults(item: settings)
     } else if UserDefaults.standard.bool(forKey: Constants.userDefaultKeys.useDefaultName) {
-      let settings = Settings(modelName: Constants.defaults.modelName, modelImageSet: nil)
+      let settings = Settings(modelName: "\(Constants.defaults.modelName)", modelImageSet: nil)
       userDefaultsService.storeInUserDefaults(item: settings)
     } else if UserDefaults.standard.bool(forKey: Constants.userDefaultKeys.useDefaultImages ) {
       let settings = Settings(modelName: currentSettings!.modelName, modelImageSet: nil)

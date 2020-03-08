@@ -31,16 +31,16 @@ class ModelImageViewModel {
                 let useDefaultName = userDefaults.bool(forKey: Constants.userDefaultKeys.useDefaultName)
                 
                 if  useDefaultName {
-                    userDefaults.set(Constants.defaults.modelName, forKey: Constants.userDefaultKeys.modelName)
+                    userDefaults.set("\(Constants.defaults.modelName) Weather", forKey: Constants.userDefaultKeys.modelName)
                 } else {
-                    userDefaults.set(modelName, forKey: Constants.userDefaultKeys.modelName)
+                    userDefaults.set("\(modelName) Weather", forKey: Constants.userDefaultKeys.modelName)
                 }
                 
                 delegate?.modelName(self, didChange: true)
             } else {
                 delegate?.modelName(self, didChange: false)
             }
-            NotificationCenter.default.post(name: .didSetModelName, object: self, userInfo: ["name": modelName])
+            NotificationCenter.default.post(name: .didSetModelName, object: self, userInfo: ["name": "\(modelName) Weather"])
         }
     }
     

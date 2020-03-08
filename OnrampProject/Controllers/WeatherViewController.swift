@@ -17,6 +17,7 @@ class WeatherViewController: UIViewController {
   @IBOutlet weak var hourBlockWeatherSlider: UISlider!
   @IBOutlet weak var modelImageView: UIImageView!
   @IBOutlet weak var modelNameLabel: UILabel!
+  @IBOutlet weak var weatherInfoView: UIView!
   
   var weatherViewModel: WeatherViewModel!
   private var hourlyWeatherViewModel: HourlyWeatherViewModel!
@@ -47,7 +48,7 @@ class WeatherViewController: UIViewController {
   }
   
   private func updateWeather() {
-    weatherViewModel.updateCurrentWeather(city: Constants.defaults.location.city, state: Constants.defaults.location.state)
+    //    weatherViewModel.updateCurrentWeather(city: Constants.defaults.location.city, state: Constants.defaults.location.state)
   }
   
   private func updateUI() {
