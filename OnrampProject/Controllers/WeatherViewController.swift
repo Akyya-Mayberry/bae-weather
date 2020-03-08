@@ -18,7 +18,7 @@ class WeatherViewController: UIViewController {
   @IBOutlet weak var modelImageView: UIImageView!
   @IBOutlet weak var modelNameLabel: UILabel!
   
-  private var weatherViewModel = WeatherViewModel()
+  var weatherViewModel: WeatherViewModel!
   private var hourlyWeatherViewModel: HourlyWeatherViewModel!
   
   // MARK: - Methods
@@ -29,8 +29,6 @@ class WeatherViewController: UIViewController {
     NotificationCenter.default.addObserver(self, selector: #selector(onUpdateModelName(_:)), name: .didSetModelName, object: nil)
     hourBlockWeatherSlider.maximumValue = Float(WeatherBlockTime.allCases.count) - 1
     hourBlockWeatherSlider.minimumValue = 0
-    modelNameLabel.text = ModelImageViewModel.getModelName()!
-    weatherViewModel.delegate = self
     
     updateWeather()
     updateUI()
@@ -55,7 +53,7 @@ class WeatherViewController: UIViewController {
   private func updateUI() {
     DispatchQueue.main.async {
       
-      guard self.weatherViewModel.weather != nil else {
+      guard self.weatherViewModel != nil, self.weatherViewModel.weather != nil else {
         return
       }
       

@@ -22,9 +22,6 @@ class WeatherViewModel {
   
   private let weatherNetworkService = WeatherNetworkService()
   fileprivate let userDefaultsService = UserDefaultsService()
-  private(set) var weatherCity: String?
-  private(set) var weatherState: String?
-  private(set) var lastUpdateTime: String?
   private var modelImageViewModel = ModelImageViewModel()
   var delegate: WeatherViewModelDelegate?
   
@@ -33,12 +30,21 @@ class WeatherViewModel {
       guard weather != nil else {
         return
       }
-      
-      lastUpdateTime = currentTimeAsString
-      
       userDefaultsService.storeInUserDefaults(item: weather)
       delegate?.didUpdateWeather(self)
     }
+  }
+  
+  var weatherCity: String? {
+    return weather?.city
+  }
+  
+  var weatherState: String? {
+    return weather?.state
+  }
+  
+  var lastUpdateTime: String? {
+    return weather?.date.getTimeAsString()
   }
   
   var currentTemp: Int? {
@@ -74,15 +80,11 @@ class WeatherViewModel {
   
   // MARK: - Methods
   
-  init() {
+  init(weather: Weather?) {
     modelImageViewModel.delegate = self
-    
-    if let lastKnownWeather = userDefaultsService.getFromUserDefaults(item: Constants.userDefaultKeys.lastKnownWeather) as? Weather {
-      self.weather = lastKnownWeather
-      lastUpdateTime = self.weather?.date.getTimeAsString()
-      delegate?.didUpdateWeather(self)
+    if let weather = weather {
+      self.weather = weather
     }
-    
   }
   
   func updateCurrentWeather(city: String, state: String) {
