@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sIU-Sa-WPw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="STo-SD-Fbo">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
@@ -36,7 +36,7 @@
                                                     </label>
                                                     <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="arrow.clockwise" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Uun-cK-MW0">
                                                         <rect key="frame" x="314" y="32.5" width="40" height="40"/>
-                                                        <color key="tintColor" red="0.81568627449999997" green="0.34901960780000002" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="tintColor" red="0.82255411148071289" green="0.24973508715629578" blue="0.34709912538528442" alpha="0.94020226880000002" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <gestureRecognizers/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="40" id="BZx-fj-d1g"/>
@@ -417,11 +417,149 @@
             </objects>
             <point key="canvasLocation" x="1873.913043478261" y="597.99107142857144"/>
         </scene>
+        <!--Request Location View Controller-->
+        <scene sceneID="XLB-hh-2hz">
+            <objects>
+                <viewController storyboardIdentifier="RequestLocationViewController" id="STo-SD-Fbo" customClass="RequestLocationViewController" customModule="OnrampProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jf0-fc-5n2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="lQs-f3-ARY" userLabel="Logo Stack View">
+                                <rect key="frame" x="185" y="282" width="44" height="44.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="b" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rll-BF-tKe" userLabel="b">
+                                        <rect key="frame" x="0.0" y="0.0" width="20.5" height="44.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="37"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="-50" translatesAutoresizingMaskIntoConstraints="NO" id="dBd-qe-lPg" userLabel="W Stack View">
+                                        <rect key="frame" x="43.5" y="10" width="0.5" height="25"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="weather-filled" translatesAutoresizingMaskIntoConstraints="NO" id="86h-XZ-Xf7">
+                                                <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                                <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="25" id="GbH-A7-bD4"/>
+                                                    <constraint firstAttribute="height" constant="25" id="ks0-PA-At3"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="w" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnK-xH-PLA" userLabel="w">
+                                                <rect key="frame" x="-25" y="0.0" width="25.5" height="25"/>
+                                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="37"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bae Weather" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vRJ-bq-ejS">
+                                <rect key="frame" x="76" y="331.5" width="262" height="58.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="49"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WFt-dX-OgG">
+                                <rect key="frame" x="157" y="448" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="GGp-D5-gt8"/>
+                                    <constraint firstAttribute="height" constant="100" id="m6d-2G-JQw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                <color key="tintColor" red="0.4556483288" green="0.56516426279999998" blue="0.4949936452" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Get Weather for My Location" image="navigation-filled-18dp-1"/>
+                                <connections>
+                                    <action selector="didTapRequestLocation:" destination="STo-SD-Fbo" eventType="touchUpInside" id="yb1-ji-YSg"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get Weather for My Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="650-GC-qQx">
+                                <rect key="frame" x="101.5" y="527.5" width="211" height="20.5"/>
+                                <gestureRecognizers/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="86h-oV-HUf" appends="YES" id="ZCk-Z1-rrS"/>
+                                </connections>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart-filled" translatesAutoresizingMaskIntoConstraints="NO" id="Ixj-zG-a5S">
+                                <rect key="frame" x="161" y="292" width="25" height="25"/>
+                                <color key="tintColor" red="0.83529411760000005" green="0.60337311029999996" blue="0.72403591869999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="CVu-LI-uxL"/>
+                                    <constraint firstAttribute="height" constant="25" id="eRi-q1-YnH"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="WFt-dX-OgG" firstAttribute="top" secondItem="vRJ-bq-ejS" secondAttribute="bottom" constant="58" id="6NJ-Ka-i1j"/>
+                            <constraint firstItem="lQs-f3-ARY" firstAttribute="centerX" secondItem="jf0-fc-5n2" secondAttribute="centerX" id="6b8-wg-zg6"/>
+                            <constraint firstItem="Ixj-zG-a5S" firstAttribute="centerY" secondItem="86h-XZ-Xf7" secondAttribute="centerY" id="7zL-3S-Xoj"/>
+                            <constraint firstItem="WFt-dX-OgG" firstAttribute="centerY" secondItem="jf0-fc-5n2" secondAttribute="centerY" constant="50" id="9WC-DX-14c"/>
+                            <constraint firstItem="vRJ-bq-ejS" firstAttribute="top" secondItem="lQs-f3-ARY" secondAttribute="bottom" constant="5" id="FVt-up-1Si"/>
+                            <constraint firstItem="650-GC-qQx" firstAttribute="bottom" secondItem="WFt-dX-OgG" secondAttribute="bottom" id="LO3-l2-tqV"/>
+                            <constraint firstItem="WFt-dX-OgG" firstAttribute="centerX" secondItem="jf0-fc-5n2" secondAttribute="centerX" id="gKe-DV-DSE"/>
+                            <constraint firstItem="vRJ-bq-ejS" firstAttribute="centerX" secondItem="jf0-fc-5n2" secondAttribute="centerX" id="pWa-QM-ckM"/>
+                            <constraint firstItem="650-GC-qQx" firstAttribute="centerX" secondItem="jf0-fc-5n2" secondAttribute="centerX" id="qBm-Vr-LhL"/>
+                            <constraint firstItem="lQs-f3-ARY" firstAttribute="leading" secondItem="Ixj-zG-a5S" secondAttribute="trailing" constant="-1" id="w3P-Jh-yPm"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="f4M-2E-EGx"/>
+                    </view>
+                    <connections>
+                        <outlet property="heartImageView" destination="Ixj-zG-a5S" id="PL8-ct-Adg"/>
+                        <outlet property="requestLocationButton" destination="WFt-dX-OgG" id="qp3-z0-yhc"/>
+                        <outlet property="weatherImageView" destination="86h-XZ-Xf7" id="3Cz-jS-81T"/>
+                        <segue destination="YTY-9c-YLx" kind="presentation" identifier="LoadingSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="aOE-91-2US"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z0p-q1-vPv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="86h-oV-HUf">
+                    <connections>
+                        <action selector="didTapRequestLocation:" destination="STo-SD-Fbo" id="FBt-yx-KRt"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-1655" y="139"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="MyW-Ol-bJI">
+            <objects>
+                <viewController id="YTY-9c-YLx" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="E2w-Cq-APk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fetching Weather..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FCe-Gt-Yjg">
+                                <rect key="frame" x="98.5" y="432.5" width="217.5" height="31.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="FCe-Gt-Yjg" firstAttribute="centerY" secondItem="E2w-Cq-APk" secondAttribute="centerY" id="MqW-B6-Otm"/>
+                            <constraint firstItem="FCe-Gt-Yjg" firstAttribute="centerX" secondItem="E2w-Cq-APk" secondAttribute="centerX" id="oLj-B2-73t"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="nuq-Oe-Iht"/>
+                    </view>
+                    <connections>
+                        <segue destination="sIU-Sa-WPw" kind="presentation" identifier="HomeSegue" modalPresentationStyle="fullScreen" id="IeV-Yp-9LL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VIe-wH-ePP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-777" y="139"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="8dW-sy-Vjp">
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="sIU-Sa-WPw" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="05I-7W-YKX"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="Nkg-Ik-BYT">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -496,6 +634,7 @@
                             <constraint firstItem="bue-kt-URg" firstAttribute="top" secondItem="hBn-3H-7Qn" secondAttribute="top" constant="15" id="F3c-4t-3ew"/>
                             <constraint firstItem="bue-kt-URg" firstAttribute="leading" secondItem="hBn-3H-7Qn" secondAttribute="leading" constant="15" id="nlE-dw-7Px"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="9C4-QW-nZF"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oo9-fI-11I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -506,13 +645,16 @@
     <resources>
         <image name="arrow.clockwise" catalog="system" width="56" height="64"/>
         <image name="edit" width="100" height="100"/>
+        <image name="heart-filled" width="100" height="100"/>
         <image name="icon-hot" width="100" height="100"/>
         <image name="moon" catalog="system" width="64" height="60"/>
         <image name="moon.stars.fill" catalog="system" width="64" height="62"/>
+        <image name="navigation-filled-18dp-1" width="36" height="36"/>
         <image name="sample-hot" width="1920" height="1280"/>
         <image name="save" width="100" height="100"/>
         <image name="settings" width="25" height="25"/>
         <image name="sunrise" catalog="system" width="64" height="48"/>
         <image name="weather" width="25" height="25"/>
+        <image name="weather-filled" width="100" height="100"/>
     </resources>
 </document>

@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     guard let _ = (scene as? UIWindowScene) else { return }
     
-    loadTabBarController()
+//    loadTabBarController()
   }
   
   func sceneDidDisconnect(_ scene: UIScene) {
@@ -60,19 +60,22 @@ extension SceneDelegate {
     let userDefaultsService = UserDefaultsService()
     let lastKnownWeather = userDefaultsService.getFromUserDefaults(item: Constants.userDefaultKeys.lastKnownWeather) as? Weather
     
-    let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-    
-    let weatherVC = storyboard.instantiateViewController(identifier: String(describing: WeatherViewController.self)) as! WeatherViewController
-    weatherVC.weatherViewModel = WeatherViewModel(weather: lastKnownWeather)
-    weatherVC.weatherViewModel.delegate = weatherVC.self
-    
-    let settingsVC = storyboard.instantiateViewController(identifier: String(describing: SettingsViewController.self)) as! SettingsViewController
-    
-    
-    let tabBarController = UITabBarController()
-    tabBarController.viewControllers = [weatherVC, settingsVC]
-    
-    self.window?.rootViewController = tabBarController
+    // Send to homepage if there's previous weather
+    if lastKnownWeather != nil {
+      let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+      
+      let weatherVC = storyboard.instantiateViewController(identifier: String(describing: WeatherViewController.self)) as! WeatherViewController
+      weatherVC.weatherViewModel = WeatherViewModel(weather: lastKnownWeather)
+      weatherVC.weatherViewModel.delegate = weatherVC.self
+      
+      let settingsVC = storyboard.instantiateViewController(identifier: String(describing: SettingsViewController.self)) as! SettingsViewController
+      
+      
+      let tabBarController = UITabBarController()
+      tabBarController.viewControllers = [weatherVC, settingsVC]
+      
+      self.window?.rootViewController = tabBarController
+    }
   }
 }
 

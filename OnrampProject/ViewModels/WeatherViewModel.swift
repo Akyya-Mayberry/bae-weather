@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 protocol WeatherViewModelDelegate {
   func didUpdateWeather(_ weatherViewModel: WeatherViewModel)
@@ -21,6 +22,7 @@ class WeatherViewModel {
   // MARK: - Properties
   
   private let weatherNetworkService = WeatherNetworkService()
+  private let locationManager = CLLocationManager()
   fileprivate let userDefaultsService = UserDefaultsService()
   private var modelImageViewModel = ModelImageViewModel()
   var delegate: WeatherViewModelDelegate?
@@ -82,9 +84,12 @@ class WeatherViewModel {
   
   init(weather: Weather?) {
     modelImageViewModel.delegate = self
+    
     if let weather = weather {
       self.weather = weather
     }
+    
+    locationManager.requestAlwaysAuthorization()
   }
   
   func updateCurrentWeather(city: String, state: String) {
