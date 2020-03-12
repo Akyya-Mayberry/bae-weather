@@ -28,10 +28,10 @@ class WeatherViewController: UIViewController {
     super.viewDidLoad()
     
     NotificationCenter.default.addObserver(self, selector: #selector(onUpdateModelName(_:)), name: .didSetModelName, object: nil)
-//    hourBlockWeatherSlider.maximumValue = Float(WeatherBlockTime.allCases.count) - 1
-//    hourBlockWeatherSlider.minimumValue = 0
+    //    hourBlockWeatherSlider.maximumValue = Float(WeatherBlockTime.allCases.count) - 1
+    //    hourBlockWeatherSlider.minimumValue = 0
     
-    updateWeather()
+    //    updateWeather()
     updateUI()
   }
   
@@ -48,7 +48,11 @@ class WeatherViewController: UIViewController {
   }
   
   private func updateWeather() {
-    //    weatherViewModel.updateCurrentWeather(city: Constants.defaults.location.city, state: Constants.defaults.location.state)
+    
+    print("city: \(Constants.defaults.location.city)")
+    print("state: \(Constants.defaults.location.state)")
+    
+    weatherViewModel.updateCurrentWeather(city: Constants.defaults.location.city, state: Constants.defaults.location.state)
   }
   
   private func updateUI() {

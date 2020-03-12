@@ -524,10 +524,10 @@
             </objects>
             <point key="canvasLocation" x="-1655" y="139"/>
         </scene>
-        <!--View Controller-->
+        <!--Loading View Controller-->
         <scene sceneID="MyW-Ol-bJI">
             <objects>
-                <viewController id="YTY-9c-YLx" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoadingViewController" id="YTY-9c-YLx" customClass="LoadingViewController" customModule="OnrampProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E2w-Cq-APk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

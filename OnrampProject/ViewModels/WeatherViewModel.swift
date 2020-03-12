@@ -104,7 +104,7 @@ class WeatherViewModel {
         let date = Date()
         let currentHourBlock = HourlyWeatherViewModel.getCurrentWeatherBlockUsing(date: date)
         
-        self.weather = Weather(date: date, temperature: Int(data.main.temp), hourlyTemps: [:], city: city, state: state, currentHourBlock: currentHourBlock)
+        self.weather = Weather(date: date, temperature: Int(data.main.temp), hourlyTemps: [:], city: city, state: state, country: data.sys.country, currentHourBlock: currentHourBlock)
       }
     }
   }
@@ -124,6 +124,16 @@ class WeatherViewModel {
 }
 
 // MARK: - Extensions
+
+extension WeatherViewModel {
+  static func makeWeather(from weatherData: WeatherData) -> Weather {
+    let currentHourBlock = HourlyWeatherViewModel.getCurrentWeatherBlockUsing(date: Date())
+    
+    let weather = Weather(date: Date(), temperature: Int(weatherData.main.temp), hourlyTemps: [:], city: weatherData.name, state: "", country: weatherData.sys.country, currentHourBlock: currentHourBlock)
+    
+    return weather
+  }
+}
 
 extension Date {
   func getDateAsString() -> String {

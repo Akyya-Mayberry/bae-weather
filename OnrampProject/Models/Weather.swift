@@ -43,16 +43,22 @@ struct Weather: Codable {
     let hourlyTemps: [Int: Int]
     let city: String
     let state: String
+    let country: String
     let currentHourBlock: WeatherBlockTime
 }
 
 struct WeatherData: Codable {
     let name: String
     let main: Main
+    let sys: Sys
 }
 
 struct Main: Codable {
     let temp: Float
+}
+
+struct Sys: Codable {
+    let country: String
 }
 
 struct WeatherBlock: Comparable {

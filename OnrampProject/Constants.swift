@@ -27,6 +27,7 @@ struct Constants {
     static let numberOfImageCollections = 1
     static let numberOfImagesInSet = 4
     static let location = (city: "Fresno", state: "California")
+    
     struct settings {
       static let placeholderText = "enter name"
     }
