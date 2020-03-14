@@ -1,13 +1,13 @@
 //
-//  RequestLocationViewController.swift
+//  CurrentLocationViewController.swift
 //  OnrampProject
 //
-//  Created by hollywoodno on 3/9/20.
+//  Created by hollywoodno on 3/13/20.
 //
 
 import UIKit
 
-class RequestLocationViewController: UIViewController {
+class CurrentLocationViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -18,20 +18,6 @@ class RequestLocationViewController: UIViewController {
             requestLocationButton.tintColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
             requestLocationButton.contentMode = .scaleAspectFit
             requestLocationButton.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/4))
-        }
-    }
-    
-    @IBOutlet weak var heartImageView: UIImageView! {
-        didSet {
-            heartImageView.image = heartImageView.image?.withRenderingMode(.alwaysTemplate)
-            heartImageView.tintColor = #colorLiteral(red: 0.8225541115, green: 0.2497350872, blue: 0.3470991254, alpha: 0.9402022688)
-        }
-    }
-    
-    @IBOutlet weak var weatherImageView: UIImageView! {
-        didSet {
-            weatherImageView.image = weatherImageView.image?.withRenderingMode(.alwaysTemplate)
-            weatherImageView.tintColor = #colorLiteral(red: 0.5270639062, green: 0.628903687, blue: 0.5675569773, alpha: 0.9402022688)
         }
     }
     
@@ -90,7 +76,7 @@ class RequestLocationViewController: UIViewController {
 
 // MARK: - Extensions
 
-extension RequestLocationViewController: LocationViewModelDelegate {
+extension CurrentLocationViewController: LocationViewModelDelegate {
     func viewModelLocationManager(_ locationViewModel: LocationViewModel, didUpdateLocationAuthorization status: LocationStatusUpdate) {
         switch status {
         case .authorized:
@@ -108,3 +94,4 @@ extension RequestLocationViewController: LocationViewModelDelegate {
         print("In request vc location manager failed. Alert user of error. Error: \(error).")
     }
 }
+

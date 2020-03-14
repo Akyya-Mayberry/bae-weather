@@ -24,7 +24,7 @@ class LoadingViewController: UIViewController {
   
   func getCurrentLocation() {
     if let currentLocation = locationViewModel.currentLocation {
-      getCurrentWeather(lat: currentLocation.lat, long: currentLocation.long)
+//      getCurrentWeather(lat: currentLocation.lat, long: currentLocation.long)
     } else {
       print("Show there was an error getting current location")
     }
