@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol CurrentLocationViewControllerDelegate {
+    func didAuthorizeCurrentLocation(_ currentLocationViewController: CurrentLocationViewController)
+}
+
 class CurrentLocationViewController: UIViewController {
     
     // MARK: - Properties
@@ -22,6 +26,7 @@ class CurrentLocationViewController: UIViewController {
     }
     
     let locationViewModel = LocationViewModel()
+    var delegate: CurrentLocationViewControllerDelegate?
     
     // MARK: - Methods
     
@@ -29,17 +34,16 @@ class CurrentLocationViewController: UIViewController {
         super.viewDidLoad()
         
         locationViewModel.delegate = self
-        
-        // animates gps icon
-        UIView.animate(withDuration: 1.5, delay: 2.0, options: .curveEaseIn, animations: {
-            self.requestLocationButton.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/3))
-        }, completion: nil)
     }
     
     @IBAction func didTapRequestLocation(_ sender: Any) {
         switch locationViewModel.requestStatus {
         case .authorized:
-            performSegue(withIdentifier: "LoadingSegue", sender: self)
+            // animates gps icon
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
+                self.requestLocationButton.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/3))
+            }, completion: nil)
+            delegate?.didAuthorizeCurrentLocation(self)
         case .denied:
             showLinkToSettings()
         default:
@@ -81,7 +85,11 @@ extension CurrentLocationViewController: LocationViewModelDelegate {
         switch status {
         case .authorized:
             print("In request vc current location is authorized, send to loading page")
-            performSegue(withIdentifier: "LoadingSegue", sender: self)
+            // animates gps icon
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
+                self.requestLocationButton.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/3))
+            }, completion: nil)
+            delegate?.didAuthorizeCurrentLocation(self)
         case .denied:
             print("Show screen to request access or ask view model to request access")
             showLinkToSettings()

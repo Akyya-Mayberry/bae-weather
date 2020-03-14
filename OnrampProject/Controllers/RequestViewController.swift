@@ -29,7 +29,7 @@ class RequestViewController: UIViewController {
     
     private var containerChildViewControllers: [UIViewController] = []
     
-    var activeChildViewController: UIViewController! {
+    private var activeChildViewController: UIViewController! {
         didSet {
             if oldValue != nil {
                 removeChildViewController(oldValue)
@@ -49,6 +49,7 @@ class RequestViewController: UIViewController {
     
     func instantiateChildViewControllers() {
         if let currentLocationViewController = storyboard?.instantiateViewController(identifier: String(describing: CurrentLocationViewController.self)) as? CurrentLocationViewController {
+            currentLocationViewController.delegate = self
             containerChildViewControllers.append(currentLocationViewController)
         }
         
@@ -59,19 +60,33 @@ class RequestViewController: UIViewController {
     
     func setChildViewController() {
         addChild(activeChildViewController)
-        containerView.addSubview(activeChildViewController.view)
         
-        // needed to keep childview within continer view since constraints are defined using autolayout
-        activeChildViewController.view.frame = containerView.bounds
-        
-        activeChildViewController.didMove(toParent: self)
+        UIView.transition(with: self.view, duration: 1, options: .transitionCrossDissolve, animations: {
+            self.containerView.addSubview(self.activeChildViewController.view)
+            
+        }) { (success) in
+            // needed to keep childview within continer view since constraints are defined using autolayout
+            self.activeChildViewController.view.frame = self.containerView.bounds
+            self.activeChildViewController.didMove(toParent: self)
+        }
     }
     
     func removeChildViewController(_ childViewController: UIViewController) {
         childViewController.willMove(toParent: nil)
-        childViewController.view.removeFromSuperview()
-        childViewController.removeFromParent()
+        
+        UIView.transition(with: self.view, duration: 0.3, options: .transitionCrossDissolve, animations: {
+            childViewController.view.removeFromSuperview()
+        }) { (success) in
+            childViewController.removeFromParent()
+        }
     }
 }
 
+extension RequestViewController: CurrentLocationViewControllerDelegate {
+    func didAuthorizeCurrentLocation(_ currentLocationViewController: CurrentLocationViewController) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1)) {
+            self.activeChildViewController = self.containerChildViewControllers[1]
+        }
+    }
+}
 

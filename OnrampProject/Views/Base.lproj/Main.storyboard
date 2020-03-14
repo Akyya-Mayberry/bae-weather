@@ -568,27 +568,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fetching Weather..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FCe-Gt-Yjg">
-                                <rect key="frame" x="98.5" y="432.5" width="217.5" height="31.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <nil key="textColor"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="6vE-ue-5RF">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="color" red="0.82255411148071289" green="0.24973508715629578" blue="0.34709912538528442" alpha="0.94020226880000002" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fetching weather..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FCe-Gt-Yjg">
+                                <rect key="frame" x="132.5" y="64" width="149.5" height="23"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="19"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="FCe-Gt-Yjg" firstAttribute="centerY" secondItem="E2w-Cq-APk" secondAttribute="centerY" id="MqW-B6-Otm"/>
+                            <constraint firstItem="6vE-ue-5RF" firstAttribute="top" secondItem="nuq-Oe-Iht" secondAttribute="top" id="2AG-XR-h1m"/>
+                            <constraint firstItem="6vE-ue-5RF" firstAttribute="leading" secondItem="nuq-Oe-Iht" secondAttribute="leading" id="2RQ-rU-yIK"/>
+                            <constraint firstItem="nuq-Oe-Iht" firstAttribute="trailing" secondItem="6vE-ue-5RF" secondAttribute="trailing" id="9zR-gX-RmA"/>
+                            <constraint firstItem="nuq-Oe-Iht" firstAttribute="bottom" secondItem="6vE-ue-5RF" secondAttribute="bottom" id="Knb-Cg-z0y"/>
+                            <constraint firstItem="FCe-Gt-Yjg" firstAttribute="top" secondItem="nuq-Oe-Iht" secondAttribute="top" constant="20" id="LYY-wc-x96"/>
                             <constraint firstItem="FCe-Gt-Yjg" firstAttribute="centerX" secondItem="E2w-Cq-APk" secondAttribute="centerX" id="oLj-B2-73t"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nuq-Oe-Iht"/>
                     </view>
                     <connections>
+                        <outlet property="loadingSpinner" destination="6vE-ue-5RF" id="dAH-IQ-1LX"/>
                         <segue destination="sIU-Sa-WPw" kind="presentation" identifier="HomeSegue" modalPresentationStyle="fullScreen" id="IeV-Yp-9LL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VIe-wH-ePP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1071" y="-307"/>
+            <point key="canvasLocation" x="-1071.0144927536232" y="-307.36607142857139"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="8dW-sy-Vjp">

@@ -81,7 +81,7 @@
 		AB418A9F2415BD9E003852B3 /* HourlyWeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherViewController.swift; sourceTree = "<group>"; };
 		AB418AA1241746DE003852B3 /* RequestViewController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = RequestViewController.swift; sourceTree = "<group>"; };
 		ABF9B41A241871A90096F563 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
-		ABF9B41C2419B21F0096F563 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		ABF9B41C2419B21F0096F563 /* LoadingViewController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		ABF9B41E241C43E00096F563 /* CurrentLocationViewController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = CurrentLocationViewController.swift; sourceTree = "<group>"; };
 		AE522B3F23D1B668092FF989 /* Pods_OnrampProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnrampProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1BAB3E1459CFFFBF05753BA /* Pods-OnrampProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnrampProjectTests.debug.xcconfig"; path = "Target Support Files/Pods-OnrampProjectTests/Pods-OnrampProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
