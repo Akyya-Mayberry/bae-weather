@@ -63,7 +63,7 @@
 		2F5A11EB90CAA655AE837397 /* Pods-OnrampProject-OnrampProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnrampProject-OnrampProjectUITests.release.xcconfig"; path = "Target Support Files/Pods-OnrampProject-OnrampProjectUITests/Pods-OnrampProject-OnrampProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4345D2E4743E4582B3B67D7A /* Pods-OnrampProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnrampProject.debug.xcconfig"; path = "Target Support Files/Pods-OnrampProject/Pods-OnrampProject.debug.xcconfig"; sourceTree = "<group>"; };
 		59CD0F04C6C65205A89FF4BD /* Pods-OnrampProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnrampProjectTests.release.xcconfig"; path = "Target Support Files/Pods-OnrampProjectTests/Pods-OnrampProjectTests.release.xcconfig"; sourceTree = "<group>"; };
-		6030FC6C23FF0C79007F0901 /* OnrampProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnrampProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6030FC6C23FF0C79007F0901 /* OnrampProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = OnrampProject.app; path = "/Users/hollywoodno/projects/OnrampProject/build/Debug-iphoneos/OnrampProject.app"; sourceTree = "<absolute>"; };
 		6030FC6F23FF0C79007F0901 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6030FC7123FF0C79007F0901 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		6030FC7323FF0C79007F0901 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
@@ -71,10 +71,10 @@
 		6030FC7823FF0C7A007F0901 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6030FC7B23FF0C7A007F0901 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6030FC7D23FF0C7A007F0901 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6030FC8223FF0C7A007F0901 /* OnrampProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnrampProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6030FC8223FF0C7A007F0901 /* OnrampProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = OnrampProjectTests.xctest; path = "/Users/hollywoodno/projects/OnrampProject/build/Debug-iphoneos/OnrampProjectTests.xctest"; sourceTree = "<absolute>"; };
 		6030FC8623FF0C7A007F0901 /* OnrampProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnrampProjectTests.swift; sourceTree = "<group>"; };
 		6030FC8823FF0C7A007F0901 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6030FC8D23FF0C7A007F0901 /* OnrampProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnrampProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6030FC8D23FF0C7A007F0901 /* OnrampProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = OnrampProjectUITests.xctest; path = "/Users/hollywoodno/projects/OnrampProject/build/Debug-iphoneos/OnrampProjectUITests.xctest"; sourceTree = "<absolute>"; };
 		6030FC9123FF0C7A007F0901 /* OnrampProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnrampProjectUITests.swift; sourceTree = "<group>"; };
 		6030FC9323FF0C7A007F0901 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93778C92E27F31A842031435 /* Pods_OnrampProject_OnrampProjectUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnrampProject_OnrampProjectUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,7 +90,7 @@
 		EB2D0258240F0AC3005C2241 /* ModelImageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModelImageView.xib; sourceTree = "<group>"; };
 		EB3B341924104D4D0037807F /* ModelImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelImageViewModel.swift; sourceTree = "<group>"; };
 		EB3B341B241056340037807F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		EB950EA1240B6BDE00096825 /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
+		EB950EA1240B6BDE00096825 /* WeatherViewModel.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 		EB950EA3240B6F4F00096825 /* BaeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaeImage.swift; sourceTree = "<group>"; };
 		EB950EA6240B7ADD00096825 /* Weather.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; tabWidth = 2; };
 		EBA5EB16241097E5003143B1 /* ModelImageDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelImageDetailsViewController.swift; sourceTree = "<group>"; };
@@ -149,20 +149,9 @@
 				6030FC6E23FF0C79007F0901 /* OnrampProject */,
 				6030FC8523FF0C7A007F0901 /* OnrampProjectTests */,
 				6030FC9023FF0C7A007F0901 /* OnrampProjectUITests */,
-				6030FC6D23FF0C79007F0901 /* Products */,
 				B378E105EE9C327CE8F9C20D /* Pods */,
 				3FA0E01E7CAE20D0671B50F3 /* Frameworks */,
 			);
-			sourceTree = "<group>";
-		};
-		6030FC6D23FF0C79007F0901 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				6030FC6C23FF0C79007F0901 /* OnrampProject.app */,
-				6030FC8223FF0C7A007F0901 /* OnrampProjectTests.xctest */,
-				6030FC8D23FF0C7A007F0901 /* OnrampProjectUITests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		6030FC6E23FF0C79007F0901 /* OnrampProject */ = {
@@ -371,7 +360,7 @@
 				Base,
 			);
 			mainGroup = 6030FC6323FF0C79007F0901;
-			productRefGroup = 6030FC6D23FF0C79007F0901 /* Products */;
+			productRefGroup = 6030FC6323FF0C79007F0901;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (

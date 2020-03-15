@@ -65,6 +65,14 @@ class LocationViewModel: NSObject {
   func getCurrentLocationAsPlacemark() -> CLPlacemark? {
     return nil
   }
+  
+  func startUpdatingLocation() {
+          locationManager.startUpdatingLocation()
+  }
+  
+  func stopUpdatingLocation() {
+          locationManager.stopUpdatingLocation()
+  }
 }
 
 extension LocationViewModel: CLLocationManagerDelegate {
@@ -75,7 +83,6 @@ extension LocationViewModel: CLLocationManagerDelegate {
     switch status {
     case .authorizedWhenInUse, .authorizedAlways:
       print("App is authorize to use location within app")
-      locationManager.startUpdatingLocation()
       delegate?.viewModelLocationManager(self, didUpdateLocationAuthorization: .authorized)
     case .restricted, .denied:
       print("App not authorized to use location, so send user to device settings to give authorization")

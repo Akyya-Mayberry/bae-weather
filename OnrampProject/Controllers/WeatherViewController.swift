@@ -18,6 +18,8 @@ class WeatherViewController: UIViewController {
   @IBOutlet weak var modelImageView: UIImageView!
   @IBOutlet weak var modelNameLabel: UILabel!
   @IBOutlet weak var weatherInfoView: UIView!
+  @IBOutlet weak var loadingSpinner: UIActivityIndicatorView!
+  @IBOutlet weak var refreshWeatherImageView: UIImageView!
   
   var weatherViewModel: WeatherViewModel!
   private var hourlyWeatherViewModel: HourlyWeatherViewModel!
@@ -36,6 +38,8 @@ class WeatherViewController: UIViewController {
   }
   
   @IBAction func onTapRefreshImage(_ sender: UITapGestureRecognizer) {
+    refreshWeatherImageView.isHidden = true
+    loadingSpinner.isHidden = false
     updateWeather()
   }
   
@@ -49,10 +53,7 @@ class WeatherViewController: UIViewController {
   
   private func updateWeather() {
     
-    print("city: \(Constants.defaults.location.city)")
-    print("state: \(Constants.defaults.location.state)")
-    
-    weatherViewModel.updateCurrentWeather(city: Constants.defaults.location.city, state: Constants.defaults.location.state)
+    weatherViewModel.getCurrentWeather()
   }
   
   private func updateUI() {
@@ -67,6 +68,9 @@ class WeatherViewController: UIViewController {
       self.lastTimeUpdatedLabel.text = self.weatherViewModel.lastUpdateTime
       self.modelImageView.image = UIImage(named: self.weatherViewModel.modelImageDetails!.imageName)
       self.modelNameLabel.text = ModelImageViewModel.getModelName()!
+      
+      self.refreshWeatherImageView.isHidden = false
+      self.loadingSpinner.isHidden = true
     }
   }
   

@@ -34,18 +34,27 @@
                                                         <color key="textColor" red="0.74779313802719116" green="0.84133410453796387" blue="0.83930426836013794" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="arrow.clockwise" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Uun-cK-MW0">
-                                                        <rect key="frame" x="314" y="32.5" width="40" height="40"/>
-                                                        <color key="tintColor" red="0.82255411148071289" green="0.24973508715629578" blue="0.34709912538528442" alpha="0.94020226880000002" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <gestureRecognizers/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="40" id="BZx-fj-d1g"/>
-                                                            <constraint firstAttribute="height" constant="40" id="VHI-pL-iZe"/>
-                                                        </constraints>
-                                                        <connections>
-                                                            <outletCollection property="gestureRecognizers" destination="hgV-xI-fLw" appends="YES" id="5bo-bx-NoQ"/>
-                                                        </connections>
-                                                    </imageView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="-38" translatesAutoresizingMaskIntoConstraints="NO" id="3dE-Ab-w7v">
+                                                        <rect key="frame" x="314" y="33.5" width="40" height="40"/>
+                                                        <subviews>
+                                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="iJ5-GP-8uy">
+                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="40"/>
+                                                                <color key="color" red="0.82255411148071289" green="0.24973508715629578" blue="0.34709912538528442" alpha="0.94020226880000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </activityIndicatorView>
+                                                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="arrow.clockwise" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Uun-cK-MW0">
+                                                                <rect key="frame" x="0.0" y="-1" width="40" height="40"/>
+                                                                <color key="tintColor" red="0.82255411148071289" green="0.24973508715629578" blue="0.34709912538528442" alpha="0.94020226880000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <gestureRecognizers/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="40" id="BZx-fj-d1g"/>
+                                                                    <constraint firstAttribute="height" constant="40" id="VHI-pL-iZe"/>
+                                                                </constraints>
+                                                                <connections>
+                                                                    <outletCollection property="gestureRecognizers" destination="hgV-xI-fLw" appends="YES" id="5bo-bx-NoQ"/>
+                                                                </connections>
+                                                            </imageView>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" distribution="equalCentering" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="52R-aC-VOT" userLabel="Info Stack View">
@@ -139,8 +148,10 @@
                         <outlet property="currentDateLabel" destination="Nx1-JK-ovd" id="ZZg-76-oEP"/>
                         <outlet property="currentWeatherLabel" destination="XNb-aU-Ls9" id="3Eg-tr-C5I"/>
                         <outlet property="lastTimeUpdatedLabel" destination="MbA-cN-4Bv" id="oEl-4L-LwE"/>
+                        <outlet property="loadingSpinner" destination="iJ5-GP-8uy" id="SB8-oE-AMu"/>
                         <outlet property="modelImageView" destination="c35-Vg-ELG" id="B5r-3v-M5z"/>
                         <outlet property="modelNameLabel" destination="MC2-Rq-aYQ" id="bVd-XC-9l7"/>
+                        <outlet property="refreshWeatherImageView" destination="Uun-cK-MW0" id="lv1-9c-OiJ"/>
                         <outlet property="weatherInfoView" destination="wzL-jh-eZG" id="Ox5-0E-7XZ"/>
                     </connections>
                 </viewController>

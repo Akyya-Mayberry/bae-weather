@@ -20,6 +20,7 @@ class LoadingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationViewModel.startUpdatingLocation()
         loadingSpinner.layer.opacity = 0
         loadSpinner()
     }
@@ -43,6 +44,7 @@ class LoadingViewController: UIViewController {
         } else {
             print("Show there was an error getting current location")
         }
+        locationViewModel.stopUpdatingLocation()
     }
     
     func getCurrentWeather(lat: Double, long: Double) {
