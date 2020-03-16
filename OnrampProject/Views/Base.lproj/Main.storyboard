@@ -18,6 +18,7 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="219" image="sample-hot" translatesAutoresizingMaskIntoConstraints="NO" id="c35-Vg-ELG" userLabel="Bae Image View">
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wzL-jh-eZG">
                                 <rect key="frame" x="15" y="59" width="384" height="165.5"/>
@@ -34,7 +35,7 @@
                                                         <color key="textColor" red="0.74779313802719116" green="0.84133410453796387" blue="0.83930426836013794" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="-38" translatesAutoresizingMaskIntoConstraints="NO" id="3dE-Ab-w7v">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="-38" translatesAutoresizingMaskIntoConstraints="NO" id="3dE-Ab-w7v" userLabel="Refresh Weather Stack View">
                                                         <rect key="frame" x="314" y="33.5" width="40" height="40"/>
                                                         <subviews>
                                                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="iJ5-GP-8uy">
@@ -123,6 +124,24 @@
                                     <segue destination="ztf-XX-xWN" kind="embed" id="WWW-Mg-AsH"/>
                                 </connections>
                             </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ke4-AY-i5g" userLabel="Location View">
+                                <rect key="frame" x="100" y="232.5" width="299" height="58"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fresno, USA" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zxe-i5-mng">
+                                        <rect key="frame" x="203.5" y="20.5" width="85.5" height="17"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Zxe-i5-mng" secondAttribute="trailing" constant="10" id="DqV-b3-Zqk"/>
+                                    <constraint firstAttribute="height" constant="58" id="INx-9h-YcE"/>
+                                    <constraint firstItem="Zxe-i5-mng" firstAttribute="centerY" secondItem="ke4-AY-i5g" secondAttribute="centerY" id="Qg6-zX-K4A"/>
+                                    <constraint firstItem="Zxe-i5-mng" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ke4-AY-i5g" secondAttribute="leading" constant="20" symbolic="YES" id="u4e-44-5lQ"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -131,13 +150,17 @@
                             <constraint firstItem="MC2-Rq-aYQ" firstAttribute="top" secondItem="wzL-jh-eZG" secondAttribute="top" id="5Fu-rw-ijI"/>
                             <constraint firstItem="MC2-Rq-aYQ" firstAttribute="leading" secondItem="wzL-jh-eZG" secondAttribute="leading" constant="8" id="99o-K9-X4k"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="c35-Vg-ELG" secondAttribute="trailing" id="An7-7S-bQi"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ke4-AY-i5g" secondAttribute="trailing" constant="15" id="GHv-mP-cb3"/>
                             <constraint firstItem="c35-Vg-ELG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="N60-RH-EOc"/>
                             <constraint firstItem="cYV-eT-XJm" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="OCn-bx-skA"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wzL-jh-eZG" secondAttribute="trailing" constant="15" id="PAN-1g-6FN"/>
+                            <constraint firstItem="ke4-AY-i5g" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="QZZ-rY-VkG"/>
+                            <constraint firstItem="ke4-AY-i5g" firstAttribute="top" secondItem="wzL-jh-eZG" secondAttribute="bottom" constant="8" id="Syc-0K-r8P"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="c35-Vg-ELG" secondAttribute="bottom" id="h7g-br-sDS"/>
                             <constraint firstItem="wzL-jh-eZG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="hOI-Rg-Ncd"/>
                             <constraint firstItem="wzL-jh-eZG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="jGb-Gz-91U"/>
                             <constraint firstItem="cYV-eT-XJm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="jLh-9T-OfZ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MC2-Rq-aYQ" secondAttribute="trailing" symbolic="YES" id="oqo-0F-4bU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -149,6 +172,7 @@
                         <outlet property="currentWeatherLabel" destination="XNb-aU-Ls9" id="3Eg-tr-C5I"/>
                         <outlet property="lastTimeUpdatedLabel" destination="MbA-cN-4Bv" id="oEl-4L-LwE"/>
                         <outlet property="loadingSpinner" destination="iJ5-GP-8uy" id="SB8-oE-AMu"/>
+                        <outlet property="locationLabel" destination="Zxe-i5-mng" id="70K-oh-YJX"/>
                         <outlet property="modelImageView" destination="c35-Vg-ELG" id="B5r-3v-M5z"/>
                         <outlet property="modelNameLabel" destination="MC2-Rq-aYQ" id="bVd-XC-9l7"/>
                         <outlet property="refreshWeatherImageView" destination="Uun-cK-MW0" id="lv1-9c-OiJ"/>
@@ -675,7 +699,7 @@
                                     </stackView>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" continuous="NO" minimumValueImage="sunrise" catalog="system" maximumValueImage="moon" translatesAutoresizingMaskIntoConstraints="NO" id="1Us-Sk-Mp7">
                                         <rect key="frame" x="-2" y="92.5" width="388" height="28.5"/>
-                                        <color key="tintColor" red="0.4556483288" green="0.56516426279999998" blue="0.4949936452" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.82255411148071289" green="0.24973508715629578" blue="0.34709912538528442" alpha="0.94020226880000002" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <action selector="didChangeWeatherBlock:" destination="BYZ-38-t0r" eventType="valueChanged" id="tCv-QT-Ayz"/>
                                         </connections>
@@ -683,7 +707,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="0.9041363441780822" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="bue-kt-URg" secondAttribute="bottom" constant="15" id="4bw-dX-MKd"/>
                             <constraint firstAttribute="trailing" secondItem="bue-kt-URg" secondAttribute="trailing" constant="15" id="7Rm-s7-Q2T"/>

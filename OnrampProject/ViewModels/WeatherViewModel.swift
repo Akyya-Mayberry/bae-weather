@@ -41,6 +41,14 @@ class WeatherViewModel {
         return weather?.city
     }
     
+    var location: String? {
+        guard weather != nil else {
+            return nil
+        }
+        
+        return "\(weather!.city.capitalized), \(weather!.country.uppercased())"
+    }
+    
     var weatherState: String? {
         return weather?.state
     }
