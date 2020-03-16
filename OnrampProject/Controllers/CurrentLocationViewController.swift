@@ -25,7 +25,7 @@ class CurrentLocationViewController: UIViewController {
         }
     }
     
-    let locationViewModel = LocationViewModel()
+    let locationService = LocationService()
     var delegate: CurrentLocationViewControllerDelegate?
     
     // MARK: - Methods
@@ -33,11 +33,11 @@ class CurrentLocationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        locationViewModel.delegate = self
+        locationService.delegate = self
     }
     
     @IBAction func didTapRequestLocation(_ sender: Any) {
-        switch locationViewModel.requestStatus {
+        switch locationService.requestStatus {
         case .authorized:
             // animates gps icon
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
@@ -47,7 +47,7 @@ class CurrentLocationViewController: UIViewController {
         case .denied:
             showLinkToSettings()
         default:
-            locationViewModel.requestLocation()
+            locationService.requestLocation()
         }
     }
     
@@ -80,8 +80,8 @@ class CurrentLocationViewController: UIViewController {
 
 // MARK: - Extensions
 
-extension CurrentLocationViewController: LocationViewModelDelegate {
-    func viewModelLocationManager(_ locationViewModel: LocationViewModel, didUpdateLocationAuthorization status: LocationStatusUpdate) {
+extension CurrentLocationViewController: LocationServiceDelegate {
+    func locationService(_ locationService: LocationService, didUpdateLocationAuthorization status: LocationStatusUpdate) {
         switch status {
         case .authorized:
             print("In request vc current location is authorized, send to loading page")
@@ -94,11 +94,11 @@ extension CurrentLocationViewController: LocationViewModelDelegate {
             print("Show screen to request access or ask view model to request access")
             showLinkToSettings()
         default:
-            locationViewModel.requestLocation()
+            locationService.requestLocation()
         }
     }
     
-    func viewModelLocationManager(_ locationViewModel: LocationViewModel, didFailWith error: Error) {
+    func locationService(_ locationService: LocationService, didFailWith error: Error) {
         print("In request vc location manager failed. Alert user of error. Error: \(error).")
     }
 }

@@ -8,21 +8,21 @@
 import Foundation
 import CoreLocation
 
-protocol LocationViewModelDelegate {
-  func viewModelLocationManager(_ locationViewModel: LocationViewModel, didUpdateLocationAuthorization status: LocationStatusUpdate)
-  func viewModelLocationManager(_ locationViewModel: LocationViewModel, didFailWith error: Error)
+protocol LocationServiceDelegate {
+  func locationService(_ locationService: LocationService, didUpdateLocationAuthorization status: LocationStatusUpdate)
+  func locationService(_ locationService: LocationService, didFailWith error: Error)
 }
 
 enum LocationStatusUpdate {
   case authorized, denied, notDetermined
 }
 
-class LocationViewModel: NSObject {
+class LocationService: NSObject {
   
   // MARK: - Properties
   
   private let locationManager = CLLocationManager()
-  var delegate: LocationViewModelDelegate?
+  var delegate: LocationServiceDelegate?
   
   var requestStatus: LocationStatusUpdate {
     let status = CLLocationManager.authorizationStatus()
@@ -75,7 +75,7 @@ class LocationViewModel: NSObject {
   }
 }
 
-extension LocationViewModel: CLLocationManagerDelegate {
+extension LocationService: CLLocationManagerDelegate {
   
   func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
     print("Authorization status changed...")
@@ -83,13 +83,13 @@ extension LocationViewModel: CLLocationManagerDelegate {
     switch status {
     case .authorizedWhenInUse, .authorizedAlways:
       print("App is authorize to use location within app")
-      delegate?.viewModelLocationManager(self, didUpdateLocationAuthorization: .authorized)
+      delegate?.locationService(self, didUpdateLocationAuthorization: .authorized)
     case .restricted, .denied:
       print("App not authorized to use location, so send user to device settings to give authorization")
-      delegate?.viewModelLocationManager(self, didUpdateLocationAuthorization: .denied)
+      delegate?.locationService(self, didUpdateLocationAuthorization: .denied)
     case .notDetermined:
       print(" User has not decided to give or reject access, ask for location permission.")
-      delegate?.viewModelLocationManager(self, didUpdateLocationAuthorization: .notDetermined)
+      delegate?.locationService(self, didUpdateLocationAuthorization: .notDetermined)
     default:
       print("Uknown status update")
     }

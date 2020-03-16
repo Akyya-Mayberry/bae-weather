@@ -22,7 +22,7 @@ class WeatherViewModel {
     // MARK: - Properties
     
     private let weatherNetworkService = WeatherNetworkService()
-    private let locationViewModel = LocationViewModel()
+    private let locationService = LocationService()
     fileprivate let userDefaultsService = UserDefaultsService()
     private var modelImageViewModel = ModelImageViewModel()
     var delegate: WeatherViewModelDelegate?
@@ -100,15 +100,15 @@ class WeatherViewModel {
     }
     
     private func getCurrentLocation() -> (lat: Double, long: Double)? {
-        locationViewModel.startUpdatingLocation()
+        locationService.startUpdatingLocation()
 
-        if let currentLocation = locationViewModel.currentLocation {
-            locationViewModel.stopUpdatingLocation()
+        if let currentLocation = locationService.currentLocation {
+            locationService.stopUpdatingLocation()
             return currentLocation
         }
         
         print("Show there was an error getting current location")
-        locationViewModel.stopUpdatingLocation()
+        locationService.stopUpdatingLocation()
         return nil
     }
     

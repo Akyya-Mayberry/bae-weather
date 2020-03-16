@@ -14,13 +14,13 @@ class LoadingViewController: UIViewController {
     @IBOutlet weak var loadingSpinner: UIActivityIndicatorView!
     
     let networkService = WeatherNetworkService()
-    let locationViewModel = LocationViewModel()
+    let locationService = LocationService()
     
     // MARK: - Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        locationViewModel.startUpdatingLocation()
+        locationService.startUpdatingLocation()
         loadingSpinner.layer.opacity = 0
         loadSpinner()
     }
@@ -39,12 +39,12 @@ class LoadingViewController: UIViewController {
     }
     
     func getCurrentLocation() {
-        if let currentLocation = locationViewModel.currentLocation {
+        if let currentLocation = locationService.currentLocation {
             getCurrentWeather(lat: currentLocation.lat, long: currentLocation.long)
         } else {
             print("Show there was an error getting current location")
         }
-        locationViewModel.stopUpdatingLocation()
+        locationService.stopUpdatingLocation()
     }
     
     func getCurrentWeather(lat: Double, long: Double) {

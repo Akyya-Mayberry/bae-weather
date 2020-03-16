@@ -19,7 +19,7 @@
 		65891E2B8F0A052F4AA309AC /* Pods_OnrampProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE522B3F23D1B668092FF989 /* Pods_OnrampProject.framework */; };
 		AB418AA02415BD9E003852B3 /* HourlyWeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB418A9F2415BD9E003852B3 /* HourlyWeatherViewController.swift */; };
 		AB418AA2241746DE003852B3 /* RequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB418AA1241746DE003852B3 /* RequestViewController.swift */; };
-		ABF9B41B241871AA0096F563 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF9B41A241871A90096F563 /* LocationViewModel.swift */; };
+		ABF9B41B241871AA0096F563 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF9B41A241871A90096F563 /* LocationService.swift */; };
 		ABF9B41D2419B21F0096F563 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF9B41C2419B21F0096F563 /* LoadingViewController.swift */; };
 		ABF9B41F241C43E00096F563 /* CurrentLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF9B41E241C43E00096F563 /* CurrentLocationViewController.swift */; };
 		D4D791C336B291AE9947D6F3 /* Pods_OnrampProjectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D64DA9D626AEDFAD8945F06 /* Pods_OnrampProjectTests.framework */; };
@@ -80,7 +80,7 @@
 		93778C92E27F31A842031435 /* Pods_OnrampProject_OnrampProjectUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnrampProject_OnrampProjectUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB418A9F2415BD9E003852B3 /* HourlyWeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherViewController.swift; sourceTree = "<group>"; };
 		AB418AA1241746DE003852B3 /* RequestViewController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = RequestViewController.swift; sourceTree = "<group>"; };
-		ABF9B41A241871A90096F563 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
+		ABF9B41A241871A90096F563 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		ABF9B41C2419B21F0096F563 /* LoadingViewController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		ABF9B41E241C43E00096F563 /* CurrentLocationViewController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = CurrentLocationViewController.swift; sourceTree = "<group>"; };
 		AE522B3F23D1B668092FF989 /* Pods_OnrampProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnrampProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -189,6 +189,22 @@
 			path = OnrampProjectUITests;
 			sourceTree = "<group>";
 		};
+		ABF9B420241F410C0096F563 /* Data Storage */ = {
+			isa = PBXGroup;
+			children = (
+				EBD469D224121CC2004E80DC /* UserDefaultsService.swift */,
+			);
+			path = "Data Storage";
+			sourceTree = "<group>";
+		};
+		ABF9B421241F41250096F563 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				ABF9B41A241871A90096F563 /* LocationService.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
 		B378E105EE9C327CE8F9C20D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,7 +262,6 @@
 				EB950EA1240B6BDE00096825 /* WeatherViewModel.swift */,
 				EBF176DB240B9D3E005AB1F8 /* HourlyWeatherBlockViewModel.swift */,
 				EB3B341924104D4D0037807F /* ModelImageViewModel.swift */,
-				ABF9B41A241871A90096F563 /* LocationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -254,8 +269,9 @@
 		EBF176DD240CA149005AB1F8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				ABF9B421241F41250096F563 /* Location */,
+				ABF9B420241F410C0096F563 /* Data Storage */,
 				EBF176DE240CA169005AB1F8 /* Api */,
-				EBD469D224121CC2004E80DC /* UserDefaultsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -512,7 +528,7 @@
 				EBF176E0240CA19F005AB1F8 /* WeatherNetworkService.swift in Sources */,
 				AB418AA02415BD9E003852B3 /* HourlyWeatherViewController.swift in Sources */,
 				ABF9B41F241C43E00096F563 /* CurrentLocationViewController.swift in Sources */,
-				ABF9B41B241871AA0096F563 /* LocationViewModel.swift in Sources */,
+				ABF9B41B241871AA0096F563 /* LocationService.swift in Sources */,
 				EB2D0257240F0AAE005C2241 /* ModelImageView.swift in Sources */,
 				EB950EA2240B6BDE00096825 /* WeatherViewModel.swift in Sources */,
 				6030FC7423FF0C79007F0901 /* WeatherViewController.swift in Sources */,
