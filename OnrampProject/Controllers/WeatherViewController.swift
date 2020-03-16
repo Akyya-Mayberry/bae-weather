@@ -21,10 +21,13 @@ class WeatherViewController: UIViewController {
   @IBOutlet weak var loadingSpinner: UIActivityIndicatorView!
   @IBOutlet weak var refreshWeatherImageView: UIImageView!
   @IBOutlet weak var locationLabel: UILabel!
+  @IBOutlet weak var errorMessageView: UIView!
+  @IBOutlet weak var errorLabel: UILabel!
   
-  var weatherViewModel: WeatherViewModel!
-  private var hourlyWeatherViewModel: HourlyWeatherViewModel!
+  private let weatherError = "Error occurred getting weather update."
   private let locationService = LocationService()
+  private var hourlyWeatherViewModel: HourlyWeatherViewModel!
+  var weatherViewModel: WeatherViewModel!
   
   // MARK: - Methods
   
@@ -79,6 +82,8 @@ class WeatherViewController: UIViewController {
       
       self.refreshWeatherImageView.isHidden = false
       self.loadingSpinner.isHidden = true
+      self.refreshWeatherImageView.isHidden = false
+      self.errorMessageView.isHidden = true
     }
   }
   
@@ -104,6 +109,12 @@ extension WeatherViewController: WeatherViewModelDelegate {
   }
   
   func didFailWithError(_ weatherViewModel: WeatherViewModel, _ error: Error) {
-    print("Error with viewModel: \(error)")
+    DispatchQueue.main.async {
+      self.loadingSpinner.isHidden = true
+      self.refreshWeatherImageView.isHidden = false
+      self.errorMessageView.isHidden = false
+      self.errorLabel.text = self.weatherError
+      print("Error with viewModel fetching weather: \(error)")
+    }
   }
 }

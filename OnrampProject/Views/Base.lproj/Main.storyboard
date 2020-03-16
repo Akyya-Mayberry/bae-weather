@@ -142,6 +142,24 @@
                                     <constraint firstItem="Zxe-i5-mng" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ke4-AY-i5g" secondAttribute="leading" constant="20" symbolic="YES" id="u4e-44-5lQ"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gu2-Qm-wA1" userLabel="Error Message View">
+                                <rect key="frame" x="72" y="597" width="270" height="58"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Updating Weather. Try again later." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6QF-oc-0Ek">
+                                        <rect key="frame" x="10" y="20.5" width="250" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="0.9041363442" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="6QF-oc-0Ek" secondAttribute="trailing" constant="10" id="GDM-Hm-0Xi"/>
+                                    <constraint firstAttribute="height" constant="58" id="Mvj-Ur-4Al"/>
+                                    <constraint firstItem="6QF-oc-0Ek" firstAttribute="leading" secondItem="gu2-Qm-wA1" secondAttribute="leading" constant="10" id="VQP-AV-Spo"/>
+                                    <constraint firstItem="6QF-oc-0Ek" firstAttribute="centerY" secondItem="gu2-Qm-wA1" secondAttribute="centerY" id="vKh-jC-ezG"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -156,6 +174,8 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wzL-jh-eZG" secondAttribute="trailing" constant="15" id="PAN-1g-6FN"/>
                             <constraint firstItem="ke4-AY-i5g" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="QZZ-rY-VkG"/>
                             <constraint firstItem="ke4-AY-i5g" firstAttribute="top" secondItem="wzL-jh-eZG" secondAttribute="bottom" constant="8" id="Syc-0K-r8P"/>
+                            <constraint firstItem="cYV-eT-XJm" firstAttribute="top" secondItem="gu2-Qm-wA1" secondAttribute="bottom" constant="8" id="ZAX-C9-Stv"/>
+                            <constraint firstItem="gu2-Qm-wA1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZZq-x9-cS0"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="c35-Vg-ELG" secondAttribute="bottom" id="h7g-br-sDS"/>
                             <constraint firstItem="wzL-jh-eZG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="hOI-Rg-Ncd"/>
                             <constraint firstItem="wzL-jh-eZG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="jGb-Gz-91U"/>
@@ -170,6 +190,8 @@
                     <connections>
                         <outlet property="currentDateLabel" destination="Nx1-JK-ovd" id="ZZg-76-oEP"/>
                         <outlet property="currentWeatherLabel" destination="XNb-aU-Ls9" id="3Eg-tr-C5I"/>
+                        <outlet property="errorLabel" destination="6QF-oc-0Ek" id="7Pv-va-gk1"/>
+                        <outlet property="errorMessageView" destination="gu2-Qm-wA1" id="nz5-Rf-yz4"/>
                         <outlet property="lastTimeUpdatedLabel" destination="MbA-cN-4Bv" id="oEl-4L-LwE"/>
                         <outlet property="loadingSpinner" destination="iJ5-GP-8uy" id="SB8-oE-AMu"/>
                         <outlet property="locationLabel" destination="Zxe-i5-mng" id="70K-oh-YJX"/>
