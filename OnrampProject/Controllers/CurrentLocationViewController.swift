@@ -50,32 +50,6 @@ class CurrentLocationViewController: UIViewController {
             locationService.requestLocation()
         }
     }
-    
-    func showLinkToSettings() {
-        print("In request vc Location is not granted, inform user it's needed")
-        
-        let locationNeededAlertController = UIAlertController (title: "Current Location Required", message: "To get current weather, access to your location is needed. Continue to settings to enable access.", preferredStyle: .alert)
-        
-        let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
-            
-            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
-                return
-            }
-            
-            if UIApplication.shared.canOpenURL(settingsUrl) {
-                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                    print("User taken to settings: \(success)")
-                })
-            }
-        }
-        
-        locationNeededAlertController.addAction(settingsAction)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-        locationNeededAlertController.addAction(cancelAction)
-        
-        present(locationNeededAlertController, animated: true, completion: nil)
-    }
 }
 
 // MARK: - Extensions
@@ -100,6 +74,34 @@ extension CurrentLocationViewController: LocationServiceDelegate {
     
     func locationService(_ locationService: LocationService, didFailWith error: Error) {
         print("In request vc location manager failed. Alert user of error. Error: \(error).")
+    }
+}
+
+extension UIViewController {
+    func showLinkToSettings() {
+        print("In request vc Location is not granted, inform user it's needed")
+        
+        let locationNeededAlertController = UIAlertController (title: "Current Location Required", message: "To get current weather, access to your location is needed. Continue to settings to enable access.", preferredStyle: .alert)
+        
+        let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+            
+            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                return
+            }
+            
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                    print("User taken to settings: \(success)")
+                })
+            }
+        }
+        
+        locationNeededAlertController.addAction(settingsAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        locationNeededAlertController.addAction(cancelAction)
+        
+        present(locationNeededAlertController, animated: true, completion: nil)
     }
 }
 
