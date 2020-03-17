@@ -58,12 +58,17 @@ class WeatherViewController: UIViewController {
     }
     
     private func updateWeather() {
-        if locationService.requestStatus == .authorized {
+        switch locationService.requestStatus {
+        case .authorized:
             weatherViewModel.getCurrentWeather()
-        } else {
+        case .denied:
             self.refreshWeatherImageView.isHidden = false
             self.loadingSpinner.isHidden = true
-            showLinkToSettings()
+            self.showLinkToSettings()
+        default:
+            self.refreshWeatherImageView.isHidden = false
+            self.loadingSpinner.isHidden = true
+            locationService.requestLocation()
         }
     }
     

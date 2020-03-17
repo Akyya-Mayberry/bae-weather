@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     guard let _ = (scene as? UIWindowScene) else { return }
     
-//    loadTabBarController()
+    loadTabBarController()
   }
   
   func sceneDidDisconnect(_ scene: UIScene) {
