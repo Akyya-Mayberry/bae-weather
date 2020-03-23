@@ -56,14 +56,12 @@ class ModelImageView: UIView {
     }
     
     func select() {
-        modelImageView.layer.borderColor = UIColor.systemPink.cgColor
-        modelImageView.layer.borderWidth = 3
+        modelImageView.layer.opacity = 1
         isSelected = true
     }
     
     func deselect() {
-        modelImageView.layer.borderColor = nil
-        modelImageView.layer.borderWidth = 0
+        modelImageView.layer.opacity = 0.3
         isSelected = false
     }
     

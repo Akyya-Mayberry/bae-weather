@@ -28,6 +28,7 @@
 		EB2D0259240F0AC3005C2241 /* ModelImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB2D0258240F0AC3005C2241 /* ModelImageView.xib */; };
 		EB3B341A24104D4D0037807F /* ModelImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3B341924104D4D0037807F /* ModelImageViewModel.swift */; };
 		EB3B341C241056340037807F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3B341B241056340037807F /* Constants.swift */; };
+		EB751CEB2425CFD000B1AA81 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB751CEA2425CFD000B1AA81 /* CardView.swift */; };
 		EB950EA2240B6BDE00096825 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB950EA1240B6BDE00096825 /* WeatherViewModel.swift */; };
 		EB950EA4240B6F4F00096825 /* BaeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB950EA3240B6F4F00096825 /* BaeImage.swift */; };
 		EB950EA7240B7ADD00096825 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB950EA6240B7ADD00096825 /* Weather.swift */; };
@@ -90,6 +91,7 @@
 		EB2D0258240F0AC3005C2241 /* ModelImageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModelImageView.xib; sourceTree = "<group>"; };
 		EB3B341924104D4D0037807F /* ModelImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelImageViewModel.swift; sourceTree = "<group>"; };
 		EB3B341B241056340037807F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		EB751CEA2425CFD000B1AA81 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		EB950EA1240B6BDE00096825 /* WeatherViewModel.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 		EB950EA3240B6F4F00096825 /* BaeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaeImage.swift; sourceTree = "<group>"; };
 		EB950EA6240B7ADD00096825 /* Weather.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -225,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				6030FC7523FF0C79007F0901 /* Main.storyboard */,
+				EB751CEA2425CFD000B1AA81 /* CardView.swift */,
 				6030FC7A23FF0C7A007F0901 /* LaunchScreen.storyboard */,
 				EB2D0250240F076C005C2241 /* ModelImageCell.swift */,
 				EB2D0256240F0AAE005C2241 /* ModelImageView.swift */,
@@ -545,6 +548,7 @@
 				ABF9B41D2419B21F0096F563 /* LoadingViewController.swift in Sources */,
 				6030FC7223FF0C79007F0901 /* SceneDelegate.swift in Sources */,
 				EBA5EB17241097E5003143B1 /* ModelImageDetailsViewController.swift in Sources */,
+				EB751CEB2425CFD000B1AA81 /* CardView.swift in Sources */,
 				EBD469D324121CC2004E80DC /* UserDefaultsService.swift in Sources */,
 				EB3B341A24104D4D0037807F /* ModelImageViewModel.swift in Sources */,
 				EBE9EF75240D0FEA002817C7 /* SettingsViewController.swift in Sources */,

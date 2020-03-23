@@ -46,10 +46,10 @@ struct Constants {
   }
   
   struct weatherCategoryIcons {
-    static let freezing = "icon-freezing"
-    static let cold = "icon-cold"
-    static let warm = "icon-warm"
-    static let hot = "icon-hot"
+    static let freezing = "icon-freezing-filled"
+    static let cold = "icon-cold-filled"
+    static let warm = "icon-warm-filled"
+    static let hot = "icon-hot-filled"
   }
   
   struct tabBarItems {

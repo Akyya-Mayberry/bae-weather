@@ -15,8 +15,21 @@ class SettingsViewController: UIViewController {
     @IBOutlet var modelSetImageViews: [ModelImageView]!
     @IBOutlet weak var defaultNameSwitch: UISwitch!
     @IBOutlet weak var defaultPicsSwitch: UISwitch!
+    @IBOutlet weak var editNameStackView: UIStackView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var modelNameLabel: UILabel!
+    @IBOutlet weak var modelNameViewHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var editButton: UIButton! {
+        didSet {
+            let editImage = UIImage(named: "edit-2")
+            let editTintedImage = editImage?.withRenderingMode(.alwaysTemplate)
+            
+            editButton.setImage(editTintedImage, for: .normal)
+            editButton.imageView?.contentMode = .scaleAspectFit
+            editButton.tintColor = #colorLiteral(red: 0.747793138, green: 0.8413341045, blue: 0.8393042684, alpha: 1)
+        }
+    }
     
     private var collections: [[BaeImage]] = []
     var modelImageViewModel = ModelImageViewModel()
@@ -38,11 +51,16 @@ class SettingsViewController: UIViewController {
         // temporary - sets default images
         modelSetImageViews.first?.select()
         modelImageViewModel.selectedThumbnailIndex = 0
+        
+        // hides model name editing
+        editNameStackView.isHidden = true
+        nameTextField.isHidden = true
+        defaultNameSwitch.isHidden = true
     }
     
     private func createImageSet(using image: UIImage?) -> ModelImageView {
         let imageSetView = ModelImageView(frame: CGRect(x: 0, y: 0,
-                                                        width: view.frame.width,
+                                                        width: collectionView.frame.width,
                                                         height: collectionView.frame.height))
         
         imageSetView.clipsToBounds = true
@@ -90,6 +108,25 @@ class SettingsViewController: UIViewController {
         print("Did change default images switch")
     }
     
+    @IBAction func didTapEditName(_ sender: Any) {
+        let hideEditFields = !self.editNameStackView.isHidden
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            
+            self.nameTextField.isHidden = hideEditFields
+            self.editNameStackView.isHidden = hideEditFields
+            
+            let modelNameHeight = self.modelNameViewHeightConstraint.constant
+            
+            // decreases edit view size if not editing otherwise increases it
+            self.modelNameViewHeightConstraint.constant = hideEditFields ? modelNameHeight - 60 : modelNameHeight + 60
+        }) { (success) in
+            UIView.animate(withDuration: 0.5) {
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
     private func createThumbnails() {
         for (index, modelView) in modelSetImageViews.enumerated() {
             let typeOfWeather = WeatherCategory(rawValue: index)
@@ -126,7 +163,7 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
         modelView.weatherCategoryView.category = modelImageViewModel.getCategory(for: typeOfWeather)
         modelView.weatherCategoryView.image = UIImage(named: modelImageViewModel.getIconName(for: typeOfWeather))!.withRenderingMode(
             UIImage.RenderingMode.alwaysTemplate)
-        modelView.weatherCategoryView.tintColor = UIColor.white
+        modelView.weatherCategoryView.tintColor = #colorLiteral(red: 1, green: 0.9265189341, blue: 0.6531018429, alpha: 1)
         cell.modelView = modelView
         
         cell.addSubview(modelView)
@@ -181,7 +218,6 @@ extension SettingsViewController: UIScrollViewDelegate {
             
             self.modelSetImageViews[indexPath!.row].select()
             self.modelImageViewModel.selectedThumbnailIndex = indexPath!.row
-            
             self.updateUI()
         }
     }
