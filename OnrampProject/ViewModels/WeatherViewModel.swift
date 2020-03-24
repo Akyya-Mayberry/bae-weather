@@ -101,7 +101,7 @@ class WeatherViewModel {
     
     private func getCurrentLocation() -> (lat: Double, long: Double)? {
         locationService.startUpdatingLocation()
-
+        
         if let currentLocation = locationService.currentLocation {
             locationService.stopUpdatingLocation()
             return currentLocation
@@ -143,8 +143,8 @@ class WeatherViewModel {
             }
             
             if let data = data {
-//                let date = Date()
-//                let currentHourBlock = HourlyWeatherViewModel.getCurrentWeatherBlockUsing(date: date)
+                //                let date = Date()
+                //                let currentHourBlock = HourlyWeatherViewModel.getCurrentWeatherBlockUsing(date: date)
                 
                 self.weather = WeatherViewModel.makeWeather(from: data)
             }
@@ -208,7 +208,7 @@ extension Date {
 }
 
 extension WeatherViewModel: ModelImageViewModelDelegate {
-    func modelName(_ modelImageViewModel: ModelImageViewModel, didChange: Bool) {
+    func modelName(_ modelImageViewModel: ModelImageViewModel, didChange: Bool, name: String) {
         delegate?.didUpdateModelImageDetails(self, modelImageViewModel: modelImageViewModel)
     }
 }

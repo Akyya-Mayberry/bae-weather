@@ -16,9 +16,16 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var defaultNameSwitch: UISwitch!
     @IBOutlet weak var defaultPicsSwitch: UISwitch!
     @IBOutlet weak var editNameStackView: UIStackView!
-    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var nameTextField: UITextField! {
+        didSet {
+            nameTextField.layer.borderColor = UIColor.darkGray.cgColor
+            nameTextField.layer.borderWidth = 0.3
+            nameTextField.layer.cornerRadius = 7
+        }
+    }
     @IBOutlet weak var modelNameLabel: UILabel!
     @IBOutlet weak var modelNameViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var modelNameViewBottomContraint: NSLayoutConstraint!
     
     @IBOutlet weak var editButton: UIButton! {
         didSet {
@@ -43,6 +50,7 @@ class SettingsViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         nameTextField.delegate = self
+        modelImageViewModel.delegate = self
         
         createThumbnails()
         
@@ -54,8 +62,6 @@ class SettingsViewController: UIViewController {
         
         // hides model name editing
         editNameStackView.isHidden = true
-        nameTextField.isHidden = true
-        defaultNameSwitch.isHidden = true
     }
     
     private func createImageSet(using image: UIImage?) -> ModelImageView {
@@ -75,6 +81,9 @@ class SettingsViewController: UIViewController {
     
     func updateUI() {
         DispatchQueue.main.async {
+            // TODO: move certain ui changes to funcs for reuse
+            
+            // enable/disable editing name field
             if self.modelImageViewModel.isUsingDefaultName() {
                 self.nameTextField.isEnabled = false
                 self.defaultNameSwitch.isOn = true
@@ -83,8 +92,9 @@ class SettingsViewController: UIViewController {
                 self.defaultNameSwitch.isOn = false
             }
             
-            self.nameTextField.placeholder = ""
-            self.nameTextField.placeholder = ModelImageViewModel.getModelName()
+            // show/hide edit name view
+            self.editButton.isSelected = !self.editNameStackView.isHidden
+            
             self.modelNameLabel.text = ModelImageViewModel.getModelName()
             
             // sets selected thumbnail
@@ -99,27 +109,27 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func didChangeUseDefaultNameSwitch(_ sender: UISwitch) {
-        nameTextField.isEnabled = !sender.isOn
-        modelImageViewModel.useDefaultName(to: sender.isOn)
-        updateUI()
-    }
-    
-    @IBAction func didChangeUseDefaultImagesSwitch(_ sender: Any) {
-        print("Did change default images switch")
+        modelImageViewModel.useDefaultName(on: sender.isOn)
+        self.nameTextField.isEnabled = !sender.isOn
     }
     
     @IBAction func didTapEditName(_ sender: Any) {
         let hideEditFields = !self.editNameStackView.isHidden
+        editButton.isSelected = !hideEditFields
+        nameTextField.text = ""
         
         UIView.animate(withDuration: 0.5, animations: {
-            
             self.nameTextField.isHidden = hideEditFields
+            self.defaultNameSwitch.isOn = self.modelImageViewModel.isUsingDefaultName()
+            self.nameTextField.isEnabled = !self.modelImageViewModel.isUsingDefaultName()
             self.editNameStackView.isHidden = hideEditFields
             
             let modelNameHeight = self.modelNameViewHeightConstraint.constant
+            let modelNameBottom = self.modelNameViewBottomContraint.constant
             
             // decreases edit view size if not editing otherwise increases it
-            self.modelNameViewHeightConstraint.constant = hideEditFields ? modelNameHeight - 60 : modelNameHeight + 60
+            self.modelNameViewHeightConstraint.constant = hideEditFields ? modelNameHeight - 80 : modelNameHeight + 80
+            self.modelNameViewBottomContraint.constant = hideEditFields ? modelNameBottom + 10 : modelNameBottom - 10
         }) { (success) in
             UIView.animate(withDuration: 0.5) {
                 self.view.layoutIfNeeded()
@@ -228,27 +238,13 @@ extension SettingsViewController: UITextFieldDelegate {
         return !defaultNameSwitch.isOn
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        DispatchQueue.main.async {
-            if let text = textField.text, let rangeOfChangedText = Range(range, in: text) {
-                
-                let updatedText = text.replacingCharacters(in: rangeOfChangedText, with: string)
-                
-                self.modelNameLabel.text = !updatedText.isEmpty ? updatedText : Constants.defaults.settings.placeholderText
-                self.nameTextField.placeholder = !updatedText.isEmpty ? updatedText : Constants.defaults.settings.placeholderText
-                
-            } else {
-                self.nameTextField.text = Constants.defaults.settings.placeholderText
-            }
-        }
-        
-        return true
-    }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         modelImageViewModel.setModel(name: textField.text!)
+        modelImageViewModel.useDefaultName(on: defaultNameSwitch.isOn)
+        modelNameLabel.text = ModelImageViewModel.getModelName()
         textField.resignFirstResponder()
+        didTapEditName(self)
         
         return true
     }
@@ -261,4 +257,16 @@ extension SettingsViewController: ModelImageDetailsViewControllerDelegate {
             cell.modelView.image = image
         }
     }
+}
+
+extension SettingsViewController: ModelImageViewModelDelegate {
+    func modelName(_ modelImageViewModel: ModelImageViewModel, didChange: Bool, name: String) {
+        if didChange {
+            DispatchQueue.main.async {
+                self.modelNameLabel.text = name
+            }
+        }
+    }
+    
+    
 }
