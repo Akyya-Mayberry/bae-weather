@@ -16,13 +16,6 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var defaultNameSwitch: UISwitch!
     @IBOutlet weak var defaultPicsSwitch: UISwitch!
     @IBOutlet weak var editNameStackView: UIStackView!
-    @IBOutlet weak var nameTextField: UITextField! {
-        didSet {
-            nameTextField.layer.borderColor = UIColor.darkGray.cgColor
-            nameTextField.layer.borderWidth = 0.3
-            nameTextField.layer.cornerRadius = 7
-        }
-    }
     @IBOutlet weak var modelNameLabel: UILabel!
     @IBOutlet weak var modelNameViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var modelNameViewBottomContraint: NSLayoutConstraint!
@@ -35,6 +28,12 @@ class SettingsViewController: UIViewController {
             editButton.setImage(editTintedImage, for: .normal)
             editButton.imageView?.contentMode = .scaleAspectFit
             editButton.tintColor = #colorLiteral(red: 0.747793138, green: 0.8413341045, blue: 0.8393042684, alpha: 1)
+        }
+    }
+    
+    @IBOutlet weak var nameTextField: UITextField! {
+        didSet {
+            nameTextField.rounded()
         }
     }
     
@@ -149,6 +148,8 @@ class SettingsViewController: UIViewController {
         }
     }
 }
+
+// MARK: - Extensions
 
 extension SettingsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -269,4 +270,18 @@ extension SettingsViewController: ModelImageViewModelDelegate {
     }
     
     
+}
+
+extension UITextField {
+    func rounded() {
+        layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1).cgColor
+        layer.borderWidth = 1.5
+        layer.cornerRadius = bounds.size.height / 2
+        layer.masksToBounds = true
+        
+        // indents/pads text
+        let padding = UIView(frame:CGRect(x: 0, y: 0, width: 15, height: 10))
+        leftViewMode = UITextField.ViewMode.always
+        leftView = padding
+    }
 }

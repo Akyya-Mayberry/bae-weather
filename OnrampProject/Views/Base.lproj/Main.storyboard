@@ -258,9 +258,10 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="250" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="e4l-hX-HmA" userLabel="Edit Name Stack View">
                                         <rect key="frame" x="30" y="110" width="324" height="72"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter weathercaster name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aw6-nv-lbd">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter weathercaster name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aw6-nv-lbd">
                                                 <rect key="frame" x="0.0" y="0.0" width="324" height="34"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="upg-cJ-U5f" userLabel="Default Name Stack View">
