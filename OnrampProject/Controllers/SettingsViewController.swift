@@ -131,9 +131,20 @@ class SettingsViewController: UIViewController {
             self.modelNameViewBottomContraint.constant = hideEditFields ? modelNameBottom + 10 : modelNameBottom - 10
         }) { (success) in
             UIView.animate(withDuration: 0.5) {
+                if self.nameTextField.isEnabled && !self.nameTextField.isHidden  {
+                    self.nameTextField.becomeFirstResponder()
+                } else {
+                    self.nameTextField.resignFirstResponder()
+                }
+                
+                // allows animation of view constraint changes
                 self.view.layoutIfNeeded()
             }
         }
+    }
+    
+    @IBAction func didTapOutsideTextfields(_ sender: UITapGestureRecognizer) {
+        nameTextField.resignFirstResponder()
     }
     
     private func createThumbnails() {
