@@ -1,14 +1,15 @@
 # Bae Weather
 
-Bae Weather is a slimmed down weather app aim to be simplistic and cute (hence bae). Users are provided with the current weather in degrees, only significant hourly forecasts (rush hour e.x.) and a convient categorized weather (freezing, cold, warm, hot) modeled by a customizable weathercaster (bae, kiddos etc).
+Bae Weather is a personizable web app. Users are provided with the current weather in degrees, only significant hourly forecasts (rush hour e.x.) and a convient categorized weather (freezing, cold, warm, hot) modeled by a customizable weathercaster (bae, kiddos etc).
 
 # Implemented Features
 
-  - Current weather (persisted)
-  - Default weathercaster (persisted)
-  - Default weathercaster name (Bae) (persisted)
-  - Customizable weathercaster name (persisted)
-  - Upload custom weathercaster photos (not persisted)
+  - Current weather for current location
+  - Hourly Weather - to come
+  - Default weathercaster
+  - Default weathercaster name (Bae)
+  - Customizable weathercaster name
+  - Upload custom weathercaster photos - to come
 
 ### Tech
 
@@ -34,20 +35,19 @@ Steps
 
 ### How to use the app
 
-Currently all features of the app are not implemented.
+Current Location Request: When first launching the application, you are requested to grant the app access to your current location in order to display weather for your location. If you deny access, before proceeding to use the app, you will be require to grant the app location access in your phones settings. Once location access is granted, you will be sent to the weather homepage. 
 
-Homepage: When launching the application, you are sent to the weather homepage. The current weather is fetched and displayed along with the webcasters image associated with the weather cateogry. Currently the current location is hardcoded for "Fresno, California". To change this, you must update the default values for city state in the Contants.swift file. The current date and the last time the current weather was updated is also display. Please be aware that the weather may take a couple of minutes to update (you may see a placeholder for weather). This issue will be fix and future updates
+Weather Homepage: Once location access is granted for the first time and on each subsequent app launch, you are sent to the weather homepage. The first time you launch the app, the current weather is fetched and displayed for you along with the default webcaster name "Bae", the current date and time the weather was fetched, and the default webcasters images associated with the current weather cateogry. If you have used the app to fetch current weather before, then your homepage will display the date and time of the last fetched weather. To update the weather, you must click the refresh button. If location access is not granted, you will first be required to authorized your current location before the weather is able to update. 
 
-Settings: Settings view is primarily for webcaster configuration. You are able to view and change the weathercaster name. You are able to view each model image associated with a weather cateogry by swiping the preview area or selecting a model image from the thumbnails.
+Settings: Settings view is primarily to configure the webcaster. You are able to view and change the weathercaster name. To change the name, click on the pencil icon and ensure that "Use Default" switch is turned off. If the "Use Default" switch is on, your webcaster will have the default name of "Bae" and the field to change the name will be disabled. In this view, you are also able to view the model image associated with each weather cateogry by either selecting anl image from the collection of thumbnails or by swiping along the image the larger image preview area.
 
-Weathercaster Image Details: Clicking on an image in the preview area if of the settings view presents a detailed view of the image. The details view allows selecting a new photo from the library however uploaded photos are not yet perisisted.
-
-### Implementation of Project Reqs
+Weather Category Image Details: Clicking on an image in the preview area displays the image details and the ability to select a custom image from your photos library. However the ability to save the image is not implemented yet.
 
 ##### Project Structure
 - Services:
     - Network Service - Open Weather API for getting current weather
     - UserDefaults Service - Aim to be a wrapper around user defaults. Some quering and peristence will still require regular usage of UserDefaults.
+    - Location Service - Provides current location data for device
 - UIViewControllers: 
     - WeatherViewController: Displays current weather, date, last time weather was updated, webcaster image for current weather and hourly forecast (not implemented)
     - SettingsViewController: Configurations related to webcaster/model such as name and photos for each weather category
@@ -69,33 +69,13 @@ Weathercaster Image Details: Clicking on an image in the preview area if of the 
     - Holds app configuration data such as api base url, keys used in user defaults and default weathercaster data
 
 ##### Design Patterns
-- MVVM: Based on the project structure above, MVVM is the design pattern implemented. A lot of typical UIViewController work in MVC such as managing weather models and weathercaster objects and state has been moved to view models. Interacting with the network service is also extracted away from the UIViewControllers and handled in view models. Since I hadn't coded very many projects in MVVM, it took some getting use to. It did leave my view controllers slimmer, but then I had so many extensions for delgation methods that some of my view controller files still have lots of code. I've seen some datasource get extracted out of the view controller and that's definetly a convention I want to try out. 
+- MVVM: Based on the project structure above, MVVM is the design pattern implemented. Services handle working with API clients, local data storage and location manager. Only view models interact with the services to manipulate the data objects and pass information to and from the view controllers. The view controllers manages the views. The view controllers are slimmer, but there is still room for refactoring especially around moving extensions.
 
 ##### Data Persistence and State
-- UserDefaults: Most data that is being stored is the app is stored in user defaults. Giving the simplicity of data that needed to be peristed (ex. just settings and no user account management), user defaults was the peristence store of choice. Realm was considered because of how easy it is to model updates throughout the app, but it was not needed.
+- UserDefaults: Most data that is being stored is the app is stored in user defaults. Giving the simplicity of data that needed to be peristed and that the data is local (ex. just settings and no user account management), user defaults was the peristence store of choice. As more features are developed (custom images), other forms of persistence will be utilized that best meets the needs.
 
 - NSNotification: For this app thus far, there was one property that I needed to be "global", the model's name. The state of this property needed to be known in the Weather view, because the models name is displayed. First attempt at this was done using delegation, and second attempt using key value observation. But with using delegation and kvo updates were not provided in the weather view if it wasn't the current displayed view. Realm would of been greate for passing updates to the weather view, but NSNotification was far easier to implement and did the job well.
 
-- Delegatation: Delegation was used throughout the app and was the choice for handling asynchronous network calls. Due to the ease of using delegation, it was often the first sought after solution for event management.
-
-##### iOS Controls
-- Slider: Though the backend not fully implented, the UI uses a slider to allow selection of a weather hour within a restricted range
-
-- CollectionView: Use in SettingsViewController to manage the previewing of model image Sets. Currently only one set of images exist (1 per for categories of weather). As features roll out, there can be multiple image sets user defined and application default.
-
-- Custom UIViews: Used for reusble custom components such as model image thumbnails and previews
-
-- StackViews: Used in combination with autolayout for laying out interface
-
-- Switches: Used to manage toggling of default settings of app
-
-##### Upcoming
-1. Refactor datasource and delegation code, extract it out of view controllers
-2. Use users current location, by implementing location manager
-3. Make interface better (fonts, colors, animations etc)
-4. Implement persisting user photo uploads and multiple image sets
-5. Seek out any free options for hourly weather updates to fully implement hour-based weather update
-6. Handle network errors on backend and in UI. 
-
+- Delegatation: Delegation was used throughout the app and was the choice for handling asynchronous network calls, and updates between view model and view controllers. 
  
 
