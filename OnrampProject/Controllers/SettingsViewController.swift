@@ -285,8 +285,8 @@ extension SettingsViewController: ModelImageViewModelDelegate {
 
 extension UITextField {
     func rounded() {
-        layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1).cgColor
-        layer.borderWidth = 1.5
+        layer.borderColor = #colorLiteral(red: 0.9108538948, green: 0.8431372549, blue: 0.5877637754, alpha: 1).cgColor
+        layer.borderWidth = 1.7
         layer.cornerRadius = bounds.size.height / 2
         layer.masksToBounds = true
         

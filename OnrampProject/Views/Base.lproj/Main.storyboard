@@ -244,7 +244,7 @@
                                                     <constraint firstAttribute="width" secondItem="eBp-Wt-Fyz" secondAttribute="height" multiplier="1:1" priority="250" id="y9W-Gb-s4A"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="10"/>
-                                                <color key="tintColor" red="0.74779313800000002" green="0.84133410450000001" blue="0.83930426840000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="tintColor" red="0.51352403680000003" green="0.69125082400000004" blue="0.59841413769999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" image="pencil" catalog="system">
                                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -278,7 +278,7 @@
                                                     </label>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YiW-xn-cTR" userLabel="Default Name Switch">
                                                         <rect key="frame" x="275" y="0.0" width="51" height="31"/>
-                                                        <color key="onTintColor" red="0.7726853414" green="0.8948088515" blue="0.77508470500000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="onTintColor" red="0.69329513399999998" green="0.7857344852" blue="0.7857344852" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <connections>
                                                             <action selector="didChangeUseDefaultNameSwitch:" destination="Gnv-4n-e6Z" eventType="valueChanged" id="hc9-uW-h29"/>
                                                         </connections>
@@ -336,9 +336,9 @@
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5v9-sg-WHh" userLabel="Default Image Switch">
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5v9-sg-WHh" userLabel="Default Image Switch">
                                                         <rect key="frame" x="168.5" y="0.0" width="51" height="31"/>
-                                                        <color key="onTintColor" red="0.7726853414" green="0.8948088515" blue="0.77508470500000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="onTintColor" red="0.69329513400940579" green="0.78573448521065992" blue="0.78573448521065992" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="thumbTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </switch>
                                                 </subviews>
