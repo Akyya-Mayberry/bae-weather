@@ -12,6 +12,8 @@ protocol ModelImageCellDelegate {
 }
 
 class ModelImageCell: UICollectionViewCell {
+    
+    @IBOutlet weak var cardView: UIView!
     var delegate: ModelImageCellDelegate?
     var modelView: ModelImageView!
 }

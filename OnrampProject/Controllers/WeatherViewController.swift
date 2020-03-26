@@ -83,7 +83,7 @@ class WeatherViewController: UIViewController {
             self.currentDateLabel.text = self.weatherViewModel.currentDateAsString
             self.lastTimeUpdatedLabel.text = self.weatherViewModel.lastUpdateTime
             self.modelImageView.image = UIImage(named: self.weatherViewModel.modelImageDetails!.imageName)
-            self.modelNameLabel.text = ModelImageViewModel.getModelName()!
+            self.modelNameLabel.text = "\(ModelImageViewModel.getModelName()) Weather"
             self.locationLabel.text = self.weatherViewModel.location
             
             self.refreshWeatherImageView.isHidden = false
@@ -97,7 +97,7 @@ class WeatherViewController: UIViewController {
         if let modelInfo = notification.userInfo as? [String: String] {
             if let modelName = modelInfo["name"] {
                 DispatchQueue.main.async {
-                    self.modelNameLabel.text = modelName
+                    self.modelNameLabel.text = "\(modelName) Weather"
                 }
             }
         }

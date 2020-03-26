@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ModelImageViewModelDelegate {
-    func modelName(_ modelImageViewModel: ModelImageViewModel, didChange: Bool)
+    func modelName(_ modelImageViewModel: ModelImageViewModel, didChange: Bool, name: String)
 }
 
 class ModelImageViewModel {
@@ -24,23 +24,25 @@ class ModelImageViewModel {
         return getImagesSorted()
     }
     
-    @objc dynamic private(set) var modelName: String = "" {
+    @objc dynamic private(set) var modelName: String = Constants.defaults.modelName {
         didSet {
             if oldValue != modelName {
                 
                 let useDefaultName = userDefaults.bool(forKey: Constants.userDefaultKeys.useDefaultName)
                 
                 if  useDefaultName {
-                    userDefaults.set("\(Constants.defaults.modelName) Weather", forKey: Constants.userDefaultKeys.modelName)
+                    let settings = Settings(modelName: "\(Constants.defaults.modelName)", modelImageSet: nil)
+                    userDefaultsService.storeInUserDefaults(item: settings)
                 } else {
-                    userDefaults.set("\(modelName) Weather", forKey: Constants.userDefaultKeys.modelName)
+                    let settings = Settings(modelName: modelName, modelImageSet: nil)
+                    userDefaultsService.storeInUserDefaults(item: settings)
                 }
                 
-                delegate?.modelName(self, didChange: true)
+                delegate?.modelName(self, didChange: true, name: ModelImageViewModel.getModelName())
             } else {
-                delegate?.modelName(self, didChange: false)
+                delegate?.modelName(self, didChange: false, name: ModelImageViewModel.getModelName())
             }
-            NotificationCenter.default.post(name: .didSetModelName, object: self, userInfo: ["name": "\(modelName) Weather"])
+            NotificationCenter.default.post(name: .didSetModelName, object: self, userInfo: ["name": ModelImageViewModel.getModelName()])
         }
     }
     
@@ -72,7 +74,7 @@ class ModelImageViewModel {
         userDefaults.set(on, forKey: Constants.userDefaultKeys.useDefaultImages)
     }
     
-    func useDefaultName(to on: Bool) {
+    func useDefaultName(on: Bool) {
         userDefaults.set(on, forKey: Constants.userDefaultKeys.useDefaultName)
         
         if on {
@@ -85,9 +87,11 @@ class ModelImageViewModel {
     }
     
     func setModel(name: String) {
-        let settings = Settings(modelName: name, modelImageSet: nil)
-        userDefaultsService.storeInUserDefaults(item: settings)
-        modelName = name
+        if !name.isEmpty {
+            let settings = Settings(modelName: name, modelImageSet: nil)
+            userDefaultsService.storeInUserDefaults(item: settings)
+            modelName = name
+        }
     }
     
     func getCategory(for typeOfWeather: WeatherCategory) -> String {
@@ -129,12 +133,11 @@ class ModelImageViewModel {
 
 extension ModelImageViewModel {
     static let userDefaultsService = UserDefaultsService()
-    static func getModelName() -> String? {
+    static func getModelName() -> String {
         if let settings = userDefaultsService.getFromUserDefaults(item: Constants.userDefaultKeys.settings) as? Settings {
-            let modelName = settings.modelName
-            return modelName
+            return settings.modelName
         } else {
-            return nil
+            return Constants.defaults.modelName
         }
     }
 }
