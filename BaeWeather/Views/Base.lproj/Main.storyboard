@@ -663,12 +663,11 @@
                         <outlet property="containerView" destination="gel-tM-RQg" id="7do-zA-062"/>
                         <outlet property="heartImageView" destination="Ixj-zG-a5S" id="PL8-ct-Adg"/>
                         <outlet property="weatherImageView" destination="86h-XZ-Xf7" id="3Cz-jS-81T"/>
-                        <segue destination="YTY-9c-YLx" kind="presentation" identifier="LoadingSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="aOE-91-2US"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z0p-q1-vPv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3197" y="119"/>
+            <point key="canvasLocation" x="-2229" y="139"/>
         </scene>
         <!--Current Location View Controller-->
         <scene sceneID="BJR-Ic-UQY">
@@ -707,7 +706,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="KzW-L5-xdw" firstAttribute="centerX" secondItem="d0w-42-8Uq" secondAttribute="centerX" id="MMl-gW-51b"/>
                             <constraint firstItem="KzW-L5-xdw" firstAttribute="centerY" secondItem="d0w-42-8Uq" secondAttribute="centerY" id="uUg-YJ-Omc"/>
@@ -876,21 +875,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oo9-fI-11I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1861" y="-56"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="3WQ-3Q-wfH">
-            <objects>
-                <viewController id="Upd-XZ-bds" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="azN-dW-LJt">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="0.74125107020000003" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="yfa-9x-u6P"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eLW-FK-OkB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1980" y="290"/>
         </scene>
     </scenes>
     <resources>
