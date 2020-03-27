@@ -2,6 +2,8 @@
 
 Bae Weather is a personizable web app. Users are provided with the current weather in degrees, only significant hourly forecasts (rush hour e.x.) and a convient categorized weather (freezing, cold, warm, hot) modeled by a customizable weathercaster (bae, kiddos etc).
 
+![Bae Weather Demo](bae-weather-demo1.gif)
+
 # Implemented Features
 
   - Current weather for current location
