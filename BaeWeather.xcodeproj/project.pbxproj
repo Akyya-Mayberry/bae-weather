@@ -210,12 +210,12 @@
 			path = BaeWeatherUITests;
 			sourceTree = "<group>";
 		};
-		ABF9B420241F410C0096F563 /* Data Storage */ = {
+		ABF9B420241F410C0096F563 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
 				EBD469D224121CC2004E80DC /* UserDefaultsService.swift */,
 			);
-			path = "Data Storage";
+			path = Storage;
 			sourceTree = "<group>";
 		};
 		ABF9B421241F41250096F563 /* Location */ = {
@@ -279,7 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				ABF9B421241F41250096F563 /* Location */,
-				ABF9B420241F410C0096F563 /* Data Storage */,
+				ABF9B420241F410C0096F563 /* Storage */,
 				EBF176DE240CA169005AB1F8 /* Api */,
 			);
 			path = Services;

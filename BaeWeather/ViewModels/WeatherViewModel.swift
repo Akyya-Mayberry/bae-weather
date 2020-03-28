@@ -23,7 +23,7 @@ class WeatherViewModel {
     
     private let weatherNetworkService = WeatherNetworkService()
     private let locationService = LocationService()
-    fileprivate let userDefaultsService = UserDefaultsService()
+    fileprivate let userDefaultsService = UserDefaultsService.sharedInstance
     private var modelImageViewModel = ModelImageViewModel()
     var delegate: WeatherViewModelDelegate?
     
@@ -32,7 +32,7 @@ class WeatherViewModel {
             guard weather != nil else {
                 return
             }
-            userDefaultsService.storeInUserDefaults(item: weather)
+            userDefaultsService.lastKnownWeather = weather
             delegate?.didUpdateWeather(self)
         }
     }
@@ -208,7 +208,7 @@ extension Date {
 }
 
 extension WeatherViewModel: ModelImageViewModelDelegate {
-    func modelName(_ modelImageViewModel: ModelImageViewModel, didChange: Bool, name: String) {
+    func modelName(_ modelImageViewModel: ModelImageViewModel, willChange: Bool, name: String) {
         delegate?.didUpdateModelImageDetails(self, modelImageViewModel: modelImageViewModel)
     }
 }
