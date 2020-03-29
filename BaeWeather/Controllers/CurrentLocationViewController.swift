@@ -25,7 +25,7 @@ class CurrentLocationViewController: UIViewController {
         }
     }
     
-    let locationService = LocationService()
+    let locationService = LocationService.sharedInstance
     var delegate: CurrentLocationViewControllerDelegate?
     
     // MARK: - Methods

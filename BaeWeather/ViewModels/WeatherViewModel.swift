@@ -22,7 +22,7 @@ class WeatherViewModel {
     // MARK: - Properties
     
     private let weatherNetworkService = WeatherNetworkService()
-    private let locationService = LocationService()
+    private let locationService = LocationService.sharedInstance
     fileprivate let userDefaultsService = UserDefaultsService.sharedInstance
     private var modelImageViewModel = ModelImageViewModel()
     var delegate: WeatherViewModelDelegate?
@@ -110,6 +110,18 @@ class WeatherViewModel {
         print("Show there was an error getting current location")
         locationService.stopUpdatingLocation()
         return nil
+    }
+    
+    func getLocationAuthorizationStatus() -> LocationStatusUpdate {
+        switch locationService.requestStatus {
+        case .authorized:
+            return .authorized
+        case .denied:
+            return .denied
+        default:
+            locationService.requestLocation()
+            return .notDetermined
+        }
     }
     
     func updateCurrentWeather(city: String, state: String) {
