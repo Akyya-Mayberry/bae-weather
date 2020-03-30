@@ -8,15 +8,14 @@
 import Foundation
 
 protocol ModelImageViewModelDelegate {
-    func modelName(_ modelImageViewModel: ModelImageViewModel, didChange: Bool, name: String)
+    func modelName(_ modelImageViewModel: ModelImageViewModel, willChange: Bool, name: String)
 }
 
 class ModelImageViewModel {
     
     // MARK: - Properties
     
-    private let userDefaultsService = UserDefaultsService()
-    private let userDefaults = UserDefaults.standard
+    private let userDefaultsService = UserDefaultsService.sharedInstance
     var delegate: ModelImageViewModelDelegate?
     var selectedThumbnailIndex = 0
     
@@ -24,24 +23,26 @@ class ModelImageViewModel {
         return getImagesSorted()
     }
     
-    @objc dynamic private(set) var modelName: String = Constants.defaults.modelName {
-        didSet {
-            if oldValue != modelName {
-                
-                let useDefaultName = userDefaults.bool(forKey: Constants.userDefaultKeys.useDefaultName)
-                
-                if  useDefaultName {
-                    let settings = Settings(modelName: "\(Constants.defaults.modelName)", modelImageSet: nil)
-                    userDefaultsService.storeInUserDefaults(item: settings)
-                } else {
-                    let settings = Settings(modelName: modelName, modelImageSet: nil)
-                    userDefaultsService.storeInUserDefaults(item: settings)
-                }
-                
-                delegate?.modelName(self, didChange: true, name: ModelImageViewModel.getModelName())
+    @objc dynamic private(set) var modelName: String = "" {
+        willSet {
+            if newValue != modelName {
+                delegate?.modelName(self, willChange: true, name: newValue)
             } else {
-                delegate?.modelName(self, didChange: false, name: ModelImageViewModel.getModelName())
+                delegate?.modelName(self, willChange: false, name: newValue)
             }
+        }
+        
+        didSet {
+            let useDefaultName = userDefaultsService.useDefaultName
+            
+            if  useDefaultName {
+                let settings = Settings(modelName: "\(Constants.defaults.modelName)", modelImageSet: nil)
+                userDefaultsService.settings = settings
+            } else {
+                let settings = Settings(modelName: modelName, modelImageSet: nil)
+                userDefaultsService.settings = settings
+            }
+            
             NotificationCenter.default.post(name: .didSetModelName, object: self, userInfo: ["name": ModelImageViewModel.getModelName()])
         }
     }
@@ -71,26 +72,28 @@ class ModelImageViewModel {
     }
     
     func useDefaultImages(to on: Bool) {
-        userDefaults.set(on, forKey: Constants.userDefaultKeys.useDefaultImages)
+        userDefaultsService.useDefaultImages = on
     }
     
-    func useDefaultName(on: Bool) {
-        userDefaults.set(on, forKey: Constants.userDefaultKeys.useDefaultName)
+    func setDefaultName(on: Bool) {
+        userDefaultsService.useDefaultName = on
         
         if on {
-            modelName = Constants.defaults.modelName
+            setModel(name: Constants.defaults.modelName)
         }
     }
     
     func isUsingDefaultName() -> Bool {
-        return userDefaults.bool(forKey: Constants.userDefaultKeys.useDefaultName)
+        return userDefaultsService.useDefaultName
     }
     
     func setModel(name: String) {
-        if !name.isEmpty {
-            let settings = Settings(modelName: name, modelImageSet: nil)
-            userDefaultsService.storeInUserDefaults(item: settings)
-            modelName = name
+        let nameTrimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if !nameTrimmed.isEmpty {
+            let settings = Settings(modelName: nameTrimmed, modelImageSet: nil)
+            userDefaultsService.settings = settings
+            modelName = nameTrimmed
         }
     }
     
@@ -121,20 +124,20 @@ class ModelImageViewModel {
     }
     
     func update(image: BaeImage) {
-        if let currentSettings = userDefaultsService.getFromUserDefaults(item: Constants.userDefaultKeys.settings) as? Settings {
+        if let currentSettings = userDefaultsService.settings {
             var currentImages = currentSettings.modelImageSet
             currentImages![image.typeOfWeather.rawValue] = image
             
             let settings = Settings(modelName: currentSettings.modelName, modelImageSet: currentImages)
-            userDefaultsService.storeInUserDefaults(item: settings)
+            userDefaultsService.settings = settings
         }
     }
 }
 
 extension ModelImageViewModel {
-    static let userDefaultsService = UserDefaultsService()
+    static let userDefaultsService = UserDefaultsService.sharedInstance
     static func getModelName() -> String {
-        if let settings = userDefaultsService.getFromUserDefaults(item: Constants.userDefaultKeys.settings) as? Settings {
+        if let settings = userDefaultsService.settings {
             return settings.modelName
         } else {
             return Constants.defaults.modelName

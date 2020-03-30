@@ -15,6 +15,10 @@ class CurrentLocationViewController: UIViewController {
     
     // MARK: - Properties
     
+    @IBOutlet weak var messageStackView: UIStackView!
+    @IBOutlet weak var requestWeatherStackView: UIStackView!
+    @IBOutlet weak var messageLabel: UILabel!
+    
     @IBOutlet weak var requestLocationButton: UIButton! {
         didSet {
             let navImage = UIImage(named: "navigation-18dp-1")?.withRenderingMode(.alwaysTemplate)
@@ -25,7 +29,16 @@ class CurrentLocationViewController: UIViewController {
         }
     }
     
-    let locationService = LocationService()
+    @IBOutlet weak var tryAgainButton: UIButton! {
+        didSet {
+            tryAgainButton.layer.borderColor = #colorLiteral(red: 0.9108538948, green: 0.8431372549, blue: 0.5877637754, alpha: 1).cgColor
+            tryAgainButton.layer.borderWidth = 1.7
+            tryAgainButton.layer.cornerRadius = tryAgainButton.bounds.size.height / 2
+        }
+    }
+    
+    let locationService = LocationService.sharedInstance
+    let locationError = "Error occurred getting your current location"
     var delegate: CurrentLocationViewControllerDelegate?
     
     // MARK: - Methods
@@ -34,6 +47,8 @@ class CurrentLocationViewController: UIViewController {
         super.viewDidLoad()
         
         locationService.delegate = self
+        requestWeatherStackView.isHidden = false
+        messageStackView.isHidden = true
     }
     
     @IBAction func didTapRequestLocation(_ sender: Any) {
@@ -49,6 +64,11 @@ class CurrentLocationViewController: UIViewController {
         default:
             locationService.requestLocation()
         }
+    }
+    
+    @IBAction func didTapTryAgain(_ sender: UIButton) {
+        self.requestWeatherStackView.isHidden = false
+        self.messageStackView.isHidden = true
     }
 }
 
@@ -74,6 +94,12 @@ extension CurrentLocationViewController: LocationServiceDelegate {
     
     func locationService(_ locationService: LocationService, didFailWith error: Error) {
         print("In request vc location manager failed. Alert user of error. Error: \(error).")
+        
+        DispatchQueue.main.async {
+            self.messageLabel.text = self.locationError
+            self.requestWeatherStackView.isHidden = true
+            self.messageStackView.isHidden = false
+        }
     }
 }
 

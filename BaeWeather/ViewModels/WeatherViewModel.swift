@@ -21,9 +21,9 @@ class WeatherViewModel {
     
     // MARK: - Properties
     
-    private let weatherNetworkService = WeatherNetworkService()
-    private let locationService = LocationService()
-    fileprivate let userDefaultsService = UserDefaultsService()
+    private let weatherNetworkService = WeatherNetworkService.sharedInstance
+    private let locationService = LocationService.sharedInstance
+    fileprivate let userDefaultsService = UserDefaultsService.sharedInstance
     private var modelImageViewModel = ModelImageViewModel()
     var delegate: WeatherViewModelDelegate?
     
@@ -32,7 +32,7 @@ class WeatherViewModel {
             guard weather != nil else {
                 return
             }
-            userDefaultsService.storeInUserDefaults(item: weather)
+            userDefaultsService.lastKnownWeather = weather
             delegate?.didUpdateWeather(self)
         }
     }
@@ -110,6 +110,18 @@ class WeatherViewModel {
         print("Show there was an error getting current location")
         locationService.stopUpdatingLocation()
         return nil
+    }
+    
+    func getLocationAuthorizationStatus() -> LocationStatusUpdate {
+        switch locationService.requestStatus {
+        case .authorized:
+            return .authorized
+        case .denied:
+            return .denied
+        default:
+            locationService.requestLocation()
+            return .notDetermined
+        }
     }
     
     func updateCurrentWeather(city: String, state: String) {
@@ -208,7 +220,7 @@ extension Date {
 }
 
 extension WeatherViewModel: ModelImageViewModelDelegate {
-    func modelName(_ modelImageViewModel: ModelImageViewModel, didChange: Bool, name: String) {
+    func modelName(_ modelImageViewModel: ModelImageViewModel, willChange: Bool, name: String) {
         delegate?.didUpdateModelImageDetails(self, modelImageViewModel: modelImageViewModel)
     }
 }

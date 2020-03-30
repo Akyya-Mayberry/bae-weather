@@ -25,7 +25,6 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var errorLabel: UILabel!
     
     private let weatherError = "Error occurred getting weather update."
-    private let locationService = LocationService()
     private var hourlyWeatherViewModel: HourlyWeatherViewModel!
     var weatherViewModel: WeatherViewModel!
     
@@ -58,7 +57,7 @@ class WeatherViewController: UIViewController {
     }
     
     private func updateWeather() {
-        switch locationService.requestStatus {
+        switch weatherViewModel.getLocationAuthorizationStatus() {
         case .authorized:
             weatherViewModel.getCurrentWeather()
         case .denied:
@@ -68,7 +67,6 @@ class WeatherViewController: UIViewController {
         default:
             self.refreshWeatherImageView.isHidden = false
             self.loadingSpinner.isHidden = true
-            locationService.requestLocation()
         }
     }
     

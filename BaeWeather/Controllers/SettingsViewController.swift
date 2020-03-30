@@ -85,6 +85,7 @@ class SettingsViewController: UIViewController {
             // enable/disable editing name field
             if self.modelImageViewModel.isUsingDefaultName() {
                 self.nameTextField.isEnabled = false
+                self.nameTextField.text = ""
                 self.defaultNameSwitch.isOn = true
             } else {
                 self.nameTextField.isEnabled = true
@@ -108,8 +109,14 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func didChangeUseDefaultNameSwitch(_ sender: UISwitch) {
-        modelImageViewModel.useDefaultName(on: sender.isOn)
-        self.nameTextField.isEnabled = !sender.isOn
+        modelImageViewModel.setDefaultName(on: sender.isOn)
+        
+        if sender.isOn {
+            nameTextField.isEnabled = false
+            nameTextField.text = ""
+        } else {
+            nameTextField.isEnabled = true
+        }
     }
     
     @IBAction func didTapEditName(_ sender: Any) {
@@ -253,7 +260,6 @@ extension SettingsViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         modelImageViewModel.setModel(name: textField.text!)
-        modelImageViewModel.useDefaultName(on: defaultNameSwitch.isOn)
         modelNameLabel.text = ModelImageViewModel.getModelName()
         textField.resignFirstResponder()
         didTapEditName(self)
@@ -272,15 +278,13 @@ extension SettingsViewController: ModelImageDetailsViewControllerDelegate {
 }
 
 extension SettingsViewController: ModelImageViewModelDelegate {
-    func modelName(_ modelImageViewModel: ModelImageViewModel, didChange: Bool, name: String) {
-        if didChange {
+    func modelName(_ modelImageViewModel: ModelImageViewModel, willChange: Bool, name: String) {
+        if willChange {
             DispatchQueue.main.async {
                 self.modelNameLabel.text = name
             }
         }
     }
-    
-    
 }
 
 extension UITextField {
