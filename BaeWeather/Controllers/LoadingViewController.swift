@@ -11,13 +11,14 @@ class LoadingViewController: UIViewController {
     
     // MARK: - Properties
     
+    @IBOutlet weak var messageStackView: UIStackView!
     @IBOutlet weak var loadingSpinner: UIActivityIndicatorView!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var tryAgainButton: UIButton! {
         didSet {
-            tryAgainButton.layer.borderColor = UIColor.darkGray.cgColor
-            tryAgainButton.layer.borderWidth = 1
-            tryAgainButton.layer.cornerRadius = 10
+            tryAgainButton.layer.borderColor = #colorLiteral(red: 0.9108538948, green: 0.8431372549, blue: 0.5877637754, alpha: 1).cgColor
+            tryAgainButton.layer.borderWidth = 1.7
+            tryAgainButton.layer.cornerRadius = tryAgainButton.bounds.size.height / 2
         }
     }
     
@@ -32,6 +33,7 @@ class LoadingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         locationService.startUpdatingLocation()
+        locationService.delegate = self
         weatherViewModel.delegate = self
         loadingSpinner.layer.opacity = 0
         loadSpinner()
@@ -54,14 +56,15 @@ class LoadingViewController: UIViewController {
         if locationService.currentLocation != nil {
             weatherViewModel.getCurrentWeather()
         } else {
+            loadingSpinner.stopAnimating()
             messageLabel.text = locationError
+            messageStackView.isHidden = false
         }
         locationService.stopUpdatingLocation()
     }
     
     @IBAction func didTapTryAgain(_ sender: UIButton) {
-        self.tryAgainButton.isHidden = true
-        self.messageLabel.isHidden = true
+        messageStackView.isHidden = true
         loadSpinner()
     }
 }
@@ -90,14 +93,37 @@ extension LoadingViewController: WeatherViewModelDelegate {
     func didFailWithError(_ weatherViewModel: WeatherViewModel, _ error: Error) {
         DispatchQueue.main.async {
             self.loadingSpinner.stopAnimating()
-            self.tryAgainButton.isHidden = false
-            self.messageLabel.isHidden = false
+            self.messageStackView.isHidden = false
             self.messageLabel.text = self.weatherError
             print("loading weather returned an error: \(error)")
         }
     }
-    
+     
     func didUpdateModelImageDetails(_ weatherViewModel: WeatherViewModel, modelImageViewModel: ModelImageViewModel) {
         //
+    }
+}
+
+extension LoadingViewController: LocationServiceDelegate {
+    func locationService(_ locationService: LocationService, didUpdateLocationAuthorization status: LocationStatusUpdate) {
+        switch locationService.requestStatus {
+        case .authorized:
+            getCurrentLocation()
+        case .denied:
+            self.loadingSpinner.stopAnimating()
+            showLinkToSettings()
+        default:
+            self.loadingSpinner.stopAnimating()
+            locationService.requestLocation()
+        }
+    }
+    
+    func locationService(_ locationService: LocationService, didFailWith error: Error) {
+        DispatchQueue.main.async {
+            self.loadingSpinner.stopAnimating()
+            self.messageStackView.isHidden = false
+            self.messageLabel.text = self.locationError
+            print("requesting current location returned an error: \(error)")
+        }
     }
 }

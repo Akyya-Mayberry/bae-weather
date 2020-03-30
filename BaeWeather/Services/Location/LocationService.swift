@@ -95,6 +95,7 @@ extension LocationService: CLLocationManagerDelegate {
             delegate?.locationService(self, didUpdateLocationAuthorization: .notDetermined)
         default:
             print("Uknown status update")
+            delegate?.locationService(self, didUpdateLocationAuthorization: .notDetermined)
         }
         
     }
