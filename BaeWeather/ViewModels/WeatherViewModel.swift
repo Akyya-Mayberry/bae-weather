@@ -21,7 +21,7 @@ class WeatherViewModel {
     
     // MARK: - Properties
     
-    private let weatherNetworkService = WeatherNetworkService()
+    private let weatherNetworkService = WeatherNetworkService.sharedInstance
     private let locationService = LocationService.sharedInstance
     fileprivate let userDefaultsService = UserDefaultsService.sharedInstance
     private var modelImageViewModel = ModelImageViewModel()

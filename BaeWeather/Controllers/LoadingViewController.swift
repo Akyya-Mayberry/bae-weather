@@ -22,7 +22,7 @@ class LoadingViewController: UIViewController {
         }
     }
     
-    let networkService = WeatherNetworkService()
+    let networkService = WeatherNetworkService.sharedInstance
     let locationService = LocationService.sharedInstance
     let weatherViewModel = WeatherViewModel(weather: nil)
     let weatherError = "Error occurred fetching weather for your location."
