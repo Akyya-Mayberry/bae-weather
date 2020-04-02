@@ -9,5 +9,5 @@ import Foundation
 
 struct Settings: Codable {
     var modelName: String
-    var modelImageSet: [BaeImage]?
+    var modelImageSet: [String?]
 }

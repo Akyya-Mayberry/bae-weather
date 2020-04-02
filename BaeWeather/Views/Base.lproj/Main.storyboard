@@ -336,7 +336,7 @@
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5v9-sg-WHh" userLabel="Default Image Switch">
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5v9-sg-WHh" userLabel="Default Image Switch">
                                                         <rect key="frame" x="168.5" y="0.0" width="51" height="31"/>
                                                         <color key="onTintColor" red="0.69329513400940579" green="0.78573448521065992" blue="0.78573448521065992" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="thumbTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -503,7 +503,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sample-hot" translatesAutoresizingMaskIntoConstraints="NO" id="USs-8j-vRk">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="USs-8j-vRk">
                                 <rect key="frame" x="20" y="100" width="374" height="363"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="363" id="ISn-Wu-rMC"/>
@@ -539,17 +539,17 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-hot" translatesAutoresizingMaskIntoConstraints="NO" id="fPi-ze-Sjx">
-                                <rect key="frame" x="87" y="483" width="240" height="128"/>
+                                <rect key="frame" x="152" y="483" width="110" height="110"/>
                                 <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="jGU-in-X97"/>
-                                    <constraint firstAttribute="width" constant="240" id="voq-sw-nsb"/>
+                                    <constraint firstAttribute="width" secondItem="fPi-ze-Sjx" secondAttribute="height" id="Z7d-cK-hS7"/>
+                                    <constraint firstAttribute="width" constant="110" id="voq-sw-nsb"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z9p-el-7EP">
                                 <rect key="frame" x="30" y="25.5" width="52" height="39.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="33"/>
-                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" red="0.82255411150000002" green="0.24973508720000001" blue="0.34709912539999999" alpha="0.88992936639999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -751,7 +751,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-858" y="297"/>
+            <point key="canvasLocation" x="-670" y="252"/>
         </scene>
         <!--Loading View Controller-->
         <scene sceneID="MyW-Ol-bJI">
@@ -818,7 +818,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VIe-wH-ePP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-859" y="69"/>
+            <point key="canvasLocation" x="-670" y="25"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="8dW-sy-Vjp">

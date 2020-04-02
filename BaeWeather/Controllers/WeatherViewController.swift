@@ -27,6 +27,7 @@ class WeatherViewController: UIViewController {
     private let weatherError = "Error occurred getting weather update."
     private var hourlyWeatherViewModel: HourlyWeatherViewModel!
     var weatherViewModel: WeatherViewModel!
+    var modelImageViewModel = ModelImageViewModel()
     
     // MARK: - Methods
     
@@ -72,15 +73,16 @@ class WeatherViewController: UIViewController {
     
     private func updateUI() {
         DispatchQueue.main.async {
-            
             guard self.weatherViewModel != nil, self.weatherViewModel.weather != nil else {
                 return
             }
             
+            self.loadWeathercasterImage()
+            
             self.currentWeatherLabel.text = "\(self.weatherViewModel.currentTemp!)°"
             self.currentDateLabel.text = self.weatherViewModel.currentDateAsString
             self.lastTimeUpdatedLabel.text = self.weatherViewModel.lastUpdateTime
-            self.modelImageView.image = UIImage(named: self.weatherViewModel.modelImageDetails!.imageName)
+            
             self.modelNameLabel.text = "\(ModelImageViewModel.getModelName()) Weather"
             self.locationLabel.text = self.weatherViewModel.location
             
@@ -96,6 +98,20 @@ class WeatherViewController: UIViewController {
             if let modelName = modelInfo["name"] {
                 DispatchQueue.main.async {
                     self.modelNameLabel.text = "\(modelName) Weather"
+                }
+            }
+        }
+    }
+    
+    private func loadWeathercasterImage() {
+        if let weatherCategory = self.weatherViewModel.getWeatherCategory() {
+            modelImageViewModel.getImage(for: weatherCategory) { (weathercasterImage) in
+                if weathercasterImage != nil {
+                    DispatchQueue.main.async {
+                        self.modelImageView.image = UIImage(contentsOfFile: weathercasterImage!.name)
+                    }
+                } else {
+                    print("failed to get current weathercaster image")
                 }
             }
         }

@@ -19,9 +19,20 @@ class ModelImageDetailsViewController: UIViewController {
     @IBOutlet weak var categoryImageView: UIImageView!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var previewImageView: UIImageView!
-    @IBOutlet weak var editButton: UIButton!
+    
+    @IBOutlet weak var editButton: UIButton! {
+        didSet {
+            let editImage = UIImage(named: "edit")
+            let editTintedImage = editImage?.withRenderingMode(.alwaysTemplate)
+            
+            editButton.setImage(editTintedImage, for: .normal)
+            editButton.imageView?.contentMode = .scaleAspectFit
+            editButton.tintColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
+        }
+    }
     
     var modelImageView: ModelImageView!
+    var weathercasterImage: WeathercasterImage!
     var delegate: ModelImageDetailsViewControllerDelegate?
     var modelImageViewModel = ModelImageViewModel()
     
@@ -41,39 +52,49 @@ class ModelImageDetailsViewController: UIViewController {
     }
     
     @IBAction func didTapSave(_ sender: UIButton) {
-        self.saveButton.isHidden = true
         
-        // after save show checkmark before hidding save button
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { (timer) in
-            self.saveButton.isHidden = false
-            self.saveButton.setImage(UIImage(named: "checkmark"), for: .normal)
+        // TODO: editing button should be disabled while save is in progress
+        
+        let imageData = previewImageView.image!.pngData()!
+        
+        modelImageViewModel.saveModelImage(data: imageData, for: weathercasterImage.typeOfWeather) { (success, imageUrl) in
+            if success {
+                DispatchQueue.main.async {
+                    print("successfully saved custom imaged!!!!")
+                    self.saveButton.setImage(UIImage(named: "checkmark"), for: .normal)
+                    
+                    Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { (timer) in
+                        self.saveButton.isHidden = true
+                    }
+                    
+                    self.delegate?.didUpdateCategory(self, image: self.previewImageView.image!, for: self.weathercasterImage.typeOfWeather)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    print("failed to save custom image")
+                    self.saveButton.tintColor = UIColor.red
+                    // TODO: update UI to reflect failure to save image
+                }
+            }
         }
-        
-        Timer.scheduledTimer(withTimeInterval: 6.0, repeats: false) { (timer) in
-            self.saveButton.isHidden = true
-        }
-        
-        delegate?.didUpdateCategory(self, image: previewImageView.image!, for: modelImageView.typeOfWeather!)
     }
     
     func updateUI() {
-        let editImage = UIImage(named: "edit")
-        let editTintedImage = editImage?.withRenderingMode(.alwaysTemplate)
-        
-        editButton.setImage(editTintedImage, for: .normal)
-        editButton.imageView?.contentMode = .scaleAspectFit
-        editButton.tintColor = #colorLiteral(red: 1, green: 0.4051257875, blue: 0.3453042228, alpha: 1)
-        
         saveButton.isHidden = true
         
-        previewImageView.image = modelImageView.image
-        categoryLabel.text = modelImageViewModel.getCategory(for: modelImageView.typeOfWeather!)
+        if let image = UIImage(contentsOfFile: weathercasterImage.name) {
+            previewImageView.image = image
+        } else {
+            previewImageView.image = UIImage(named: weathercasterImage.name)
+        }
         
-        let categoryImage = UIImage(named: modelImageViewModel.getIconName(for: modelImageView.typeOfWeather!))
+        categoryLabel.text = modelImageViewModel.getCategory(for: weathercasterImage.typeOfWeather)
+        
+        let categoryImage = UIImage(named: modelImageViewModel.getIconName(for: weathercasterImage.typeOfWeather))
         let categoryTintedImage = categoryImage?.withRenderingMode(.alwaysTemplate)
         
         categoryImageView.image = categoryTintedImage
-        categoryImageView.tintColor = .darkGray
+        categoryImageView.tintColor = #colorLiteral(red: 0.693295134, green: 0.7857344852, blue: 0.7857344852, alpha: 1)
     }
 }
 

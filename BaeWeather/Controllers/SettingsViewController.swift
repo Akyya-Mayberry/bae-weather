@@ -27,7 +27,7 @@ class SettingsViewController: UIViewController {
             
             editButton.setImage(editTintedImage, for: .normal)
             editButton.imageView?.contentMode = .scaleAspectFit
-            editButton.tintColor = #colorLiteral(red: 0.747793138, green: 0.8413341045, blue: 0.8393042684, alpha: 1)
+            editButton.tintColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
         }
     }
     
@@ -37,7 +37,7 @@ class SettingsViewController: UIViewController {
         }
     }
     
-    private var collections: [[BaeImage]] = []
+    private var collections: [[WeathercasterImage?]] = []
     var modelImageViewModel = ModelImageViewModel()
     
     // MARK: - Methods
@@ -45,7 +45,8 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collections.append(modelImageViewModel.getImages())
+        getImages()
+        
         collectionView.dataSource = self
         collectionView.delegate = self
         nameTextField.delegate = self
@@ -61,51 +62,6 @@ class SettingsViewController: UIViewController {
         
         // hides model name editing
         editNameStackView.isHidden = true
-    }
-    
-    private func createImageSet(using image: UIImage?) -> ModelImageView {
-        let imageSetView = ModelImageView(frame: CGRect(x: 0, y: 0,
-                                                        width: collectionView.frame.width,
-                                                        height: collectionView.frame.height))
-        
-        imageSetView.clipsToBounds = true
-        imageSetView.contentMode = .scaleAspectFill
-        
-        if let image = image {
-            imageSetView.image = image
-        }
-        
-        return imageSetView
-    }
-    
-    func updateUI() {
-        DispatchQueue.main.async {
-            // TODO: move certain ui changes to funcs for reuse
-            
-            // enable/disable editing name field
-            if self.modelImageViewModel.isUsingDefaultName() {
-                self.nameTextField.isEnabled = false
-                self.nameTextField.text = ""
-                self.defaultNameSwitch.isOn = true
-            } else {
-                self.nameTextField.isEnabled = true
-                self.defaultNameSwitch.isOn = false
-            }
-            
-            // show/hide edit name view
-            self.editButton.isSelected = !self.editNameStackView.isHidden
-            
-            self.modelNameLabel.text = ModelImageViewModel.getModelName()
-            
-            // sets selected thumbnail
-            for (index, modelView) in self.modelSetImageViews.enumerated() {
-                if index != self.modelImageViewModel.selectedThumbnailIndex {
-                    modelView.deselect()
-                } else {
-                    modelView.select()
-                }
-            }
-        }
     }
     
     @IBAction func didChangeUseDefaultNameSwitch(_ sender: UISwitch) {
@@ -154,6 +110,51 @@ class SettingsViewController: UIViewController {
         nameTextField.resignFirstResponder()
     }
     
+    private func updateUI() {
+        DispatchQueue.main.async {
+            // TODO: move certain ui changes to funcs for reuse
+            
+            // enable/disable editing name field
+            if self.modelImageViewModel.isUsingDefaultName() {
+                self.nameTextField.isEnabled = false
+                self.nameTextField.text = ""
+                self.defaultNameSwitch.isOn = true
+            } else {
+                self.nameTextField.isEnabled = true
+                self.defaultNameSwitch.isOn = false
+            }
+            
+            // show/hide edit name view
+            self.editButton.isSelected = !self.editNameStackView.isHidden
+            
+            self.modelNameLabel.text = ModelImageViewModel.getModelName()
+            
+            // sets selected thumbnail
+            for (index, modelView) in self.modelSetImageViews.enumerated() {
+                if index != self.modelImageViewModel.selectedThumbnailIndex {
+                    modelView.deselect()
+                } else {
+                    modelView.select()
+                }
+            }
+        }
+    }
+    
+    private func createImageSet(using image: UIImage?) -> ModelImageView {
+        let imageSetView = ModelImageView(frame: CGRect(x: 0, y: 0,
+                                                        width: collectionView.frame.width,
+                                                        height: collectionView.frame.height))
+        
+        imageSetView.clipsToBounds = true
+        imageSetView.contentMode = .scaleAspectFill
+        
+        if let image = image {
+            imageSetView.image = image
+        }
+        
+        return imageSetView
+    }
+    
     private func createThumbnails() {
         for (index, modelView) in modelSetImageViews.enumerated() {
             let typeOfWeather = WeatherCategory(rawValue: index)
@@ -161,8 +162,19 @@ class SettingsViewController: UIViewController {
             modelView.typeOfWeather = typeOfWeather
             modelView.hideWeatherCategory(true)
             
-            let modelImageDetails = modelImageViewModel.getImagefor(typeOfWeather: typeOfWeather!)
-            modelView.image = UIImage(named: modelImageDetails.imageName)
+            // TODO: image should be pulled from datasource not view model
+            modelImageViewModel.getImage(for: typeOfWeather!) { (weathercasterImage) in
+                if weathercasterImage != nil {
+                    modelView.image = UIImage(contentsOfFile: weathercasterImage!.name)
+                    
+                }
+            }
+        }
+    }
+    
+    private func getImages() {
+        modelImageViewModel.getImages { (weathercasterImages) in
+            collections.append(weathercasterImages)
         }
     }
 }
@@ -183,18 +195,17 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ModelImageCell.self), for: indexPath) as! ModelImageCell
         
         let typeOfWeather = WeatherCategory(rawValue: indexPath.row)!
-        let modelImageDetails = modelImageViewModel.getImagefor(typeOfWeather: typeOfWeather)
+        let modelImageDetails = collections[0][indexPath.row]
+        let modelView = createImageSet(using: UIImage(contentsOfFile: modelImageDetails!.name))
         
-        let modelView = createImageSet(using: UIImage(named: modelImageDetails.imageName))
-        
-        modelView.typeOfWeather = modelImageDetails.typeOfWeather
+        modelView.typeOfWeather = modelImageDetails?.typeOfWeather
         modelView.delegate = self
         modelView.weatherCategoryView.category = modelImageViewModel.getCategory(for: typeOfWeather)
         modelView.weatherCategoryView.image = UIImage(named: modelImageViewModel.getIconName(for: typeOfWeather))!.withRenderingMode(
             UIImage.RenderingMode.alwaysTemplate)
         modelView.weatherCategoryView.tintColor = #colorLiteral(red: 1, green: 0.9265189341, blue: 0.6531018429, alpha: 1)
-        cell.modelView = modelView
         
+        cell.modelView = modelView
         cell.addSubview(modelView)
         
         return cell
@@ -212,6 +223,10 @@ extension SettingsViewController: ModelImageViewDelegate {
             
             let modelImageDetailsVC = storyboard?.instantiateViewController(identifier: String(describing: ModelImageDetailsViewController.self)) as! ModelImageDetailsViewController
             modelImageDetailsVC.modelImageView = modelImageView
+            
+            let weathercasterImage = collections[0][modelImageView.typeOfWeather!.rawValue]
+            modelImageDetailsVC.weathercasterImage = weathercasterImage
+            
             modelImageDetailsVC.delegate = self
             
             show(modelImageDetailsVC, sender: self)
@@ -271,8 +286,13 @@ extension SettingsViewController: UITextFieldDelegate {
 extension SettingsViewController: ModelImageDetailsViewControllerDelegate {
     func didUpdateCategory(_ modelImageDetailsViewController: ModelImageDetailsViewController, image: UIImage, for typeOfWeather: WeatherCategory) {
         DispatchQueue.main.async {
-            let cell = self.collectionView.cellForItem(at: IndexPath(row: typeOfWeather.rawValue, section: 0)) as! ModelImageCell
+            let indexPath = IndexPath(row: typeOfWeather.rawValue, section: 0)
+            self.collections[0][indexPath.row] = modelImageDetailsViewController.weathercasterImage
+            
+            let cell = self.collectionView.cellForItem(at: indexPath) as! ModelImageCell
             cell.modelView.image = image
+            
+            // TODO: persist image
         }
     }
 }
