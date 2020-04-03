@@ -42,6 +42,12 @@ class WeatherViewController: UIViewController {
         updateUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        loadWeathercasterImage()
+    }
+    
     @IBAction func onTapRefreshImage(_ sender: UITapGestureRecognizer) {
         refreshWeatherImageView.tintColor = #colorLiteral(red: 0.8225541115, green: 0.2497350872, blue: 0.3470991254, alpha: 0.9402022688) // must set - it's turns white when touched
         refreshWeatherImageView.isHidden = true
