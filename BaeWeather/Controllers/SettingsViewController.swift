@@ -243,7 +243,7 @@ extension SettingsViewController: ModelImageViewDelegate {
             
             let weathercasterImage = collections[0][modelImageView.typeOfWeather!.rawValue]
             modelImageDetailsVC.weathercasterImage = weathercasterImage
-            
+            modelImageDetailsVC.isUserInteractionEnabled = !modelImageViewModel.isUsingDefaultImages()
             modelImageDetailsVC.delegate = self
             
             show(modelImageDetailsVC, sender: self)

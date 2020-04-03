@@ -35,6 +35,7 @@ class ModelImageDetailsViewController: UIViewController {
     var weathercasterImage: WeathercasterImage!
     var delegate: ModelImageDetailsViewControllerDelegate?
     var modelImageViewModel = ModelImageViewModel()
+    var isUserInteractionEnabled: Bool!
     
     // MARK: - Methods
     
@@ -95,6 +96,9 @@ class ModelImageDetailsViewController: UIViewController {
         
         categoryImageView.image = categoryTintedImage
         categoryImageView.tintColor = #colorLiteral(red: 0.693295134, green: 0.7857344852, blue: 0.7857344852, alpha: 1)
+        
+        // allow/disables editing
+        editButton.isEnabled = isUserInteractionEnabled
     }
 }
 
