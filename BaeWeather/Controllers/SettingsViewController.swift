@@ -37,7 +37,12 @@ class SettingsViewController: UIViewController {
         }
     }
     
-    private var collections: [[WeathercasterImage?]] = [[]]
+    private var collections: [[WeathercasterImage?]] = [[]] {
+        didSet {
+            createThumbnails()
+        }
+    }
+    
     var modelImageViewModel = ModelImageViewModel()
     
     // MARK: - Methods
@@ -51,9 +56,7 @@ class SettingsViewController: UIViewController {
         collectionView.delegate = self
         nameTextField.delegate = self
         modelImageViewModel.delegate = self
-        
-        createThumbnails()
-        
+            
         updateUI()
         
         // temporary - sets default images
@@ -176,13 +179,9 @@ class SettingsViewController: UIViewController {
             modelView.delegate = self
             modelView.typeOfWeather = typeOfWeather
             modelView.hideWeatherCategory(true)
-            
-            // TODO: image should be pulled from datasource not view model
-            modelImageViewModel.getImage(for: typeOfWeather!) { (weathercasterImage) in
-                if weathercasterImage != nil {
-                    modelView.image = UIImage(contentsOfFile: weathercasterImage!.name)
-                }
-            }
+
+            let weathercasterImage = collections[0][index]
+            modelView.image = UIImage(contentsOfFile: weathercasterImage!.name)
         }
     }
     
