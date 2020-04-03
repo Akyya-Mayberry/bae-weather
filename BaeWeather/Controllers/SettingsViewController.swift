@@ -37,14 +37,14 @@ class SettingsViewController: UIViewController {
         }
     }
     
-    private var collections: [[WeathercasterImage?]] = []
+    private var collections: [[WeathercasterImage?]] = [[]]
     var modelImageViewModel = ModelImageViewModel()
     
     // MARK: - Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         getImages()
         
         collectionView.dataSource = self
@@ -75,6 +75,16 @@ class SettingsViewController: UIViewController {
         }
     }
     
+    @IBAction func didChangeUseDefaultPicsSwitch(_ sender: UISwitch) {
+        
+        print("did change default pic switch")
+        modelImageViewModel.setDefaultImages(on: sender.isOn)
+        
+        if sender.isOn {
+            getImages()
+        }
+    }
+    
     @IBAction func didTapEditName(_ sender: Any) {
         let hideEditFields = !self.editNameStackView.isHidden
         editButton.isSelected = !hideEditFields
@@ -83,6 +93,7 @@ class SettingsViewController: UIViewController {
         UIView.animate(withDuration: 0.5, animations: {
             self.nameTextField.isHidden = hideEditFields
             self.defaultNameSwitch.isOn = self.modelImageViewModel.isUsingDefaultName()
+            self.defaultPicsSwitch.isOn = self.modelImageViewModel.isUsingDefaultImages()
             self.nameTextField.isEnabled = !self.modelImageViewModel.isUsingDefaultName()
             self.editNameStackView.isHidden = hideEditFields
             
@@ -122,6 +133,10 @@ class SettingsViewController: UIViewController {
             } else {
                 self.nameTextField.isEnabled = true
                 self.defaultNameSwitch.isOn = false
+            }
+            
+            if self.modelImageViewModel.isUsingDefaultImages() {
+                self.defaultPicsSwitch.isOn = true
             }
             
             // show/hide edit name view
@@ -166,7 +181,6 @@ class SettingsViewController: UIViewController {
             modelImageViewModel.getImage(for: typeOfWeather!) { (weathercasterImage) in
                 if weathercasterImage != nil {
                     modelView.image = UIImage(contentsOfFile: weathercasterImage!.name)
-                    
                 }
             }
         }
@@ -174,7 +188,10 @@ class SettingsViewController: UIViewController {
     
     private func getImages() {
         modelImageViewModel.getImages { (weathercasterImages) in
-            collections.append(weathercasterImages)
+            DispatchQueue.main.async {
+                self.collections[0] = weathercasterImages
+                self.collectionView.reloadData()
+            }
         }
     }
 }

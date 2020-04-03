@@ -95,10 +95,6 @@ class ModelImageViewModel {
         }))
     }
     
-    func useDefaultImages(to on: Bool) {
-        userDefaultsService.useDefaultImages = on
-    }
-    
     func setDefaultName(on: Bool) {
         userDefaultsService.useDefaultName = on
         
@@ -109,6 +105,18 @@ class ModelImageViewModel {
     
     func isUsingDefaultName() -> Bool {
         return userDefaultsService.useDefaultName
+    }
+    
+    func setDefaultImages(on: Bool) {
+        userDefaultsService.useDefaultImages = on
+        
+        if on {
+            AppDelegate.loadDefaultImages()
+        }
+    }
+    
+    func isUsingDefaultImages() -> Bool {
+        return userDefaultsService.useDefaultImages
     }
     
     func setModel(name: String) {

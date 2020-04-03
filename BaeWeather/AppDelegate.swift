@@ -45,19 +45,49 @@ extension AppDelegate {
     }
     
     func loadDefaults() {
-        loadDefaultImages()
+        AppDelegate.loadDefaultImages()
+        loadDefaultSettings()
     }
     
-    func loadDefaultImages() {
+    func loadDefaultSettings() {
+        let userDefaultsService = UserDefaultsService.sharedInstance
+        
+        // load defaults if user has not change settings or wants to use them
+        let currentSettings = userDefaultsService.settings
+        let defaultName = Constants.defaults.modelName
+        
+        if currentSettings == nil || userDefaultsService.useDefaultName && userDefaultsService.useDefaultImages {
+            let settings = Settings(modelName: defaultName, modelImageSet: userDefaultsService.defaultImages)
+            userDefaultsService.useDefaultImages = true
+            userDefaultsService.useDefaultName = true
+            userDefaultsService.settings = settings
+            
+            return
+        }
+        
+        if userDefaultsService.useDefaultName  {
+            let settings = Settings(modelName: defaultName, modelImageSet: currentSettings!.modelImageSet)
+            userDefaultsService.settings = settings
+        }
+        
+        if userDefaultsService.useDefaultImages {
+            let settings = Settings(modelName: currentSettings!.modelName, modelImageSet: userDefaultsService.defaultImages)
+            userDefaultsService.settings = settings
+        }
+    }
+}
+
+extension AppDelegate {
+    static func loadDefaultImages() {
         let userDefaultsService = UserDefaultsService.sharedInstance
 
         var defaultImages: [String] = []
         
-        for weatherCategory in Constants.defaults.modelImages {
+        for weathercasterImage in Constants.defaults.weathercasterImages {
+            let weatherCategoryString = String(weathercasterImage.typeOfWeather.rawValue)
+            let image = UIImage(named: weathercasterImage.name)
             
-            let image = UIImage(named: weatherCategory.value)
-            
-            let imageName = "\(weatherCategory.key.rawValue)-image.png"
+            let imageName = "\(weatherCategoryString)-image.png"
             
             if let imageData = image?.pngData() {
                 storeDefaultImages(data: imageData, name: imageName) { (success, imageUrl) in
@@ -73,31 +103,9 @@ extension AppDelegate {
         }
         
         userDefaultsService.defaultImages = defaultImages
-        loadDefaultSettings()
     }
     
-    func loadDefaultSettings() {
-        let userDefaultsService = UserDefaultsService.sharedInstance
-        
-        // load defaults if user has not change settings or wants to use them
-        let currentSettings = userDefaultsService.settings
-        let defaultName = Constants.defaults.modelName
-        
-        if currentSettings == nil {
-            let settings = Settings(modelName: defaultName, modelImageSet: userDefaultsService.defaultImages)
-            userDefaultsService.useDefaultImages = true
-            userDefaultsService.useDefaultName = true
-            userDefaultsService.settings = settings
-        } else if userDefaultsService.useDefaultName {
-            let settings = Settings(modelName: defaultName, modelImageSet: currentSettings!.modelImageSet)
-            userDefaultsService.settings = settings
-        } else if userDefaultsService.useDefaultImages {
-            let settings = Settings(modelName: currentSettings!.modelName, modelImageSet: userDefaultsService.defaultImages)
-            userDefaultsService.settings = settings
-        }
-    }
-    
-    func storeDefaultImages(data: Data, name: String, completion: (Bool, URL?) -> Void) {
+    static func storeDefaultImages(data: Data, name: String, completion: (Bool, URL?) -> Void) {
         let fileService = FileService.sharedInstance
         
         fileService.storeWebcasterImage(data: data, name: name, completion: { (success, imageUrl) in

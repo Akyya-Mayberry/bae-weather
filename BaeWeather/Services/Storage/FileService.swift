@@ -75,13 +75,13 @@ class FileService {
             return (false, nil)
         }
         
-        let imageURL = documentsDirectory.appendingPathComponent(name)
+        let itemUrl = documentsDirectory.appendingPathComponent(name)
         
         do {
-            try data.write(to: imageURL)
-            return (true, imageURL)
+            try data.write(to: itemUrl)
+            return (true, itemUrl)
         } catch let e {
-            print("Error saving image to documents directory: \(e)")
+            print("Error saving item to documents directory: \(e)")
             return (false, nil)
         }
     }

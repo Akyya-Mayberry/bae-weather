@@ -340,6 +340,9 @@
                                                         <rect key="frame" x="168.5" y="0.0" width="51" height="31"/>
                                                         <color key="onTintColor" red="0.69329513400940579" green="0.78573448521065992" blue="0.78573448521065992" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="thumbTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <connections>
+                                                            <action selector="didChangeUseDefaultPicsSwitch:" destination="Gnv-4n-e6Z" eventType="valueChanged" id="7Dl-2i-lqu"/>
+                                                        </connections>
                                                     </switch>
                                                 </subviews>
                                             </stackView>
@@ -473,6 +476,7 @@
                     <connections>
                         <outlet property="collectionView" destination="MYM-0y-rvb" id="Pud-4d-1ff"/>
                         <outlet property="defaultNameSwitch" destination="YiW-xn-cTR" id="H0l-7M-dSS"/>
+                        <outlet property="defaultPicsSwitch" destination="5v9-sg-WHh" id="l0c-rV-jBV"/>
                         <outlet property="editButton" destination="eBp-Wt-Fyz" id="J4V-eT-dfQ"/>
                         <outlet property="editNameStackView" destination="e4l-hX-HmA" id="UDh-xe-Vhy"/>
                         <outlet property="modelNameLabel" destination="0ZJ-Yo-IRG" id="XVZ-Hx-B4N"/>
