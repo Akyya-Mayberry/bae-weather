@@ -307,8 +307,6 @@ extension SettingsViewController: ModelImageDetailsViewControllerDelegate {
             
             let cell = self.collectionView.cellForItem(at: indexPath) as! ModelImageCell
             cell.modelView.image = image
-            
-            // TODO: persist image
         }
     }
 }

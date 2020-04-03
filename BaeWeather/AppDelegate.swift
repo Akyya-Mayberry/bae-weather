@@ -45,7 +45,7 @@ extension AppDelegate {
     }
     
     func loadDefaults() {
-        AppDelegate.loadDefaultImages()
+//        AppDelegate.loadDefaultImages()
         loadDefaultSettings()
     }
     
@@ -57,6 +57,9 @@ extension AppDelegate {
         let defaultName = Constants.defaults.modelName
         
         if currentSettings == nil || userDefaultsService.useDefaultName && userDefaultsService.useDefaultImages {
+            
+            AppDelegate.loadDefaultImages()
+            
             let settings = Settings(modelName: defaultName, modelImageSet: userDefaultsService.defaultImages)
             userDefaultsService.useDefaultImages = true
             userDefaultsService.useDefaultName = true
@@ -71,6 +74,8 @@ extension AppDelegate {
         }
         
         if userDefaultsService.useDefaultImages {
+            AppDelegate.loadDefaultImages()
+
             let settings = Settings(modelName: currentSettings!.modelName, modelImageSet: userDefaultsService.defaultImages)
             userDefaultsService.settings = settings
         }

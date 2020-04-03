@@ -137,9 +137,11 @@ class ModelImageViewModel {
             if success {
                 
                 // TODO: use update image method to update in user defaults
-                var currentSettings = userDefaultsService.settings
-                currentSettings?.modelImageSet[typeOfWeather.rawValue] = imageName
-                userDefaultsService.settings = currentSettings
+                let currentSettings = userDefaultsService.settings
+                var currentImages = currentSettings?.modelImageSet
+                currentImages![typeOfWeather.rawValue] = imageName
+                let settings = Settings(modelName: currentSettings!.modelName, modelImageSet: currentImages!)
+                userDefaultsService.settings = settings
                 
                 completion(true, imageURL)
             } else {

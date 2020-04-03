@@ -55,7 +55,7 @@ class ModelImageDetailsViewController: UIViewController {
     @IBAction func didTapSave(_ sender: UIButton) {
         
         // TODO: editing button should be disabled while save is in progress
-        
+
         let imageData = previewImageView.image!.pngData()!
         
         modelImageViewModel.saveModelImage(data: imageData, for: weathercasterImage.typeOfWeather) { (success, imageUrl) in
