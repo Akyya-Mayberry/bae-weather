@@ -72,7 +72,9 @@ class ModelImageDetailsViewController: UIViewController {
     
     @IBAction func didTapSave(_ sender: UIButton) {
         
-        // TODO: prevent dismissing modal if save is in progress
+        // prevent editing or dismissing modal during save
+        editButton.isEnabled = false
+        isModalInPresentation = true
         
         let imageData = previewImageView.image!.pngData()!
         
@@ -90,6 +92,7 @@ class ModelImageDetailsViewController: UIViewController {
                     Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { (timer) in
                         self.animateSaveOption(in: false)
                         self.editButton.isEnabled = !self.useDefaultImageSwitch.isOn
+                        self.isModalInPresentation = false
                     }
                     
                     self.delegate?.didUpdateCategory(self, image: self.previewImageView.image!, for: self.weathercasterImage.typeOfWeather, usingDefaultImage: self.useDefaultImageSwitch.isOn)
