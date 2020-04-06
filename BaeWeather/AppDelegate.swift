@@ -40,7 +40,7 @@ extension AppDelegate {
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.darkGray], for: .normal)
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.darkGray], for: .selected)
         
-        UITabBar.appearance().tintColor = UIColor.darkGray
+        UITabBar.appearance().tintColor = #colorLiteral(red: 0.6189752817, green: 0.7771041393, blue: 0.6484287381, alpha: 1)
         UITabBar.appearance().isTranslucent = false
     }
     

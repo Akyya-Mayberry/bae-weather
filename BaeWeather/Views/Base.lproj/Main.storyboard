@@ -142,7 +142,7 @@
                                     <constraint firstItem="Zxe-i5-mng" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ke4-AY-i5g" secondAttribute="leading" constant="20" symbolic="YES" id="u4e-44-5lQ"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gu2-Qm-wA1" userLabel="Error Message View">
+                            <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gu2-Qm-wA1" userLabel="Error Message View">
                                 <rect key="frame" x="72" y="597" width="270" height="58"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Updating Weather. Try again later." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6QF-oc-0Ek">
@@ -183,8 +183,13 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MC2-Rq-aYQ" secondAttribute="trailing" symbolic="YES" id="oqo-0F-4bU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="cYV-eT-XJm"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Bae Weather" image="weather" selectedImage="weather" id="pM0-xD-u82">
+                    <tabBarItem key="tabBarItem" title="Bae Weather" image="weather" selectedImage="weather-filled" id="pM0-xD-u82">
                         <color key="badgeColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <connections>
@@ -492,7 +497,7 @@
                             <outletCollection property="gestureRecognizers" destination="mwP-La-PiA" appends="YES" id="9ec-Zx-Ird"/>
                         </connections>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" image="settings" id="Jze-HQ-XL9">
+                    <tabBarItem key="tabBarItem" title="Settings" image="settings" selectedImage="settings-filled" id="Jze-HQ-XL9">
                         <color key="badgeColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <connections>
@@ -531,11 +536,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="USs-8j-vRk">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="USs-8j-vRk">
                                 <rect key="frame" x="20" y="100" width="374" height="363"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="363" id="ISn-Wu-rMC"/>
-                                    <constraint firstAttribute="width" constant="374" id="c9T-V2-88x"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="363" id="ISn-Wu-rMC"/>
+                                    <constraint firstAttribute="width" secondItem="USs-8j-vRk" secondAttribute="height" multiplier="34:33" id="ZjP-kz-Bqa"/>
+                                    <constraint firstAttribute="width" priority="250" constant="374" id="c9T-V2-88x"/>
                                 </constraints>
                             </imageView>
                             <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vnL-TU-ewP">
@@ -580,7 +586,7 @@
                                 <color key="textColor" red="0.82255411150000002" green="0.24973508720000001" blue="0.34709912539999999" alpha="0.88992936639999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="85" translatesAutoresizingMaskIntoConstraints="NO" id="tWk-Cb-aAn" userLabel="Default Images Stack View">
+                            <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" spacing="85" translatesAutoresizingMaskIntoConstraints="NO" id="tWk-Cb-aAn" userLabel="Default Images Stack View">
                                 <rect key="frame" x="74" y="747" width="266.5" height="31"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Default" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B1f-h7-AuO">
@@ -972,8 +978,9 @@
         <image name="sample-hot" width="1920" height="1280"/>
         <image name="save" width="100" height="100"/>
         <image name="settings" width="25" height="25"/>
+        <image name="settings-filled" width="25" height="25"/>
         <image name="sunrise" catalog="system" width="64" height="48"/>
         <image name="weather" width="25" height="25"/>
-        <image name="weather-filled" width="100" height="100"/>
+        <image name="weather-filled" width="25" height="25"/>
     </resources>
 </document>
