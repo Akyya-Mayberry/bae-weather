@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ModelImageDetailsViewControllerDelegate {
-    func didUpdateCategory(_ modelImageDetailsViewController: ModelImageDetailsViewController, image: UIImage, for typeOfWeather: WeatherCategory)
+    func didUpdateCategory(_ modelImageDetailsViewController: ModelImageDetailsViewController, image: UIImage, for typeOfWeather: WeatherCategory, usingDefaultImage: Bool)
 }
 
 class ModelImageDetailsViewController: UIViewController {
@@ -17,8 +17,9 @@ class ModelImageDetailsViewController: UIViewController {
     
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var categoryImageView: UIImageView!
-    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var previewImageView: UIImageView!
+    @IBOutlet weak var editButtonTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var useDefaultImageSwitch: UISwitch!
     
     @IBOutlet weak var editButton: UIButton! {
         didSet {
@@ -27,7 +28,18 @@ class ModelImageDetailsViewController: UIViewController {
             
             editButton.setImage(editTintedImage, for: .normal)
             editButton.imageView?.contentMode = .scaleAspectFit
-            editButton.tintColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
+            editButton.tintColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        }
+    }
+    
+    @IBOutlet weak var saveButton: UIButton! {
+        didSet {
+            let saveButtonImage = UIImage(named: "save")
+            let saveButtonTintedImage = saveButtonImage?.withRenderingMode(.alwaysTemplate)
+            
+            saveButton.setImage(saveButtonTintedImage, for: .normal)
+            saveButton.imageView?.contentMode = .scaleAspectFit
+            saveButton.tintColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
         }
     }
     
@@ -35,12 +47,17 @@ class ModelImageDetailsViewController: UIViewController {
     var weathercasterImage: WeathercasterImage!
     var delegate: ModelImageDetailsViewControllerDelegate?
     var modelImageViewModel = ModelImageViewModel()
-    var isUserInteractionEnabled: Bool!
     
     // MARK: - Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let isUsingADefault = modelImageViewModel.isUsingDefaultImages() ||
+            modelImageViewModel.isUsingDefaultImage(for: weathercasterImage.typeOfWeather)
+        
+        editButton.isEnabled = !isUsingADefault
+        useDefaultImageSwitch.isOn = isUsingADefault
         
         updateUI()
     }
@@ -49,45 +66,77 @@ class ModelImageDetailsViewController: UIViewController {
         let imagePicker = UIImagePickerController()
         imagePicker.allowsEditing = true
         imagePicker.delegate = self
+        
         present(imagePicker, animated: true)
     }
     
     @IBAction func didTapSave(_ sender: UIButton) {
         
-        // TODO: editing button should be disabled while save is in progress
-
+        // TODO: prevent dismissing modal if save is in progress
+        
         let imageData = previewImageView.image!.pngData()!
         
-        modelImageViewModel.saveModelImage(data: imageData, for: weathercasterImage.typeOfWeather) { (success, imageUrl) in
+        modelImageViewModel.saveModelImage(data: imageData, for: weathercasterImage.typeOfWeather, asDefault: self.useDefaultImageSwitch.isOn) { (success, imageUrl) in
             if success {
                 DispatchQueue.main.async {
                     print("successfully saved custom imaged!!!!")
                     self.saveButton.setImage(UIImage(named: "checkmark"), for: .normal)
                     
-                    Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { (timer) in
-                        self.saveButton.isHidden = true
+                    // redundant
+                    if !self.useDefaultImageSwitch.isOn {
+                        self.modelImageViewModel.setDefaultImage(on: false, for: self.weathercasterImage.typeOfWeather)
                     }
                     
-                    self.delegate?.didUpdateCategory(self, image: self.previewImageView.image!, for: self.weathercasterImage.typeOfWeather)
+                    Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { (timer) in
+                        self.animateSaveOption(in: false)
+                        self.editButton.isEnabled = !self.useDefaultImageSwitch.isOn
+                    }
+                    
+                    self.delegate?.didUpdateCategory(self, image: self.previewImageView.image!, for: self.weathercasterImage.typeOfWeather, usingDefaultImage: self.useDefaultImageSwitch.isOn)
                 }
             } else {
                 DispatchQueue.main.async {
-                    print("failed to save custom image")
-                    self.saveButton.tintColor = UIColor.red
                     // TODO: update UI to reflect failure to save image
+                    print("failed to save custom image")
                 }
             }
         }
     }
     
-    func updateUI() {
+    @IBAction func didChangeUseDefaultImageSwitch(_ sender: UISwitch) {
+        
+        if sender.isOn {
+            self.editButton.isEnabled = false
+            
+            modelImageViewModel.getImage(for: weathercasterImage.typeOfWeather, asDefault: true) { (weathercasterImage) in
+                DispatchQueue.main.async {
+                    if weathercasterImage != nil {
+                        let image = UIImage(named: weathercasterImage!.name)
+                        self.previewImageView.image = image
+                        
+                        let currentImageData = UIImage(contentsOfFile: self.weathercasterImage!.name)?.pngData()
+                        let previewImageData = self.previewImageView.image!.pngData()
+                        if currentImageData == previewImageData {
+                            if !self.saveButton.isHidden {
+                                self.animateSaveOption(in: false)
+                            }
+                        } else {
+                            self.animateSaveOption(in: true)
+                        }
+                    }
+                }
+            }
+        } else {
+            editButton.isEnabled = true
+            previewImageView.image = UIImage(contentsOfFile: weathercasterImage.name)
+        }
+    }
+    
+    private func updateUI() {
         saveButton.isHidden = true
         
-        if let image = UIImage(contentsOfFile: weathercasterImage.name) {
-            previewImageView.image = image
-        } else {
-            previewImageView.image = UIImage(named: weathercasterImage.name)
-        }
+        let image = UIImage(contentsOfFile: weathercasterImage.name)
+        previewImageView.image = image
         
         categoryLabel.text = modelImageViewModel.getCategory(for: weathercasterImage.typeOfWeather)
         
@@ -95,10 +144,52 @@ class ModelImageDetailsViewController: UIViewController {
         let categoryTintedImage = categoryImage?.withRenderingMode(.alwaysTemplate)
         
         categoryImageView.image = categoryTintedImage
-        categoryImageView.tintColor = #colorLiteral(red: 0.693295134, green: 0.7857344852, blue: 0.7857344852, alpha: 1)
+        categoryImageView.tintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         
-        // allow/disables editing
-        editButton.isEnabled = isUserInteractionEnabled
+        
+    }
+    
+    /**
+     animates in the option to save a custom weathercaster image
+     
+     - description: if the save button is not yet displayed (user has not selected a photo), then the edit button is
+     slid over so the save button is faded in in its place. Otherwise, the save button is faded out and
+     the edit button is slid back in its original place.
+     
+     - Parameter in: whether or not the save button should be animated into view
+     */
+    private func animateSaveOption(in animateIn: Bool) {
+        // slides edit image button over and fades in save image button
+        
+        if animateIn {
+            if saveButton.isHidden {
+                self.saveButton.layer.opacity = 0
+                self.saveButton.setImage(UIImage(named: "save"), for: .normal)
+                
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.editButtonTrailingConstraint.constant += 60
+                    self.view.layoutIfNeeded()
+                }) { (success) in
+                    UIView.animate(withDuration: 0.2) {
+                        self.saveButton.isHidden = false
+                        self.saveButton.layer.opacity = 1
+                        self.view.layoutIfNeeded()
+                    }
+                }
+            }
+        } else {
+            self.saveButton.layer.opacity = 1
+            UIView.animate(withDuration: 0.3, animations: {
+                self.editButtonTrailingConstraint.constant -= 60
+                self.view.layoutIfNeeded()
+            }) { (success) in
+                UIView.animate(withDuration: 0.2) {
+                    self.saveButton.isHidden = true
+                    self.saveButton.layer.opacity = 0
+                    self.view.layoutIfNeeded()
+                }
+            }
+        }
     }
 }
 
@@ -112,8 +203,9 @@ extension ModelImageDetailsViewController: UIImagePickerControllerDelegate, UINa
             return
         }
         
-        dismiss(animated: true, completion: nil)
-        previewImageView.image = image
-        saveButton.isHidden = false
+        dismiss(animated: true){
+            self.previewImageView.image = image
+            self.animateSaveOption(in: true)
+        }
     }
 }

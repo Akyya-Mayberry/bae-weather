@@ -48,6 +48,7 @@ struct Constants {
         static let useDefaultImages = "useDefaultImages"
         static let lastKnownWeather = "weather"
         static let settings = "settings"
+        static let defaultImagesInUse = "defaultImagesInUse"
     }
     
     struct notifications {

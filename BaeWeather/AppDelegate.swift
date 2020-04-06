@@ -11,7 +11,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
+        
         configureTabControllerAppearance()
         loadDefaults()
         
@@ -45,7 +45,7 @@ extension AppDelegate {
     }
     
     func loadDefaults() {
-//        AppDelegate.loadDefaultImages()
+        //        AppDelegate.loadDefaultImages()
         loadDefaultSettings()
     }
     
@@ -55,12 +55,22 @@ extension AppDelegate {
         // load defaults if user has not change settings or wants to use them
         let currentSettings = userDefaultsService.settings
         let defaultName = Constants.defaults.modelName
+        let defaultImagesInUse = Constants.defaults.weathercasterImages.map { (weathercasterImage) -> Bool in
+            return true
+        }
         
-        if currentSettings == nil || userDefaultsService.useDefaultName && userDefaultsService.useDefaultImages {
+        if currentSettings == nil ||
+            userDefaultsService.useDefaultName &&
+            userDefaultsService.useDefaultImages {
             
             AppDelegate.loadDefaultImages()
             
-            let settings = Settings(modelName: defaultName, modelImageSet: userDefaultsService.defaultImages)
+            let settings = Settings(
+                modelName: defaultName,
+                modelImageSet: userDefaultsService.defaultImages,
+                defaultImagesInUse: defaultImagesInUse
+            )
+            
             userDefaultsService.useDefaultImages = true
             userDefaultsService.useDefaultName = true
             userDefaultsService.settings = settings
@@ -69,14 +79,22 @@ extension AppDelegate {
         }
         
         if userDefaultsService.useDefaultName  {
-            let settings = Settings(modelName: defaultName, modelImageSet: currentSettings!.modelImageSet)
+            let settings = Settings(
+                modelName: defaultName,
+                modelImageSet: currentSettings!.modelImageSet,
+                defaultImagesInUse: currentSettings!.defaultImagesInUse
+            )
             userDefaultsService.settings = settings
         }
         
         if userDefaultsService.useDefaultImages {
             AppDelegate.loadDefaultImages()
-
-            let settings = Settings(modelName: currentSettings!.modelName, modelImageSet: userDefaultsService.defaultImages)
+            
+            let settings = Settings(
+                modelName: currentSettings!.modelName,
+                modelImageSet: userDefaultsService.defaultImages,
+                defaultImagesInUse: defaultImagesInUse
+            )
             userDefaultsService.settings = settings
         }
     }
@@ -85,7 +103,7 @@ extension AppDelegate {
 extension AppDelegate {
     static func loadDefaultImages() {
         let userDefaultsService = UserDefaultsService.sharedInstance
-
+        
         var defaultImages: [String] = []
         
         for weathercasterImage in Constants.defaults.weathercasterImages {

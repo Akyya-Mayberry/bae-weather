@@ -34,10 +34,18 @@ class ModelImageViewModel {
             let currentSettings = userDefaultsService.settings
             
             if  useDefaultName {
-                let settings = Settings(modelName: "\(Constants.defaults.modelName)", modelImageSet: currentSettings!.modelImageSet)
+                let settings = Settings(
+                    modelName: "\(Constants.defaults.modelName)",
+                    modelImageSet: currentSettings!.modelImageSet,
+                    defaultImagesInUse: currentSettings!.defaultImagesInUse
+                )
                 userDefaultsService.settings = settings
             } else {
-                let settings = Settings(modelName: modelName, modelImageSet: currentSettings!.modelImageSet)
+                let settings = Settings(
+                    modelName: modelName,
+                    modelImageSet: currentSettings!.modelImageSet,
+                    defaultImagesInUse: currentSettings!.defaultImagesInUse
+                )
                 userDefaultsService.settings = settings
             }
             
@@ -47,15 +55,20 @@ class ModelImageViewModel {
     
     // MARK: - Methods
     
-    func getImage(for typeOfWeather: WeatherCategory, completion: (WeathercasterImage?) -> Void) {
-        let imageName = "\(typeOfWeather.rawValue)-image.png"
-        
-        getStoredWeathercasterImage(name: imageName) { (imageUrl) in
-            if let imageUrl = imageUrl {
-                let weathercasterImage = WeathercasterImage(0, name: imageUrl.path, weatherCategory: typeOfWeather)
-                completion(weathercasterImage)
-            } else {
-                completion(nil)
+    func getImage(for typeOfWeather: WeatherCategory, asDefault defaultImage: Bool, completion: (WeathercasterImage?) -> Void) {
+        if defaultImage {
+            let defaultWebcasterImage = Constants.defaults.weathercasterImages[typeOfWeather.rawValue]
+            completion(defaultWebcasterImage)
+        } else {
+            let imageName = "\(typeOfWeather.rawValue)-image.png"
+            
+            getStoredWeathercasterImage(name: imageName) { (imageUrl) in
+                if let imageUrl = imageUrl {
+                    let weathercasterImage = WeathercasterImage(0, name: imageUrl.path, weatherCategory: typeOfWeather)
+                    completion(weathercasterImage)
+                } else {
+                    completion(nil)
+                }
             }
         }
     }
@@ -109,14 +122,43 @@ class ModelImageViewModel {
     
     func setDefaultImages(on: Bool) {
         userDefaultsService.useDefaultImages = on
+        var currentSettings = userDefaultsService.settings
+        
+        let defaultImagesInUse = Constants.defaults.weathercasterImages.map { (weathercasterImage) -> Bool in
+            return on
+        }
         
         if on {
             AppDelegate.loadDefaultImages()
+            
+            currentSettings?.defaultImagesInUse = defaultImagesInUse
+            userDefaultsService.settings = currentSettings
+        } else {
+            
+            currentSettings?.defaultImagesInUse = defaultImagesInUse
+            userDefaultsService.settings = currentSettings
         }
+    }
+    
+    func setDefaultImage(on: Bool, for weatherCategory: WeatherCategory) {
+        let currentSettings = userDefaultsService.settings
+        var imagesInUse = currentSettings?.defaultImagesInUse
+        imagesInUse![weatherCategory.rawValue] = on
+        
+        let settings = Settings(modelName: currentSettings!.modelName, modelImageSet: currentSettings!.modelImageSet, defaultImagesInUse: imagesInUse!)
+        
+        userDefaultsService.settings = settings
+        userDefaultsService.useDefaultImages = on
     }
     
     func isUsingDefaultImages() -> Bool {
         return userDefaultsService.useDefaultImages
+    }
+    
+    func isUsingDefaultImage(for weatherCategory: WeatherCategory) -> Bool {
+        let currentSettings = userDefaultsService.settings
+        let usingDefault: Bool = (currentSettings?.defaultImagesInUse[weatherCategory.rawValue])!
+        return usingDefault
     }
     
     func setModel(name: String) {
@@ -124,13 +166,20 @@ class ModelImageViewModel {
         
         if !nameTrimmed.isEmpty {
             let currentSettings = userDefaultsService.settings
-            let settings = Settings(modelName: nameTrimmed, modelImageSet: currentSettings!.modelImageSet)
+            
+            let settings = Settings(
+                modelName: nameTrimmed,
+                modelImageSet: currentSettings!.modelImageSet,
+                defaultImagesInUse: currentSettings!.defaultImagesInUse
+            )
+            
             userDefaultsService.settings = settings
             modelName = nameTrimmed
         }
     }
     
-    func saveModelImage(data: Data, for typeOfWeather: WeatherCategory, completion: (Bool, URL?) -> Void) {
+    // TODO: here is where check for if we are using a default image
+    func saveModelImage(data: Data, for typeOfWeather: WeatherCategory, asDefault isDefaultImage: Bool, completion: (Bool, URL?) -> Void) {
         let imageName = "\(typeOfWeather.rawValue)-image.png"
         
         storeWeathercasterImage(data: data, name: imageName) { (success, imageURL) in
@@ -139,8 +188,17 @@ class ModelImageViewModel {
                 // TODO: use update image method to update in user defaults
                 let currentSettings = userDefaultsService.settings
                 var currentImages = currentSettings?.modelImageSet
+                var defaultImagesInUse = currentSettings?.defaultImagesInUse
+                
                 currentImages![typeOfWeather.rawValue] = imageName
-                let settings = Settings(modelName: currentSettings!.modelName, modelImageSet: currentImages!)
+                defaultImagesInUse![typeOfWeather.rawValue] = isDefaultImage
+                
+                let settings = Settings(
+                    modelName: currentSettings!.modelName,
+                    modelImageSet: currentImages!,
+                    defaultImagesInUse: defaultImagesInUse!
+                )
+                
                 userDefaultsService.settings = settings
                 
                 completion(true, imageURL)
@@ -177,12 +235,18 @@ class ModelImageViewModel {
         }
     }
     
+    // TODO: not in use. Test, fix and use.
     func update(image: WeathercasterImage) {
         if let currentSettings = userDefaultsService.settings {
             var currentImages = currentSettings.modelImageSet
             currentImages[image.typeOfWeather.rawValue] = image.name
             
-            let settings = Settings(modelName: currentSettings.modelName, modelImageSet: currentImages)
+            let settings = Settings(
+                modelName: currentSettings.modelName,
+                modelImageSet: currentImages,
+                defaultImagesInUse: currentSettings.defaultImagesInUse
+            )
+            
             userDefaultsService.settings = settings
         }
     }

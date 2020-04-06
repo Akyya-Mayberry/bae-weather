@@ -111,7 +111,7 @@ class WeatherViewController: UIViewController {
     
     private func loadWeathercasterImage() {
         if let weatherCategory = self.weatherViewModel.getWeatherCategory() {
-            modelImageViewModel.getImage(for: weatherCategory) { (weathercasterImage) in
+            modelImageViewModel.getImage(for: weatherCategory, asDefault: false) { (weathercasterImage) in
                 if weathercasterImage != nil {
                     DispatchQueue.main.async {
                         self.modelImageView.image = UIImage(contentsOfFile: weathercasterImage!.name)

@@ -180,7 +180,7 @@ class WeatherViewModel {
         
         let typeOfWeather = TypeOfWeather(for: weather!.temperature).category
         
-        modelImageViewModel.getImage(for: typeOfWeather) { (weathercasterImage) in
+        modelImageViewModel.getImage(for: typeOfWeather, asDefault: false) { (weathercasterImage) in
             completion(weathercasterImage)
         }
     }
