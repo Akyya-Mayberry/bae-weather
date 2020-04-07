@@ -11,41 +11,57 @@ class UserDefaultsService {
     
     // MARK: - Properties
     static let sharedInstance = UserDefaultsService()
+    private let defaultNameKey = Constants.userDefaultKeys.useDefaultName
+    private let defaultImagesKey = Constants.userDefaultKeys.useDefaultImages
+    private let modelNameKey = Constants.userDefaultKeys.modelName
+    private let imagesKey = Constants.userDefaultKeys.images
+    private let lastKnownWeatherkey = Constants.userDefaultKeys.lastKnownWeather
+    private let settingsKey = Constants.userDefaultKeys.settings
     
     var useDefaultName: Bool {
-        get { return UserDefaults.standard.bool(forKey: Constants.userDefaultKeys.useDefaultName) }
-        set { UserDefaults.standard.set(newValue, forKey: Constants.userDefaultKeys.useDefaultName) }
+        get { return UserDefaults.standard.bool(forKey: defaultNameKey) }
+        set { UserDefaults.standard.set(newValue, forKey: defaultNameKey) }
     }
     
     var useDefaultImages: Bool {
-        get { return UserDefaults.standard.bool(forKey: Constants.userDefaultKeys.useDefaultImages) }
-        set { UserDefaults.standard.set(newValue, forKey: Constants.userDefaultKeys.useDefaultImages) }
+        get { return UserDefaults.standard.bool(forKey: defaultImagesKey) }
+        set { UserDefaults.standard.set(newValue, forKey: defaultImagesKey) }
     }
     
     var modelName: String? {
-        get { return UserDefaults.standard.string(forKey: Constants.userDefaultKeys.modelName) }
-        set { UserDefaults.standard.set(newValue, forKey: Constants.userDefaultKeys.modelName) }
+        get { return UserDefaults.standard.string(forKey: modelNameKey) }
+        set { UserDefaults.standard.set(newValue, forKey: modelNameKey) }
+    }
+    
+    var images: [String] {
+        get { return UserDefaults.standard.array(forKey: imagesKey) as! [String] }
+        set { UserDefaults.standard.set(newValue, forKey: imagesKey) }
+    }
+    
+    var defaultImages: [String] {
+        get { return UserDefaults.standard.array(forKey: Constants.userDefaultKeys.defaultImages) as! [String] }
+        set { UserDefaults.standard.set(newValue, forKey: Constants.userDefaultKeys.defaultImages)}
     }
     
     var lastKnownWeather: Weather? {
         get {
-            let weather = decodeFromUserDefaults(item: Constants.userDefaultKeys.lastKnownWeather)
+            let weather = decodeFromUserDefaults(item: lastKnownWeatherkey)
             return weather as? Weather
         }
         set {
             let weatherData = encodeForUserDefaults(item: newValue)
-            UserDefaults.standard.set(weatherData, forKey: Constants.userDefaultKeys.lastKnownWeather)
+            UserDefaults.standard.set(weatherData, forKey: lastKnownWeatherkey)
         }
     }
     
     var settings: Settings? {
         get {
-            let settings = decodeFromUserDefaults(item: Constants.userDefaultKeys.settings)
+            let settings = decodeFromUserDefaults(item: settingsKey)
             return settings as? Settings
         }
         set {
             let settingsData = encodeForUserDefaults(item: newValue)
-            UserDefaults.standard.set(settingsData, forKey: Constants.userDefaultKeys.settings)
+            UserDefaults.standard.set(settingsData, forKey: settingsKey)
         }
     }
     

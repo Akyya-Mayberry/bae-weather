@@ -69,17 +69,6 @@ class WeatherViewModel {
         return currentDateAsString
     }
     
-    var modelImageDetails: BaeImage? {
-        
-        guard weather != nil else {
-            return nil
-        }
-        
-        let typeOfWeather = TypeOfWeather(for: weather!.temperature).category
-        
-        return modelImageViewModel.getImagefor(typeOfWeather: typeOfWeather)
-    }
-    
     var currentDateAsString: String {
         return (weather?.date.getDateAsString())!
     }
@@ -163,6 +152,15 @@ class WeatherViewModel {
         }
     }
     
+    func getWeatherCategory() -> WeatherCategory? {
+        guard weather != nil else {
+            return nil
+        }
+        
+        let typeOfWeather = TypeOfWeather(for: weather!.temperature)
+        return typeOfWeather.category
+    }
+    
     func getFormattedDate(_ date: Date) -> String {
         return date.getDateAsString()
     }
@@ -173,6 +171,18 @@ class WeatherViewModel {
     
     func getCurrentWeatherBlock() -> WeatherBlockTime {
         return weather!.currentHourBlock
+    }
+    
+    func modelImageDetails(for typeOfWeather: WeatherCategory, completion: (WeathercasterImage?) -> Void) {
+        if weather == nil {
+            completion(nil)
+        }
+        
+        let typeOfWeather = TypeOfWeather(for: weather!.temperature).category
+        
+        modelImageViewModel.getImage(for: typeOfWeather, asDefault: false) { (weathercasterImage) in
+            completion(weathercasterImage)
+        }
     }
     
 }

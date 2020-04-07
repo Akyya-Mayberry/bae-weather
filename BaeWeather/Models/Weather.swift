@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum WeatherCategory: Int, Codable {
+enum WeatherCategory: Int, Codable, CaseIterable {
     case freezing = 0, cold, warm, hot
 }
 

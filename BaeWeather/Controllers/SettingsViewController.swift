@@ -19,15 +19,28 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var modelNameLabel: UILabel!
     @IBOutlet weak var modelNameViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var modelNameViewBottomContraint: NSLayoutConstraint!
+    @IBOutlet weak var editImagesStackView: UIStackView!
     
-    @IBOutlet weak var editButton: UIButton! {
+    // TODO: edit button custom UI button
+    @IBOutlet weak var editNameButton: UIButton! {
         didSet {
-            let editImage = UIImage(named: "edit-2")
+            let editImage = UIImage(named: "edit-filled")
             let editTintedImage = editImage?.withRenderingMode(.alwaysTemplate)
             
-            editButton.setImage(editTintedImage, for: .normal)
-            editButton.imageView?.contentMode = .scaleAspectFit
-            editButton.tintColor = #colorLiteral(red: 0.747793138, green: 0.8413341045, blue: 0.8393042684, alpha: 1)
+            editNameButton.setImage(editTintedImage, for: .normal)
+            editNameButton.imageView?.contentMode = .scaleAspectFit
+            editNameButton.tintColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        }
+    }
+    
+    @IBOutlet weak var editImagesButton: UIButton! {
+        didSet {
+            let editImage = UIImage(named: "edit-filled")
+            let editTintedImage = editImage?.withRenderingMode(.alwaysTemplate)
+            
+            editImagesButton.setImage(editTintedImage, for: .normal)
+            editImagesButton.imageView?.contentMode = .scaleAspectFit
+            editImagesButton.tintColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         }
     }
     
@@ -37,7 +50,12 @@ class SettingsViewController: UIViewController {
         }
     }
     
-    private var collections: [[BaeImage]] = []
+    private var collections: [[WeathercasterImage?]] = [[]] {
+        didSet {
+            createThumbnails()
+        }
+    }
+    
     var modelImageViewModel = ModelImageViewModel()
     
     // MARK: - Methods
@@ -45,13 +63,12 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collections.append(modelImageViewModel.getImages())
+        getImages()
+        
         collectionView.dataSource = self
         collectionView.delegate = self
         nameTextField.delegate = self
         modelImageViewModel.delegate = self
-        
-        createThumbnails()
         
         updateUI()
         
@@ -63,22 +80,49 @@ class SettingsViewController: UIViewController {
         editNameStackView.isHidden = true
     }
     
-    private func createImageSet(using image: UIImage?) -> ModelImageView {
-        let imageSetView = ModelImageView(frame: CGRect(x: 0, y: 0,
-                                                        width: collectionView.frame.width,
-                                                        height: collectionView.frame.height))
+    @IBAction func didChangeUseDefaultNameSwitch(_ sender: UISwitch) {
+        modelImageViewModel.setDefaultName(on: sender.isOn)
         
-        imageSetView.clipsToBounds = true
-        imageSetView.contentMode = .scaleAspectFill
-        
-        if let image = image {
-            imageSetView.image = image
+        if sender.isOn {
+            nameTextField.isEnabled = false
+            nameTextField.text = ""
+        } else {
+            nameTextField.isEnabled = true
         }
-        
-        return imageSetView
     }
     
-    func updateUI() {
+    @IBAction func didChangeUseDefaultPicsSwitch(_ sender: UISwitch) {
+        
+        print("did change default pic switch")
+        modelImageViewModel.setDefaultImages(on: sender.isOn)
+        
+        if sender.isOn {
+            getImages()
+        }
+    }
+    
+    @IBAction func didTapEditName(_ sender: UIButton) {
+        
+        if  sender.tag == 1 {
+            let hideEditFields = !self.editNameStackView.isHidden
+            editNameButton.isSelected = !hideEditFields
+            nameTextField.text = ""
+            
+            animateEditingSectionTriggered(by: editNameButton)
+        }
+        
+        if sender.tag == 2 {
+            editImagesButton.isSelected = editImagesStackView.isHidden
+            
+            animateEditingSectionTriggered(by: editImagesButton)
+        }
+    }
+    
+    @IBAction func didTapOutsideTextfields(_ sender: UITapGestureRecognizer) {
+        nameTextField.resignFirstResponder()
+    }
+    
+    private func updateUI() {
         DispatchQueue.main.async {
             // TODO: move certain ui changes to funcs for reuse
             
@@ -92,8 +136,12 @@ class SettingsViewController: UIViewController {
                 self.defaultNameSwitch.isOn = false
             }
             
+            if self.modelImageViewModel.isUsingDefaultImages() {
+                self.defaultPicsSwitch.isOn = true
+            }
+            
             // show/hide edit name view
-            self.editButton.isSelected = !self.editNameStackView.isHidden
+            self.editNameButton.isSelected = !self.editNameStackView.isHidden
             
             self.modelNameLabel.text = ModelImageViewModel.getModelName()
             
@@ -108,50 +156,24 @@ class SettingsViewController: UIViewController {
         }
     }
     
-    @IBAction func didChangeUseDefaultNameSwitch(_ sender: UISwitch) {
-        modelImageViewModel.setDefaultName(on: sender.isOn)
+    private func createImageSet(using image: UIImage?) -> ModelImageView {
         
-        if sender.isOn {
-            nameTextField.isEnabled = false
-            nameTextField.text = ""
-        } else {
-            nameTextField.isEnabled = true
-        }
-    }
-    
-    @IBAction func didTapEditName(_ sender: Any) {
-        let hideEditFields = !self.editNameStackView.isHidden
-        editButton.isSelected = !hideEditFields
-        nameTextField.text = ""
+        // TODO: the height includes a hardcoded number which is
+        // the autolayout constraints of model view superviews.
+        // This should not be hardcoded.
         
-        UIView.animate(withDuration: 0.5, animations: {
-            self.nameTextField.isHidden = hideEditFields
-            self.defaultNameSwitch.isOn = self.modelImageViewModel.isUsingDefaultName()
-            self.nameTextField.isEnabled = !self.modelImageViewModel.isUsingDefaultName()
-            self.editNameStackView.isHidden = hideEditFields
-            
-            let modelNameHeight = self.modelNameViewHeightConstraint.constant
-            let modelNameBottom = self.modelNameViewBottomContraint.constant
-            
-            // decreases edit view size if not editing otherwise increases it
-            self.modelNameViewHeightConstraint.constant = hideEditFields ? modelNameHeight - 80 : modelNameHeight + 80
-            self.modelNameViewBottomContraint.constant = hideEditFields ? modelNameBottom + 10 : modelNameBottom - 10
-        }) { (success) in
-            UIView.animate(withDuration: 0.5) {
-                if self.nameTextField.isEnabled && !self.nameTextField.isHidden  {
-                    self.nameTextField.becomeFirstResponder()
-                } else {
-                    self.nameTextField.resignFirstResponder()
-                }
-                
-                // allows animation of view constraint changes
-                self.view.layoutIfNeeded()
-            }
+        let imageSetView = ModelImageView(frame: CGRect(x: 0, y: 0,
+                                                        width: collectionView.frame.width,
+                                                        height: collectionView.frame.height + 36))
+        
+        imageSetView.clipsToBounds = true
+        imageSetView.contentMode = .scaleAspectFill
+        
+        if let image = image {
+            imageSetView.image = image
         }
-    }
-    
-    @IBAction func didTapOutsideTextfields(_ sender: UITapGestureRecognizer) {
-        nameTextField.resignFirstResponder()
+        
+        return imageSetView
     }
     
     private func createThumbnails() {
@@ -161,8 +183,21 @@ class SettingsViewController: UIViewController {
             modelView.typeOfWeather = typeOfWeather
             modelView.hideWeatherCategory(true)
             
-            let modelImageDetails = modelImageViewModel.getImagefor(typeOfWeather: typeOfWeather!)
-            modelView.image = UIImage(named: modelImageDetails.imageName)
+            let weathercasterImage = collections[0][index]
+            modelView.image = UIImage(contentsOfFile: weathercasterImage!.name)
+            
+            // circular thumbnails
+            modelView.layer.cornerRadius = (modelView.frame.size.height / 2)
+            modelView.clipsToBounds = true
+        }
+    }
+    
+    private func getImages() {
+        modelImageViewModel.getImages { (weathercasterImages) in
+            DispatchQueue.main.async {
+                self.collections[0] = weathercasterImages
+                self.collectionView.reloadData()
+            }
         }
     }
 }
@@ -183,18 +218,17 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ModelImageCell.self), for: indexPath) as! ModelImageCell
         
         let typeOfWeather = WeatherCategory(rawValue: indexPath.row)!
-        let modelImageDetails = modelImageViewModel.getImagefor(typeOfWeather: typeOfWeather)
+        let modelImageDetails = collections[0][indexPath.row]
+        let modelView = createImageSet(using: UIImage(contentsOfFile: modelImageDetails!.name))
         
-        let modelView = createImageSet(using: UIImage(named: modelImageDetails.imageName))
-        
-        modelView.typeOfWeather = modelImageDetails.typeOfWeather
+        modelView.typeOfWeather = modelImageDetails?.typeOfWeather
         modelView.delegate = self
         modelView.weatherCategoryView.category = modelImageViewModel.getCategory(for: typeOfWeather)
         modelView.weatherCategoryView.image = UIImage(named: modelImageViewModel.getIconName(for: typeOfWeather))!.withRenderingMode(
             UIImage.RenderingMode.alwaysTemplate)
         modelView.weatherCategoryView.tintColor = #colorLiteral(red: 1, green: 0.9265189341, blue: 0.6531018429, alpha: 1)
-        cell.modelView = modelView
         
+        cell.modelView = modelView
         cell.addSubview(modelView)
         
         return cell
@@ -212,6 +246,9 @@ extension SettingsViewController: ModelImageViewDelegate {
             
             let modelImageDetailsVC = storyboard?.instantiateViewController(identifier: String(describing: ModelImageDetailsViewController.self)) as! ModelImageDetailsViewController
             modelImageDetailsVC.modelImageView = modelImageView
+            
+            let weathercasterImage = collections[0][modelImageView.typeOfWeather!.rawValue]
+            modelImageDetailsVC.weathercasterImage = weathercasterImage
             modelImageDetailsVC.delegate = self
             
             show(modelImageDetailsVC, sender: self)
@@ -262,17 +299,22 @@ extension SettingsViewController: UITextFieldDelegate {
         modelImageViewModel.setModel(name: textField.text!)
         modelNameLabel.text = ModelImageViewModel.getModelName()
         textField.resignFirstResponder()
-        didTapEditName(self)
+        didTapEditName(editNameButton)
         
         return true
     }
 }
 
 extension SettingsViewController: ModelImageDetailsViewControllerDelegate {
-    func didUpdateCategory(_ modelImageDetailsViewController: ModelImageDetailsViewController, image: UIImage, for typeOfWeather: WeatherCategory) {
+    func didUpdateCategory(_ modelImageDetailsViewController: ModelImageDetailsViewController, image: UIImage, for typeOfWeather: WeatherCategory, usingDefaultImage: Bool) {
         DispatchQueue.main.async {
-            let cell = self.collectionView.cellForItem(at: IndexPath(row: typeOfWeather.rawValue, section: 0)) as! ModelImageCell
+            let indexPath = IndexPath(row: typeOfWeather.rawValue, section: 0)
+            self.collections[0][indexPath.row] = modelImageDetailsViewController.weathercasterImage
+            
+            let cell = self.collectionView.cellForItem(at: indexPath) as! ModelImageCell
             cell.modelView.image = image
+            
+            self.defaultPicsSwitch.isOn = self.modelImageViewModel.isUsingDefaultImages()
         }
     }
 }
@@ -289,7 +331,7 @@ extension SettingsViewController: ModelImageViewModelDelegate {
 
 extension UITextField {
     func rounded() {
-        layer.borderColor = #colorLiteral(red: 0.9108538948, green: 0.8431372549, blue: 0.5877637754, alpha: 1).cgColor
+        layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1).cgColor
         layer.borderWidth = 1.7
         layer.cornerRadius = bounds.size.height / 2
         layer.masksToBounds = true
@@ -298,5 +340,48 @@ extension UITextField {
         let padding = UIView(frame:CGRect(x: 0, y: 0, width: 15, height: 10))
         leftViewMode = UITextField.ViewMode.always
         leftView = padding
+    }
+}
+
+extension SettingsViewController {
+    func animateEditingSectionTriggered(by button: UIButton) {
+        
+        // edit name
+        if button.tag == 1 {
+            let hideEditFields = !self.editNameStackView.isHidden
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                self.nameTextField.isHidden = hideEditFields
+                self.defaultNameSwitch.isOn = self.modelImageViewModel.isUsingDefaultName()
+                self.nameTextField.isEnabled = !self.modelImageViewModel.isUsingDefaultName()
+                self.editNameStackView.isHidden = hideEditFields
+                
+                let modelNameHeight = self.modelNameViewHeightConstraint.constant
+                let modelNameBottom = self.modelNameViewBottomContraint.constant
+                
+                // decreases edit view size if not editing otherwise increases it
+                self.modelNameViewHeightConstraint.constant = hideEditFields ? modelNameHeight - 80 : modelNameHeight + 80
+                self.modelNameViewBottomContraint.constant = hideEditFields ? modelNameBottom + 10 : modelNameBottom - 10
+            }) { (success) in
+                UIView.animate(withDuration: 0.5) {
+                    if self.nameTextField.isEnabled && !self.nameTextField.isHidden  {
+                        self.nameTextField.becomeFirstResponder()
+                    } else {
+                        self.nameTextField.resignFirstResponder()
+                    }
+                    
+                    // allows animation of view constraint changes
+                    self.view.layoutIfNeeded()
+                }
+            }
+        }
+        
+        // edit images
+        if button.tag == 2 {
+            //            UIView.animate(withDuration: 0.5) {
+            self.editImagesStackView.isHidden = !self.editImagesStackView.isHidden
+            self.defaultPicsSwitch.isOn = self.modelImageViewModel.isUsingDefaultImages()
+            //            }
+        }
     }
 }
