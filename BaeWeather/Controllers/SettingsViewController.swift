@@ -157,9 +157,14 @@ class SettingsViewController: UIViewController {
     }
     
     private func createImageSet(using image: UIImage?) -> ModelImageView {
+        
+        // TODO: the height includes a hardcoded number which is
+        // the autolayout constraints of model view superviews.
+        // This should not be hardcoded.
+        
         let imageSetView = ModelImageView(frame: CGRect(x: 0, y: 0,
                                                         width: collectionView.frame.width,
-                                                        height: collectionView.frame.height))
+                                                        height: collectionView.frame.height + 36))
         
         imageSetView.clipsToBounds = true
         imageSetView.contentMode = .scaleAspectFill
