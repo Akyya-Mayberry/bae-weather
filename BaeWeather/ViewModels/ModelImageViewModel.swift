@@ -55,17 +55,17 @@ class ModelImageViewModel {
     
     // MARK: - Methods
     
-    func getImage(for typeOfWeather: WeatherCategory, asDefault defaultImage: Bool, completion: (WeathercasterImage?) -> Void) {
+    func getImage(for typeOfWeather: WeatherCategory, asDefault defaultImage: Bool, completion: (WeatherModelImage?) -> Void) {
         if defaultImage {
-            let defaultWebcasterImage = Constants.defaults.weathercasterImages[typeOfWeather.rawValue]
-            completion(defaultWebcasterImage)
+            let defaultWeatherModelImage = Constants.defaults.weatherModelImages[typeOfWeather.rawValue]
+            completion(defaultWeatherModelImage)
         } else {
             let imageName = "\(typeOfWeather.rawValue)-image.png"
             
-            getStoredWeathercasterImage(name: imageName) { (imageUrl) in
+            getStoredWeatherModelImage(name: imageName) { (imageUrl) in
                 if let imageUrl = imageUrl {
-                    let weathercasterImage = WeathercasterImage(0, name: imageUrl.path, weatherCategory: typeOfWeather)
-                    completion(weathercasterImage)
+                    let weatherModelImage = WeatherModelImage(0, name: imageUrl.path, weatherCategory: typeOfWeather)
+                    completion(weatherModelImage)
                 } else {
                     completion(nil)
                 }
@@ -73,7 +73,7 @@ class ModelImageViewModel {
         }
     }
     
-    func getImages(completion: ([WeathercasterImage?]) -> Void) {
+    func getImages(completion: ([WeatherModelImage?]) -> Void) {
         
         let currentSettings = userDefaultsService.settings
         
@@ -82,9 +82,9 @@ class ModelImageViewModel {
         }
         
         let currentImages = currentSettings!.modelImageSet
-        var images: [WeathercasterImage?] = []
+        var images: [WeatherModelImage?] = []
         
-        fileService.getWeathercasterImagePaths(for: currentImages as! [String]) { (imageUrls) in
+        fileService.getWeatherModelImagePaths(for: currentImages as! [String]) { (imageUrls) in
             for imageUrl in imageUrls {
                 if let imageUrl = imageUrl {
                     
@@ -95,16 +95,16 @@ class ModelImageViewModel {
                     let fileName = imageUrl.lastPathComponent
                     let weatherCategory = Int((fileName.components(separatedBy: "-")[0]))
                     
-                    let weathercasterImage = WeathercasterImage(0, name: imageUrl.path, weatherCategory: WeatherCategory(rawValue: weatherCategory!)!)
-                    images.append(weathercasterImage)
+                    let weatherModelImage = WeatherModelImage(0, name: imageUrl.path, weatherCategory: WeatherCategory(rawValue: weatherCategory!)!)
+                    images.append(weatherModelImage)
                 } else {
                     images.append(nil)
                 }
             }
         }
         
-        completion(images.sorted(by: { (weathercasterImage1, weathercasterImage2) -> Bool in
-            return (weathercasterImage1?.typeOfWeather.rawValue)! < (weathercasterImage2?.typeOfWeather.rawValue)!
+        completion(images.sorted(by: { (weatherModelImage1, weatherModelImage2) -> Bool in
+            return (weatherModelImage1?.typeOfWeather.rawValue)! < (weatherModelImage2?.typeOfWeather.rawValue)!
         }))
     }
     
@@ -124,7 +124,7 @@ class ModelImageViewModel {
         userDefaultsService.useDefaultImages = on
         var currentSettings = userDefaultsService.settings
         
-        let defaultImagesInUse = Constants.defaults.weathercasterImages.map { (weathercasterImage) -> Bool in
+        let defaultImagesInUse = Constants.defaults.weatherModelImages.map { (weatherModelImage) -> Bool in
             return on
         }
         
@@ -182,7 +182,7 @@ class ModelImageViewModel {
     func saveModelImage(data: Data, for typeOfWeather: WeatherCategory, asDefault isDefaultImage: Bool, completion: (Bool, URL?) -> Void) {
         let imageName = "\(typeOfWeather.rawValue)-image.png"
         
-        storeWeathercasterImage(data: data, name: imageName) { (success, imageURL) in
+        storeWeatherModelImage(data: data, name: imageName) { (success, imageURL) in
             if success {
                 
                 // TODO: use update image method to update in user defaults
@@ -236,7 +236,7 @@ class ModelImageViewModel {
     }
     
     // TODO: not in use. Test, fix and use.
-    func update(image: WeathercasterImage) {
+    func update(image: WeatherModelImage) {
         if let currentSettings = userDefaultsService.settings {
             var currentImages = currentSettings.modelImageSet
             currentImages[image.typeOfWeather.rawValue] = image.name
@@ -251,14 +251,14 @@ class ModelImageViewModel {
         }
     }
     
-    private func getStoredWeathercasterImage(name: String, completion: (URL?) -> Void) {
-        fileService.getWebcasterImagePath(for: name) { (url) in
+    private func getStoredWeatherModelImage(name: String, completion: (URL?) -> Void) {
+        fileService.getModelImagePath(for: name) { (url) in
             completion(url)
         }
     }
     
-    private func storeWeathercasterImage(data: Data, name: String, completion: (Bool, URL?) -> Void) {
-        fileService.storeWebcasterImage(data: data, name: name, completion: { (success, imageUrl) in
+    private func storeWeatherModelImage(data: Data, name: String, completion: (Bool, URL?) -> Void) {
+        fileService.storeWeatherModelImage(data: data, name: name, completion: { (success, imageUrl) in
             completion(success, imageUrl)
         })
     }

@@ -44,7 +44,7 @@ class ModelImageDetailsViewController: UIViewController {
     }
     
     var modelImageView: ModelImageView!
-    var weathercasterImage: WeathercasterImage!
+    var weatherModelImage: WeatherModelImage!
     var delegate: ModelImageDetailsViewControllerDelegate?
     var modelImageViewModel = ModelImageViewModel()
     
@@ -54,7 +54,7 @@ class ModelImageDetailsViewController: UIViewController {
         super.viewDidLoad()
         
         let isUsingADefault = modelImageViewModel.isUsingDefaultImages() ||
-            modelImageViewModel.isUsingDefaultImage(for: weathercasterImage.typeOfWeather)
+            modelImageViewModel.isUsingDefaultImage(for: weatherModelImage.typeOfWeather)
         
         editButton.isEnabled = !isUsingADefault
         useDefaultImageSwitch.isOn = isUsingADefault
@@ -78,7 +78,7 @@ class ModelImageDetailsViewController: UIViewController {
         
         let imageData = previewImageView.image!.pngData()!
         
-        modelImageViewModel.saveModelImage(data: imageData, for: weathercasterImage.typeOfWeather, asDefault: self.useDefaultImageSwitch.isOn) { (success, imageUrl) in
+        modelImageViewModel.saveModelImage(data: imageData, for: weatherModelImage.typeOfWeather, asDefault: self.useDefaultImageSwitch.isOn) { (success, imageUrl) in
             if success {
                 DispatchQueue.main.async {
                     print("successfully saved custom imaged!!!!")
@@ -86,7 +86,7 @@ class ModelImageDetailsViewController: UIViewController {
                     
                     // redundant
                     if !self.useDefaultImageSwitch.isOn {
-                        self.modelImageViewModel.setDefaultImage(on: false, for: self.weathercasterImage.typeOfWeather)
+                        self.modelImageViewModel.setDefaultImage(on: false, for: self.weatherModelImage.typeOfWeather)
                     }
                     
                     Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { (timer) in
@@ -95,7 +95,7 @@ class ModelImageDetailsViewController: UIViewController {
                         self.isModalInPresentation = false
                     }
                     
-                    self.delegate?.didUpdateCategory(self, image: self.previewImageView.image!, for: self.weathercasterImage.typeOfWeather, usingDefaultImage: self.useDefaultImageSwitch.isOn)
+                    self.delegate?.didUpdateCategory(self, image: self.previewImageView.image!, for: self.weatherModelImage.typeOfWeather, usingDefaultImage: self.useDefaultImageSwitch.isOn)
                 }
             } else {
                 DispatchQueue.main.async {
@@ -111,13 +111,13 @@ class ModelImageDetailsViewController: UIViewController {
         if sender.isOn {
             self.editButton.isEnabled = false
             
-            modelImageViewModel.getImage(for: weathercasterImage.typeOfWeather, asDefault: true) { (weathercasterImage) in
+            modelImageViewModel.getImage(for: weatherModelImage.typeOfWeather, asDefault: true) { (weatherModelImage) in
                 DispatchQueue.main.async {
-                    if weathercasterImage != nil {
-                        let image = UIImage(named: weathercasterImage!.name)
+                    if weatherModelImage != nil {
+                        let image = UIImage(named: weatherModelImage!.name)
                         self.previewImageView.image = image
                         
-                        let currentImageData = UIImage(contentsOfFile: self.weathercasterImage!.name)?.pngData()
+                        let currentImageData = UIImage(contentsOfFile: self.weatherModelImage!.name)?.pngData()
                         let previewImageData = self.previewImageView.image!.pngData()
                         if currentImageData == previewImageData {
                             if !self.saveButton.isHidden {
@@ -131,19 +131,19 @@ class ModelImageDetailsViewController: UIViewController {
             }
         } else {
             editButton.isEnabled = true
-            previewImageView.image = UIImage(contentsOfFile: weathercasterImage.name)
+            previewImageView.image = UIImage(contentsOfFile: weatherModelImage.name)
         }
     }
     
     private func updateUI() {
         saveButton.isHidden = true
         
-        let image = UIImage(contentsOfFile: weathercasterImage.name)
+        let image = UIImage(contentsOfFile: weatherModelImage.name)
         previewImageView.image = image
         
-        categoryLabel.text = modelImageViewModel.getCategory(for: weathercasterImage.typeOfWeather)
+        categoryLabel.text = modelImageViewModel.getCategory(for: weatherModelImage.typeOfWeather)
         
-        let categoryImage = UIImage(named: modelImageViewModel.getIconName(for: weathercasterImage.typeOfWeather))
+        let categoryImage = UIImage(named: modelImageViewModel.getIconName(for: weatherModelImage.typeOfWeather))
         let categoryTintedImage = categoryImage?.withRenderingMode(.alwaysTemplate)
         
         categoryImageView.image = categoryTintedImage
@@ -153,7 +153,7 @@ class ModelImageDetailsViewController: UIViewController {
     }
     
     /**
-     animates in the option to save a custom weathercaster image
+     animates in the option to save a custom weather model image
      
      - description: if the save button is not yet displayed (user has not selected a photo), then the edit button is
      slid over so the save button is faded in in its place. Otherwise, the save button is faded out and

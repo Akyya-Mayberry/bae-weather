@@ -45,7 +45,7 @@ class WeatherViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        loadWeathercasterImage()
+        loadWeatherModelImage()
     }
     
     @IBAction func onTapRefreshImage(_ sender: UITapGestureRecognizer) {
@@ -83,7 +83,7 @@ class WeatherViewController: UIViewController {
                 return
             }
             
-            self.loadWeathercasterImage()
+            self.loadWeatherModelImage()
             
             self.currentWeatherLabel.text = "\(self.weatherViewModel.currentTemp!)°"
             self.currentDateLabel.text = self.weatherViewModel.currentDateAsString
@@ -109,15 +109,15 @@ class WeatherViewController: UIViewController {
         }
     }
     
-    private func loadWeathercasterImage() {
+    private func loadWeatherModelImage() {
         if let weatherCategory = self.weatherViewModel.getWeatherCategory() {
-            modelImageViewModel.getImage(for: weatherCategory, asDefault: false) { (weathercasterImage) in
-                if weathercasterImage != nil {
+            modelImageViewModel.getImage(for: weatherCategory, asDefault: false) { (weatherModelImage) in
+                if weatherModelImage != nil {
                     DispatchQueue.main.async {
-                        self.modelImageView.image = UIImage(contentsOfFile: weathercasterImage!.name)
+                        self.modelImageView.image = UIImage(contentsOfFile: weatherModelImage!.name)
                     }
                 } else {
-                    print("failed to get current weathercaster image")
+                    print("failed to get current weather model image")
                 }
             }
         }

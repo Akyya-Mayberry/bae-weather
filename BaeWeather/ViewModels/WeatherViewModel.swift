@@ -173,15 +173,15 @@ class WeatherViewModel {
         return weather!.currentHourBlock
     }
     
-    func modelImageDetails(for typeOfWeather: WeatherCategory, completion: (WeathercasterImage?) -> Void) {
+    func modelImageDetails(for typeOfWeather: WeatherCategory, completion: (WeatherModelImage?) -> Void) {
         if weather == nil {
             completion(nil)
         }
         
         let typeOfWeather = TypeOfWeather(for: weather!.temperature).category
         
-        modelImageViewModel.getImage(for: typeOfWeather, asDefault: false) { (weathercasterImage) in
-            completion(weathercasterImage)
+        modelImageViewModel.getImage(for: typeOfWeather, asDefault: false) { (weatherModelImage) in
+            completion(weatherModelImage)
         }
     }
     

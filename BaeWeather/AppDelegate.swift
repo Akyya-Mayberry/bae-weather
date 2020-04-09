@@ -55,7 +55,7 @@ extension AppDelegate {
         // load defaults if user has not change settings or wants to use them
         let currentSettings = userDefaultsService.settings
         let defaultName = Constants.defaults.modelName
-        let defaultImagesInUse = Constants.defaults.weathercasterImages.map { (weathercasterImage) -> Bool in
+        let defaultImagesInUse = Constants.defaults.weatherModelImages.map { (weatherModelImage) -> Bool in
             return true
         }
         
@@ -106,9 +106,9 @@ extension AppDelegate {
         
         var defaultImages: [String] = []
         
-        for weathercasterImage in Constants.defaults.weathercasterImages {
-            let weatherCategoryString = String(weathercasterImage.typeOfWeather.rawValue)
-            let image = UIImage(named: weathercasterImage.name)
+        for weatherModelImage in Constants.defaults.weatherModelImages {
+            let weatherCategoryString = String(weatherModelImage.typeOfWeather.rawValue)
+            let image = UIImage(named: weatherModelImage.name)
             
             let imageName = "\(weatherCategoryString)-image.png"
             
@@ -131,7 +131,7 @@ extension AppDelegate {
     static func storeDefaultImages(data: Data, name: String, completion: (Bool, URL?) -> Void) {
         let fileService = FileService.sharedInstance
         
-        fileService.storeWebcasterImage(data: data, name: name, completion: { (success, imageUrl) in
+        fileService.storeWeatherModelImage(data: data, name: name, completion: { (success, imageUrl) in
             completion(success, imageUrl)
         })
     }

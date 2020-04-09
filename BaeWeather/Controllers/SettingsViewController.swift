@@ -50,7 +50,7 @@ class SettingsViewController: UIViewController {
         }
     }
     
-    private var collections: [[WeathercasterImage?]] = [[]] {
+    private var collections: [[WeatherModelImage?]] = [[]] {
         didSet {
             createThumbnails()
         }
@@ -183,8 +183,8 @@ class SettingsViewController: UIViewController {
             modelView.typeOfWeather = typeOfWeather
             modelView.hideWeatherCategory(true)
             
-            let weathercasterImage = collections[0][index]
-            modelView.image = UIImage(contentsOfFile: weathercasterImage!.name)
+            let weatherModelImage = collections[0][index]
+            modelView.image = UIImage(contentsOfFile: weatherModelImage!.name)
             
             // circular thumbnails
             modelView.layer.cornerRadius = (modelView.frame.size.height / 2)
@@ -193,9 +193,9 @@ class SettingsViewController: UIViewController {
     }
     
     private func getImages() {
-        modelImageViewModel.getImages { (weathercasterImages) in
+        modelImageViewModel.getImages { (weatherModelImages) in
             DispatchQueue.main.async {
-                self.collections[0] = weathercasterImages
+                self.collections[0] = weatherModelImages
                 self.collectionView.reloadData()
             }
         }
@@ -247,8 +247,8 @@ extension SettingsViewController: ModelImageViewDelegate {
             let modelImageDetailsVC = storyboard?.instantiateViewController(identifier: String(describing: ModelImageDetailsViewController.self)) as! ModelImageDetailsViewController
             modelImageDetailsVC.modelImageView = modelImageView
             
-            let weathercasterImage = collections[0][modelImageView.typeOfWeather!.rawValue]
-            modelImageDetailsVC.weathercasterImage = weathercasterImage
+            let weatherModelImage = collections[0][modelImageView.typeOfWeather!.rawValue]
+            modelImageDetailsVC.weatherModelImage = weatherModelImage
             modelImageDetailsVC.delegate = self
             
             show(modelImageDetailsVC, sender: self)
@@ -309,7 +309,7 @@ extension SettingsViewController: ModelImageDetailsViewControllerDelegate {
     func didUpdateCategory(_ modelImageDetailsViewController: ModelImageDetailsViewController, image: UIImage, for typeOfWeather: WeatherCategory, usingDefaultImage: Bool) {
         DispatchQueue.main.async {
             let indexPath = IndexPath(row: typeOfWeather.rawValue, section: 0)
-            self.collections[0][indexPath.row] = modelImageDetailsViewController.weathercasterImage
+            self.collections[0][indexPath.row] = modelImageDetailsViewController.weatherModelImage
             
             let cell = self.collectionView.cellForItem(at: indexPath) as! ModelImageCell
             cell.modelView.image = image

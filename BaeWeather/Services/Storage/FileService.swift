@@ -12,7 +12,7 @@ class FileService {
     
     // MARK: - Properties
     
-    private let webcasterImagesDirectory = Constants.imagesDirectory
+    private let weatherModelImagesDirectory = Constants.imagesDirectory
     private let fileManager = FileManager.default
     
     static  let sharedInstance = FileService()
@@ -21,7 +21,7 @@ class FileService {
     
     private init() { }
     
-    func getWebcasterImagePath(for imageName: String, completion: (URL?) -> Void) {
+    func getModelImagePath(for imageName: String, completion: (URL?) -> Void) {
         //        let relativePath = "\(webcasterImagesDirectory)/\(imageName)"
         
         if let imageURL = getFilePath(for: imageName) {
@@ -31,11 +31,11 @@ class FileService {
         }
     }
     
-    func getWeathercasterImagePaths(for imageNames: [String], completion: ([URL?]) -> Void) {
+    func getWeatherModelImagePaths(for imageNames: [String], completion: ([URL?]) -> Void) {
         var imageUrls: [URL?] = []
         
         for imageName in imageNames {
-            getWebcasterImagePath(for: imageName) { (url) in
+            getModelImagePath(for: imageName) { (url) in
                 imageUrls.append(url)
             }
         }
@@ -43,7 +43,7 @@ class FileService {
         completion(imageUrls)
     }
     
-    func storeWebcasterImage(data: Data, name: String, completion: (Bool, URL?) -> Void) {
+    func storeWeatherModelImage(data: Data, name: String, completion: (Bool, URL?) -> Void) {
         let (dataSuccessfullyStored, imageUrl) = store(data: data, name: name)
         
         if dataSuccessfullyStored {

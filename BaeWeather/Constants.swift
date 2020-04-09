@@ -23,11 +23,11 @@ struct Constants {
                 .hot: "sample-hot"
         ]
         
-        static let weathercasterImages = [
-            WeathercasterImage(0, name: "sample-freezing", weatherCategory: .freezing),
-            WeathercasterImage(0, name: "sample-cold", weatherCategory: .cold),
-            WeathercasterImage(0, name: "sample-warm", weatherCategory: .warm),
-            WeathercasterImage(0, name: "sample-hot", weatherCategory: .hot)
+        static let weatherModelImages = [
+            WeatherModelImage(0, name: "sample-freezing", weatherCategory: .freezing),
+            WeatherModelImage(0, name: "sample-cold", weatherCategory: .cold),
+            WeatherModelImage(0, name: "sample-warm", weatherCategory: .warm),
+            WeatherModelImage(0, name: "sample-hot", weatherCategory: .hot)
         ]
         
         static let modelName = "Bae"
@@ -67,7 +67,7 @@ struct Constants {
         static let settings = "settings"
     }
     
-    static var imagesDirectory = "weathercasterImages/0"
+    static var imagesDirectory = "weatherModelImages/0"
 }
 
 
