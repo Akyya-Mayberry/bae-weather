@@ -14,15 +14,11 @@
 		6030FC7723FF0C79007F0901 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6030FC7523FF0C79007F0901 /* Main.storyboard */; };
 		6030FC7923FF0C7A007F0901 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6030FC7823FF0C7A007F0901 /* Assets.xcassets */; };
 		6030FC7C23FF0C7A007F0901 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6030FC7A23FF0C7A007F0901 /* LaunchScreen.storyboard */; };
-		6030FC8723FF0C7A007F0901 /* OnrampProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6030FC8623FF0C7A007F0901 /* OnrampProjectTests.swift */; };
-		6030FC9223FF0C7A007F0901 /* OnrampProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6030FC9123FF0C7A007F0901 /* OnrampProjectUITests.swift */; };
 		AB418AA02415BD9E003852B3 /* HourlyWeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB418A9F2415BD9E003852B3 /* HourlyWeatherViewController.swift */; };
 		AB418AA2241746DE003852B3 /* RequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB418AA1241746DE003852B3 /* RequestViewController.swift */; };
 		ABF9B41B241871AA0096F563 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF9B41A241871A90096F563 /* LocationService.swift */; };
 		ABF9B41D2419B21F0096F563 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF9B41C2419B21F0096F563 /* LoadingViewController.swift */; };
 		ABF9B41F241C43E00096F563 /* CurrentLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF9B41E241C43E00096F563 /* CurrentLocationViewController.swift */; };
-		B953F34E4F4B6A268C0606A4 /* Pods_BaeWeather_BaeWeatherUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB4948D7726FFA2E61018777 /* Pods_BaeWeather_BaeWeatherUITests.framework */; };
-		C9E0B4B5725B3B4553ADC84B /* Pods_BaeWeatherTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67DB363C0B9E6A706A53DC71 /* Pods_BaeWeatherTests.framework */; };
 		EB0664402433E59400259F40 /* FileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB06643F2433E59300259F40 /* FileService.swift */; };
 		EB2D0251240F076C005C2241 /* ModelImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2D0250240F076C005C2241 /* ModelImageCell.swift */; };
 		EB2D0257240F0AAE005C2241 /* ModelImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2D0256240F0AAE005C2241 /* ModelImageView.swift */; };
@@ -44,23 +40,6 @@
 		EBFC751424122D4500FE3E5C /* WeatherCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFC751324122D4500FE3E5C /* WeatherCategoryView.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		6030FC8323FF0C7A007F0901 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6030FC6423FF0C79007F0901 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6030FC6B23FF0C79007F0901;
-			remoteInfo = OnrampProject;
-		};
-		6030FC8E23FF0C7A007F0901 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6030FC6423FF0C79007F0901 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6030FC6B23FF0C79007F0901;
-			remoteInfo = OnrampProject;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		014A77036793F46B089CE2E5 /* Pods-BaeWeather-BaeWeatherUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaeWeather-BaeWeatherUITests.debug.xcconfig"; path = "Target Support Files/Pods-BaeWeather-BaeWeatherUITests/Pods-BaeWeather-BaeWeatherUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		50CD64A9361322AC9DBC420B /* Pods-BaeWeatherTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaeWeatherTests.release.xcconfig"; path = "Target Support Files/Pods-BaeWeatherTests/Pods-BaeWeatherTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -72,19 +51,11 @@
 		6030FC7823FF0C7A007F0901 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6030FC7B23FF0C7A007F0901 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6030FC7D23FF0C7A007F0901 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6030FC8623FF0C7A007F0901 /* OnrampProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnrampProjectTests.swift; sourceTree = "<group>"; };
-		6030FC8823FF0C7A007F0901 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6030FC9123FF0C7A007F0901 /* OnrampProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnrampProjectUITests.swift; sourceTree = "<group>"; };
-		6030FC9323FF0C7A007F0901 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		67DB363C0B9E6A706A53DC71 /* Pods_BaeWeatherTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BaeWeatherTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DC7BF3F3024D731594227DF /* Pods-BaeWeatherTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaeWeatherTests.debug.xcconfig"; path = "Target Support Files/Pods-BaeWeatherTests/Pods-BaeWeatherTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6E88AE940E49AEE7D019B859 /* Pods-BaeWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaeWeather.debug.xcconfig"; path = "Target Support Files/Pods-BaeWeather/Pods-BaeWeather.debug.xcconfig"; sourceTree = "<group>"; };
 		AB418A9F2415BD9E003852B3 /* HourlyWeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherViewController.swift; sourceTree = "<group>"; };
 		AB418AA1241746DE003852B3 /* RequestViewController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = RequestViewController.swift; sourceTree = "<group>"; };
-		AB4948D7726FFA2E61018777 /* Pods_BaeWeather_BaeWeatherUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BaeWeather_BaeWeatherUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABDDD8FD241F5902001C84A0 /* BaeWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaeWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		ABDDD8FE241F5902001C84A0 /* BaeWeatherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaeWeatherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		ABDDD8FF241F5902001C84A0 /* BaeWeatherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaeWeatherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABF9B41A241871A90096F563 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		ABF9B41C2419B21F0096F563 /* LoadingViewController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		ABF9B41E241C43E00096F563 /* CurrentLocationViewController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = CurrentLocationViewController.swift; sourceTree = "<group>"; };
@@ -120,22 +91,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6030FC7F23FF0C7A007F0901 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C9E0B4B5725B3B4553ADC84B /* Pods_BaeWeatherTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6030FC8A23FF0C7A007F0901 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B953F34E4F4B6A268C0606A4 /* Pods_BaeWeather_BaeWeatherUITests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -156,8 +111,6 @@
 			isa = PBXGroup;
 			children = (
 				C9ECCD6CA9E8E559969D4382 /* Pods_BaeWeather.framework */,
-				AB4948D7726FFA2E61018777 /* Pods_BaeWeather_BaeWeatherUITests.framework */,
-				67DB363C0B9E6A706A53DC71 /* Pods_BaeWeatherTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -167,12 +120,8 @@
 			children = (
 				EB751CEE242EC71900B1AA81 /* Default-568h@2x.png */,
 				6030FC6E23FF0C79007F0901 /* BaeWeather */,
-				6030FC8523FF0C7A007F0901 /* BaeWeatherTests */,
-				6030FC9023FF0C7A007F0901 /* BaeWeatherUITests */,
 				3FA0E01E7CAE20D0671B50F3 /* Frameworks */,
 				ABDDD8FD241F5902001C84A0 /* BaeWeather.app */,
-				ABDDD8FE241F5902001C84A0 /* BaeWeatherTests.xctest */,
-				ABDDD8FF241F5902001C84A0 /* BaeWeatherUITests.xctest */,
 				0B35258F2B2F5E43BD6F8903 /* Pods */,
 			);
 			sourceTree = "<group>";
@@ -192,24 +141,6 @@
 				EB3B341B241056340037807F /* Constants.swift */,
 			);
 			path = BaeWeather;
-			sourceTree = "<group>";
-		};
-		6030FC8523FF0C7A007F0901 /* BaeWeatherTests */ = {
-			isa = PBXGroup;
-			children = (
-				6030FC8623FF0C7A007F0901 /* OnrampProjectTests.swift */,
-				6030FC8823FF0C7A007F0901 /* Info.plist */,
-			);
-			path = BaeWeatherTests;
-			sourceTree = "<group>";
-		};
-		6030FC9023FF0C7A007F0901 /* BaeWeatherUITests */ = {
-			isa = PBXGroup;
-			children = (
-				6030FC9123FF0C7A007F0901 /* OnrampProjectUITests.swift */,
-				6030FC9323FF0C7A007F0901 /* Info.plist */,
-			);
-			path = BaeWeatherUITests;
 			sourceTree = "<group>";
 		};
 		ABF9B420241F410C0096F563 /* Storage */ = {
@@ -318,45 +249,6 @@
 			productReference = ABDDD8FD241F5902001C84A0 /* BaeWeather.app */;
 			productType = "com.apple.product-type.application";
 		};
-		6030FC8123FF0C7A007F0901 /* BaeWeatherTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6030FC9923FF0C7A007F0901 /* Build configuration list for PBXNativeTarget "BaeWeatherTests" */;
-			buildPhases = (
-				8DC39B4B6D11078A9F0C2046 /* [CP] Check Pods Manifest.lock */,
-				6030FC7E23FF0C7A007F0901 /* Sources */,
-				6030FC7F23FF0C7A007F0901 /* Frameworks */,
-				6030FC8023FF0C7A007F0901 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				6030FC8423FF0C7A007F0901 /* PBXTargetDependency */,
-			);
-			name = BaeWeatherTests;
-			productName = OnrampProjectTests;
-			productReference = ABDDD8FE241F5902001C84A0 /* BaeWeatherTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		6030FC8C23FF0C7A007F0901 /* BaeWeatherUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6030FC9C23FF0C7A007F0901 /* Build configuration list for PBXNativeTarget "BaeWeatherUITests" */;
-			buildPhases = (
-				7D7A6B536FEFD5E6D0894EAC /* [CP] Check Pods Manifest.lock */,
-				6030FC8923FF0C7A007F0901 /* Sources */,
-				6030FC8A23FF0C7A007F0901 /* Frameworks */,
-				6030FC8B23FF0C7A007F0901 /* Resources */,
-				4EE476927237F1C4B3DBB382 /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				6030FC8F23FF0C7A007F0901 /* PBXTargetDependency */,
-			);
-			name = BaeWeatherUITests;
-			productName = OnrampProjectUITests;
-			productReference = ABDDD8FF241F5902001C84A0 /* BaeWeatherUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -368,14 +260,6 @@
 				TargetAttributes = {
 					6030FC6B23FF0C79007F0901 = {
 						CreatedOnToolsVersion = 11.3.1;
-					};
-					6030FC8123FF0C7A007F0901 = {
-						CreatedOnToolsVersion = 11.3.1;
-						TestTargetID = 6030FC6B23FF0C79007F0901;
-					};
-					6030FC8C23FF0C7A007F0901 = {
-						CreatedOnToolsVersion = 11.3.1;
-						TestTargetID = 6030FC6B23FF0C79007F0901;
 					};
 				};
 			};
@@ -393,8 +277,6 @@
 			projectRoot = "";
 			targets = (
 				6030FC6B23FF0C79007F0901 /* BaeWeather */,
-				6030FC8123FF0C7A007F0901 /* BaeWeatherTests */,
-				6030FC8C23FF0C7A007F0901 /* BaeWeatherUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -410,20 +292,6 @@
 				6030FC7923FF0C7A007F0901 /* Assets.xcassets in Resources */,
 				6030FC7723FF0C79007F0901 /* Main.storyboard in Resources */,
 				EB751CEF242EC71900B1AA81 /* Default-568h@2x.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6030FC8023FF0C7A007F0901 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6030FC8B23FF0C7A007F0901 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,23 +320,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4EE476927237F1C4B3DBB382 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BaeWeather-BaeWeatherUITests/Pods-BaeWeather-BaeWeatherUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BaeWeather-BaeWeatherUITests/Pods-BaeWeather-BaeWeatherUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BaeWeather-BaeWeatherUITests/Pods-BaeWeather-BaeWeatherUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		7315C085A3CA912ACA7ED87E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -484,50 +335,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BaeWeather/Pods-BaeWeather-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7D7A6B536FEFD5E6D0894EAC /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-BaeWeather-BaeWeatherUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8DC39B4B6D11078A9F0C2046 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-BaeWeatherTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -564,36 +371,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6030FC7E23FF0C7A007F0901 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6030FC8723FF0C7A007F0901 /* OnrampProjectTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6030FC8923FF0C7A007F0901 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6030FC9223FF0C7A007F0901 /* OnrampProjectUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		6030FC8423FF0C7A007F0901 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6030FC6B23FF0C79007F0901 /* BaeWeather */;
-			targetProxy = 6030FC8323FF0C7A007F0901 /* PBXContainerItemProxy */;
-		};
-		6030FC8F23FF0C7A007F0901 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6030FC6B23FF0C79007F0901 /* BaeWeather */;
-			targetProxy = 6030FC8E23FF0C7A007F0901 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		6030FC7523FF0C79007F0901 /* Main.storyboard */ = {
@@ -767,90 +545,6 @@
 			};
 			name = Release;
 		};
-		6030FC9A23FF0C7A007F0901 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6DC7BF3F3024D731594227DF /* Pods-BaeWeatherTests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = OnrampProjectTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.onramp.OnrampProjectTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BaeWeather.app/BaeWeather";
-			};
-			name = Debug;
-		};
-		6030FC9B23FF0C7A007F0901 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 50CD64A9361322AC9DBC420B /* Pods-BaeWeatherTests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = OnrampProjectTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.onramp.OnrampProjectTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BaeWeather.app/BaeWeather";
-			};
-			name = Release;
-		};
-		6030FC9D23FF0C7A007F0901 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 014A77036793F46B089CE2E5 /* Pods-BaeWeather-BaeWeatherUITests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = OnrampProjectUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.onramp.OnrampProjectUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = OnrampProject;
-			};
-			name = Debug;
-		};
-		6030FC9E23FF0C7A007F0901 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 53451B79E50A13E920BA84B6 /* Pods-BaeWeather-BaeWeatherUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = OnrampProjectUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.onramp.OnrampProjectUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = OnrampProject;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -868,24 +562,6 @@
 			buildConfigurations = (
 				6030FC9723FF0C7A007F0901 /* Debug */,
 				6030FC9823FF0C7A007F0901 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		6030FC9923FF0C7A007F0901 /* Build configuration list for PBXNativeTarget "BaeWeatherTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6030FC9A23FF0C7A007F0901 /* Debug */,
-				6030FC9B23FF0C7A007F0901 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		6030FC9C23FF0C7A007F0901 /* Build configuration list for PBXNativeTarget "BaeWeatherUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6030FC9D23FF0C7A007F0901 /* Debug */,
-				6030FC9E23FF0C7A007F0901 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
