@@ -115,7 +115,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cYV-eT-XJm">
+                            <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cYV-eT-XJm">
                                 <rect key="frame" x="0.0" y="663" width="414" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="HqG-yp-JEY"/>
@@ -142,7 +142,7 @@
                                     <constraint firstItem="Zxe-i5-mng" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ke4-AY-i5g" secondAttribute="leading" constant="20" symbolic="YES" id="u4e-44-5lQ"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gu2-Qm-wA1" userLabel="Error Message View">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gu2-Qm-wA1" userLabel="Error Message View">
                                 <rect key="frame" x="72" y="597" width="270" height="58"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Updating Weather. Try again later." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6QF-oc-0Ek">
@@ -183,11 +183,6 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MC2-Rq-aYQ" secondAttribute="trailing" symbolic="YES" id="oqo-0F-4bU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="cYV-eT-XJm"/>
-                            </mask>
-                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Bae Weather" image="weather" selectedImage="weather-filled" id="pM0-xD-u82">
                         <color key="badgeColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
