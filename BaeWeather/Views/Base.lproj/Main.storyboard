@@ -224,25 +224,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rAj-A1-QmS" userLabel="Model Name View" customClass="CardView" customModule="BaeWeather" customModuleProvider="target">
-                                <rect key="frame" x="15" y="54" width="384" height="120"/>
+                                <rect key="frame" x="10" y="54" width="394" height="120"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Weathercaster" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yVH-9O-gJL">
-                                        <rect key="frame" x="75.5" y="15" width="233" height="31.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Weather Model" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yVH-9O-gJL">
+                                        <rect key="frame" x="78" y="15" width="238.5" height="31.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="26"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="oaH-vV-v4N" userLabel="Edit Model Name Stack View">
-                                        <rect key="frame" x="8" y="61.5" width="368" height="33.5"/>
+                                        <rect key="frame" x="8" y="61.5" width="378" height="33.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="230" verticalHuggingPriority="230" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Bae" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ZJ-Yo-IRG">
-                                                <rect key="frame" x="0.0" y="0.0" width="343" height="33.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="230" verticalHuggingPriority="230" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Weather Model Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ZJ-Yo-IRG">
+                                                <rect key="frame" x="0.0" y="0.0" width="353" height="33.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                                 <color key="textColor" red="0.82255411150000002" green="0.24973508720000001" blue="0.34709912539999999" alpha="0.94020226880000002" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eBp-Wt-Fyz">
-                                                <rect key="frame" x="343" y="4.5" width="25" height="25"/>
+                                                <rect key="frame" x="353" y="4.5" width="25" height="25"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="25" id="ZUh-zh-f2J"/>
@@ -261,19 +261,19 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="250" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="e4l-hX-HmA" userLabel="Edit Name Stack View">
-                                        <rect key="frame" x="30" y="110" width="324" height="72"/>
+                                        <rect key="frame" x="30" y="110" width="334" height="72"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter weathercaster name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aw6-nv-lbd">
-                                                <rect key="frame" x="0.0" y="0.0" width="324" height="34"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter you weather model name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aw6-nv-lbd">
+                                                <rect key="frame" x="0.0" y="0.0" width="334" height="34"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="upg-cJ-U5f" userLabel="Default Name Stack View">
-                                                <rect key="frame" x="0.0" y="41" width="324" height="31"/>
+                                                <rect key="frame" x="0.0" y="41" width="334" height="31"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Default" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cx5-rh-Qzp">
-                                                        <rect key="frame" x="0.0" y="5.5" width="271" height="20"/>
+                                                        <rect key="frame" x="0.0" y="5.5" width="281" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="WED-k3-AIu"/>
                                                         </constraints>
@@ -282,7 +282,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YiW-xn-cTR" userLabel="Default Name Switch">
-                                                        <rect key="frame" x="275" y="0.0" width="51" height="31"/>
+                                                        <rect key="frame" x="285" y="0.0" width="51" height="31"/>
                                                         <color key="onTintColor" red="0.61897528171539307" green="0.77710413932800293" blue="0.64842873811721802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <connections>
                                                             <action selector="didChangeUseDefaultNameSwitch:" destination="Gnv-4n-e6Z" eventType="valueChanged" id="hc9-uW-h29"/>
@@ -475,12 +475,12 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="rAj-A1-QmS" firstAttribute="top" secondItem="Emi-7S-xzQ" secondAttribute="top" constant="10" id="6sG-3H-e4r"/>
-                            <constraint firstItem="Emi-7S-xzQ" firstAttribute="trailing" secondItem="rAj-A1-QmS" secondAttribute="trailing" constant="15" id="8Nd-6f-g2v"/>
+                            <constraint firstItem="Emi-7S-xzQ" firstAttribute="trailing" secondItem="rAj-A1-QmS" secondAttribute="trailing" constant="10" id="8Nd-6f-g2v"/>
                             <constraint firstItem="524-lD-2RY" firstAttribute="top" secondItem="rAj-A1-QmS" secondAttribute="bottom" constant="20" id="DuX-fW-ZGy"/>
                             <constraint firstItem="Bxo-M2-KWb" firstAttribute="centerX" secondItem="62X-I2-Axu" secondAttribute="centerX" id="PjC-fj-ajk"/>
                             <constraint firstItem="Emi-7S-xzQ" firstAttribute="trailing" secondItem="6Gi-zR-u28" secondAttribute="trailing" constant="10" id="TXL-W4-9ll"/>
                             <constraint firstItem="Emi-7S-xzQ" firstAttribute="bottom" secondItem="6Gi-zR-u28" secondAttribute="bottom" constant="8" id="hvV-js-RL3"/>
-                            <constraint firstItem="rAj-A1-QmS" firstAttribute="leading" secondItem="Emi-7S-xzQ" secondAttribute="leading" constant="15" id="lAd-l1-90a"/>
+                            <constraint firstItem="rAj-A1-QmS" firstAttribute="leading" secondItem="Emi-7S-xzQ" secondAttribute="leading" constant="10" id="lAd-l1-90a"/>
                             <constraint firstItem="524-lD-2RY" firstAttribute="leading" secondItem="Emi-7S-xzQ" secondAttribute="leading" constant="10" id="ndJ-TF-4sR"/>
                             <constraint firstItem="Emi-7S-xzQ" firstAttribute="trailing" secondItem="524-lD-2RY" secondAttribute="trailing" constant="10" id="qJe-wN-qse"/>
                             <constraint firstItem="6Gi-zR-u28" firstAttribute="top" secondItem="524-lD-2RY" secondAttribute="bottom" constant="8" id="rRL-9t-Jlm"/>
