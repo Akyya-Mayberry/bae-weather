@@ -6,15 +6,6 @@ target 'BaeWeather' do
   use_frameworks!
 
   # Pods for BaeWeather
-    pod 'Alamofire', '~> 5.0'
-  
-  target 'BaeWeatherTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-  target 'BaeWeatherUITests' do
-    # Pods for testing
-  end
+  pod 'Alamofire', '~> 5.2'
 
 end
