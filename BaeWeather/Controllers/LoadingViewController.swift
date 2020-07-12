@@ -84,9 +84,7 @@ extension LoadingViewController: WeatherViewModelDelegate {
             
             let tabBarController = UITabBarController()
             tabBarController.viewControllers = [weatherVC, settingsVC]
-            tabBarController.modalPresentationStyle = .fullScreen
-            
-            self.present(tabBarController, animated: true, completion: nil)
+            (UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate).changeRootViewController(to: tabBarController)
         }
     }
     
@@ -95,10 +93,9 @@ extension LoadingViewController: WeatherViewModelDelegate {
             self.loadingSpinner.stopAnimating()
             self.messageStackView.isHidden = false
             self.messageLabel.text = self.weatherError
-            print("loading weather returned an error: \(error)")
         }
     }
-     
+    
     func didUpdateModelImageDetails(_ weatherViewModel: WeatherViewModel, modelImageViewModel: ModelImageViewModel) {
         //
     }
@@ -123,7 +120,6 @@ extension LoadingViewController: LocationServiceDelegate {
             self.loadingSpinner.stopAnimating()
             self.messageStackView.isHidden = false
             self.messageLabel.text = self.locationError
-            print("requesting current location returned an error: \(error)")
         }
     }
 }

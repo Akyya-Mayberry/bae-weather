@@ -81,27 +81,21 @@ class LocationService: NSObject {
 
 extension LocationService: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        print("Authorization status changed...")
         
         switch status {
         case .authorizedWhenInUse, .authorizedAlways:
-            print("App is authorize to use location within app")
             delegate?.locationService(self, didUpdateLocationAuthorization: .authorized)
         case .restricted, .denied:
-            print("App not authorized to use location, so send user to device settings to give authorization")
             delegate?.locationService(self, didUpdateLocationAuthorization: .denied)
         case .notDetermined:
-            print(" User has not decided to give or reject access, ask for location permission.")
             delegate?.locationService(self, didUpdateLocationAuthorization: .notDetermined)
         default:
-            print("Uknown status update")
             delegate?.locationService(self, didUpdateLocationAuthorization: .notDetermined)
         }
         
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Getting location failed with error: \(error)")
         delegate?.locationService(self, didFailWith: error)
     }
 }

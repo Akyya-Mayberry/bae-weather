@@ -11,7 +11,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
-    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
@@ -54,28 +53,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 extension SceneDelegate {
     
     func loadTabBarController() {
-        
         // load weather view controller with last known weather
-        
         let userDefaultsService = UserDefaultsService.sharedInstance
-        let lastKnownWeather = userDefaultsService.lastKnownWeather
-        
-        // Send to homepage if there's previous weather
-        if lastKnownWeather != nil {
-            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-            
-            let weatherVC = storyboard.instantiateViewController(identifier: String(describing: WeatherViewController.self)) as! WeatherViewController
-            weatherVC.weatherViewModel = WeatherViewModel(weather: lastKnownWeather)
-            weatherVC.weatherViewModel.delegate = weatherVC.self
-            
-            let settingsVC = storyboard.instantiateViewController(identifier: String(describing: SettingsViewController.self)) as! SettingsViewController
-            
-            
-            let tabBarController = UITabBarController()
-            tabBarController.viewControllers = [weatherVC, settingsVC]
-            
-            self.window?.rootViewController = tabBarController
+        guard let lastKnownWeather = userDefaultsService.lastKnownWeather else {
+            return
         }
+        
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let weatherVC = storyboard.instantiateViewController(identifier: String(describing: WeatherViewController.self)) as! WeatherViewController
+        weatherVC.weatherViewModel = WeatherViewModel(weather: lastKnownWeather)
+        weatherVC.weatherViewModel.delegate = weatherVC.self
+        
+        let settingsVC = storyboard.instantiateViewController(identifier: String(describing: SettingsViewController.self)) as! SettingsViewController
+        let tabBarController = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as! UITabBarController
+        tabBarController.viewControllers = [weatherVC, settingsVC]
+        changeRootViewController(to: tabBarController)
+    }
+    
+    func changeRootViewController(to vc: UIViewController) {
+        guard let window = self.window else {
+            return
+        }
+        window.rootViewController = vc
+        UIView.transition(with: window, duration: 0.7, options: [.transitionCrossDissolve], animations: nil, completion: nil)
     }
 }
 

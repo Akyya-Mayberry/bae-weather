@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="STo-SD-Fbo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="STo-SD-Fbo">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,9 +16,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="219" image="sample-hot" translatesAutoresizingMaskIntoConstraints="NO" id="c35-Vg-ELG" userLabel="Bae Image View">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="219" translatesAutoresizingMaskIntoConstraints="NO" id="c35-Vg-ELG" userLabel="Bae Image View">
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wzL-jh-eZG">
                                 <rect key="frame" x="15" y="59" width="384" height="165.5"/>
@@ -373,34 +373,36 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Yd3-Qr-Xbl" userLabel="Current Image Set Stack View">
                                         <rect key="frame" x="5" y="43" width="384" height="90"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5cM-tB-Xqr" userLabel="Freezing Image View" customClass="ModelImageView" customModule="BaeWeather" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="5cM-tB-Xqr" secondAttribute="height" multiplier="1:1" id="Daw-IS-j1K"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mMs-a9-3NS" userLabel="Cold View" customClass="ModelImageView" customModule="BaeWeather" customModuleProvider="target">
-                                                <rect key="frame" x="98" y="0.0" width="90" height="90"/>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="mMs-a9-3NS" secondAttribute="height" multiplier="1:1" id="47i-d4-fy9"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BaP-GW-9x9" userLabel="Warm View" customClass="ModelImageView" customModule="BaeWeather" customModuleProvider="target">
-                                                <rect key="frame" x="196" y="0.0" width="90" height="90"/>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="BaP-GW-9x9" secondAttribute="height" multiplier="1:1" id="I9O-ei-SLd"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PFj-wG-wty" userLabel="Hot View" customClass="ModelImageView" customModule="BaeWeather" customModuleProvider="target">
-                                                <rect key="frame" x="294" y="0.0" width="90" height="90"/>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="PFj-wG-wty" secondAttribute="height" multiplier="1:1" id="uMt-M6-rfA"/>
-                                                </constraints>
-                                            </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="0IA-ur-g2Z">
+                                                <rect key="frame" x="0.0" y="0.0" width="384" height="90"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5cM-tB-Xqr" userLabel="Freezing View" customClass="ModelView" customModule="BaeWeather" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mMs-a9-3NS" userLabel="Cold View" customClass="ModelView" customModule="BaeWeather" customModuleProvider="target">
+                                                        <rect key="frame" x="98" y="0.0" width="90" height="90"/>
+                                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="mMs-a9-3NS" secondAttribute="height" multiplier="1:1" id="47i-d4-fy9"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BaP-GW-9x9" userLabel="Warm View" customClass="ModelView" customModule="BaeWeather" customModuleProvider="target">
+                                                        <rect key="frame" x="196" y="0.0" width="90" height="90"/>
+                                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="BaP-GW-9x9" secondAttribute="height" multiplier="1:1" id="I9O-ei-SLd"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PFj-wG-wty" userLabel="Hot View" customClass="ModelView" customModule="BaeWeather" customModuleProvider="target">
+                                                        <rect key="frame" x="294" y="0.0" width="90" height="90"/>
+                                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="PFj-wG-wty" secondAttribute="height" multiplier="1:1" id="uMt-M6-rfA"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -428,7 +430,7 @@
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MYM-0y-rvb">
                                         <rect key="frame" x="10" y="10" width="374" height="442"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="gZ1-qr-WTM">
                                             <size key="itemSize" width="408" height="573"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -876,7 +878,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="8dW-sy-Vjp">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="sIU-Sa-WPw" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="sIU-Sa-WPw" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="05I-7W-YKX"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="Nkg-Ik-BYT">
@@ -962,19 +964,18 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrow.clockwise" catalog="system" width="56" height="64"/>
+        <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
         <image name="cancel" width="100" height="100"/>
         <image name="edit" width="100" height="100"/>
         <image name="edit-filled" width="100" height="100"/>
         <image name="heart-filled" width="100" height="100"/>
         <image name="icon-hot" width="100" height="100"/>
-        <image name="moon" catalog="system" width="64" height="60"/>
+        <image name="moon" catalog="system" width="128" height="121"/>
         <image name="navigation-filled-18dp-1" width="36" height="36"/>
-        <image name="sample-hot" width="1920" height="1280"/>
         <image name="save" width="100" height="100"/>
         <image name="settings" width="25" height="25"/>
         <image name="settings-filled" width="25" height="25"/>
-        <image name="sunrise" catalog="system" width="64" height="48"/>
+        <image name="sunrise" catalog="system" width="128" height="97"/>
         <image name="weather" width="25" height="25"/>
         <image name="weather-filled" width="25" height="25"/>
     </resources>

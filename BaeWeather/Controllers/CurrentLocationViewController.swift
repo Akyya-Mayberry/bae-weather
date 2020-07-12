@@ -78,14 +78,12 @@ extension CurrentLocationViewController: LocationServiceDelegate {
     func locationService(_ locationService: LocationService, didUpdateLocationAuthorization status: LocationStatusUpdate) {
         switch status {
         case .authorized:
-            print("In request vc current location is authorized, send to loading page")
             // animates gps icon
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
                 self.requestLocationButton.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/3))
             }, completion: nil)
             delegate?.didAuthorizeCurrentLocation(self)
         case .denied:
-            print("Show screen to request access or ask view model to request access")
             showLinkToSettings()
         default:
             locationService.requestLocation()
@@ -93,8 +91,6 @@ extension CurrentLocationViewController: LocationServiceDelegate {
     }
     
     func locationService(_ locationService: LocationService, didFailWith error: Error) {
-        print("In request vc location manager failed. Alert user of error. Error: \(error).")
-        
         DispatchQueue.main.async {
             self.messageLabel.text = self.locationError
             self.requestWeatherStackView.isHidden = true
@@ -105,8 +101,6 @@ extension CurrentLocationViewController: LocationServiceDelegate {
 
 extension UIViewController {
     func showLinkToSettings() {
-        print("In request vc Location is not granted, inform user it's needed")
-        
         let locationNeededAlertController = UIAlertController (title: "Current Location Required", message: "To get current weather, access to your location is needed. Continue to settings to enable access.", preferredStyle: .alert)
         
         let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
@@ -116,9 +110,7 @@ extension UIViewController {
             }
             
             if UIApplication.shared.canOpenURL(settingsUrl) {
-                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                    print("User taken to settings: \(success)")
-                })
+                UIApplication.shared.open(settingsUrl, completionHandler: nil)
             }
         }
         

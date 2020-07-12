@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ModelImageView" customModule="OnrampProject" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ModelView" customModule="BaeWeather" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="h7M-qo-6HP"/>
                 <outlet property="modelImageView" destination="gT0-tu-gfZ" id="exV-yq-Fd7"/>
@@ -19,26 +19,26 @@
             <rect key="frame" x="0.0" y="0.0" width="413" height="295"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="765" verticalCompressionResistancePriority="771" image="sample-hot" translatesAutoresizingMaskIntoConstraints="NO" id="gT0-tu-gfZ">
+                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="765" verticalCompressionResistancePriority="771" translatesAutoresizingMaskIntoConstraints="NO" id="gT0-tu-gfZ">
                     <rect key="frame" x="0.0" y="44" width="413" height="251"/>
                     <gestureRecognizers/>
                     <connections>
                         <outletCollection property="gestureRecognizers" destination="M4l-Kg-Odr" appends="YES" id="Ohn-k2-H7u"/>
                     </connections>
                 </imageView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lsf-7A-jW8" customClass="WeatherCategoryView" customModule="OnrampProject" customModuleProvider="target">
-                    <rect key="frame" x="300" y="64" width="108" height="110"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lsf-7A-jW8" customClass="WeatherCategoryView" customModule="BaeWeather" customModuleProvider="target">
+                    <rect key="frame" x="300" y="64" width="108" height="108"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="108" id="vrj-PW-QLJ"/>
+                        <constraint firstAttribute="width" secondItem="Lsf-7A-jW8" secondAttribute="height" multiplier="1:1" id="txx-dd-PQB"/>
+                        <constraint firstAttribute="width" priority="250" constant="108" id="vrj-PW-QLJ"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="gT0-tu-gfZ" secondAttribute="bottom" id="0cg-2b-MFb"/>
                 <constraint firstItem="gT0-tu-gfZ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="BqP-Hx-Gu3"/>
-                <constraint firstItem="Lsf-7A-jW8" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" constant="-121" id="Jry-xe-6J6"/>
                 <constraint firstItem="gT0-tu-gfZ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="PNv-5N-GGi"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="gT0-tu-gfZ" secondAttribute="trailing" id="POM-L0-dJg"/>
                 <constraint firstItem="Lsf-7A-jW8" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="X33-0j-kXu"/>
@@ -54,7 +54,4 @@
             </connections>
         </tapGestureRecognizer>
     </objects>
-    <resources>
-        <image name="sample-hot" width="1920" height="1280"/>
-    </resources>
 </document>

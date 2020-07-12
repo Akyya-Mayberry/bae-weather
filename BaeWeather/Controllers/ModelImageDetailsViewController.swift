@@ -43,7 +43,7 @@ class ModelImageDetailsViewController: UIViewController {
         }
     }
     
-    var modelImageView: ModelImageView!
+    var modelImageView: ModelView!
     var weatherModelImage: WeatherModelImage!
     var delegate: ModelImageDetailsViewControllerDelegate?
     var modelImageViewModel = ModelImageViewModel()
@@ -81,7 +81,6 @@ class ModelImageDetailsViewController: UIViewController {
         modelImageViewModel.saveModelImage(data: imageData, for: weatherModelImage.typeOfWeather, asDefault: self.useDefaultImageSwitch.isOn) { (success, imageUrl) in
             if success {
                 DispatchQueue.main.async {
-                    print("successfully saved custom imaged!!!!")
                     self.saveButton.setImage(UIImage(named: "checkmark"), for: .normal)
                     
                     // redundant
@@ -100,7 +99,6 @@ class ModelImageDetailsViewController: UIViewController {
             } else {
                 DispatchQueue.main.async {
                     // TODO: update UI to reflect failure to save image
-                    print("failed to save custom image")
                 }
             }
         }
@@ -199,9 +197,7 @@ class ModelImageDetailsViewController: UIViewController {
 // MARK: - Extensions
 
 extension ModelImageDetailsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        print("user selected photo: \(info)")
-        
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {      
         guard let image = info[.editedImage] as? UIImage else {
             return
         }

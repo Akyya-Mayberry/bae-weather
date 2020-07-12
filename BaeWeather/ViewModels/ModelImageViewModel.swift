@@ -203,12 +203,12 @@ class ModelImageViewModel {
                 
                 completion(true, imageURL)
             } else {
-                print("Error saving model image in model image view model")
                 completion(false, nil)
             }
         }
     }
     
+    // TODO: REMOVE
     func getCategory(for typeOfWeather: WeatherCategory) -> String {
         switch typeOfWeather {
         case .freezing:

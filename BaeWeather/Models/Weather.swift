@@ -88,5 +88,33 @@ struct TypeOfWeather: Codable {
             category = .hot
         }
     }
+    
+    static func getCategoryString(for typeOfWeather: WeatherCategory) -> String {
+        switch typeOfWeather {
+        case .freezing:
+            return "Freezing"
+        case .cold:
+            return "Cold"
+        case .warm:
+            return "Warm"
+        default:
+            return "Hot"
+        }
+    }
+    
+    static func getCategory(for typeOfWeather: String) -> WeatherCategory? {
+        let typeOfWeather = typeOfWeather.lowercased()
+        switch typeOfWeather {
+        case "freezing":
+            return .freezing
+        case "cold":
+            return .cold
+        case "warm":
+            return .warm
+        case "hot":
+            return .hot
+        default:
+            return nil
+        }
+    }
 }
-

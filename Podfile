@@ -6,6 +6,5 @@ target 'BaeWeather' do
   use_frameworks!
 
   # Pods for BaeWeather
-  pod 'Alamofire', '~> 5.2'
-
+    pod 'Alamofire', '~> 5.0'
 end

@@ -57,8 +57,6 @@ class WeatherViewController: UIViewController {
     
     @IBAction func didChangeWeatherBlock(_ sender: UISlider) {
         let index = Int(sender.value)
-        print("Slider new value: \(index)")
-        
         // TODO: Hourly forecast currently not available, will have
         // to use seed data or hold off on this
     }
@@ -78,33 +76,29 @@ class WeatherViewController: UIViewController {
     }
     
     private func updateUI() {
-        DispatchQueue.main.async {
-            guard self.weatherViewModel != nil, self.weatherViewModel.weather != nil else {
-                return
-            }
-            
-            self.loadWeatherModelImage()
-            
-            self.currentWeatherLabel.text = "\(self.weatherViewModel.currentTemp!)°"
-            self.currentDateLabel.text = self.weatherViewModel.currentDateAsString
-            self.lastTimeUpdatedLabel.text = self.weatherViewModel.lastUpdateTime
-            
-            self.modelNameLabel.text = "\(ModelImageViewModel.getModelName()) Weather"
-            self.locationLabel.text = self.weatherViewModel.location
-            
-            self.refreshWeatherImageView.isHidden = false
-            self.loadingSpinner.isHidden = true
-            self.refreshWeatherImageView.isHidden = false
-            self.errorMessageView.isHidden = true
+        guard self.weatherViewModel != nil, self.weatherViewModel.weather != nil else {
+            return
         }
+        
+        self.loadWeatherModelImage()
+        
+        self.currentWeatherLabel.text = "\(self.weatherViewModel.currentTemp!)°"
+        self.currentDateLabel.text = self.weatherViewModel.currentDateAsString
+        self.lastTimeUpdatedLabel.text = self.weatherViewModel.lastUpdateTime
+        
+        self.modelNameLabel.text = "\(ModelImageViewModel.getModelName()) Weather"
+        self.locationLabel.text = self.weatherViewModel.location
+        
+        self.refreshWeatherImageView.isHidden = false
+        self.loadingSpinner.isHidden = true
+        self.refreshWeatherImageView.isHidden = false
+        self.errorMessageView.isHidden = true
     }
     
     @objc func onUpdateModelName(_ notification: Notification) {
         if let modelInfo = notification.userInfo as? [String: String] {
             if let modelName = modelInfo["name"] {
-                DispatchQueue.main.async {
-                    self.modelNameLabel.text = "\(modelName) Weather"
-                }
+                self.modelNameLabel.text = "\(modelName) Weather"
             }
         }
     }
@@ -116,8 +110,6 @@ class WeatherViewController: UIViewController {
                     DispatchQueue.main.async {
                         self.modelImageView.image = UIImage(contentsOfFile: weatherModelImage!.name)
                     }
-                } else {
-                    print("failed to get current weather model image")
                 }
             }
         }
@@ -130,7 +122,6 @@ extension WeatherViewController: WeatherViewModelDelegate {
     }
     
     func didUpdateWeather(_ weatherViewModel: WeatherViewModel) {
-        print("Weather view model gave view controller the delegate a weather update")
         updateUI()
     }
     
@@ -140,7 +131,6 @@ extension WeatherViewController: WeatherViewModelDelegate {
             self.refreshWeatherImageView.isHidden = false
             self.errorMessageView.isHidden = false
             self.errorLabel.text = self.weatherError
-            print("Error with viewModel fetching weather: \(error)")
         }
     }
 }
@@ -150,9 +140,7 @@ extension WeatherViewController: WeatherViewModelDelegate {
  **/
 extension WeatherViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         let touch = touches.first!
-        
         if touch.view == refreshWeatherImageView {
             refreshWeatherImageView.tintColor = .white
         }
