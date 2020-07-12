@@ -61,7 +61,6 @@ class FileService {
      */
     private func getFilePath(for item: String) -> URL? {
         guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            print("Error getting user's document directory")
             return nil
         }
         
@@ -71,7 +70,6 @@ class FileService {
     
     private func store(data: Data, name: String) -> (Bool, URL?) {
         guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            print("Error getting user's document directory")
             return (false, nil)
         }
         
@@ -81,7 +79,6 @@ class FileService {
             try data.write(to: itemUrl)
             return (true, itemUrl)
         } catch let e {
-            print("Error saving item to documents directory: \(e)")
             return (false, nil)
         }
     }

@@ -96,7 +96,6 @@ class WeatherViewModel {
             return currentLocation
         }
         
-        print("Show there was an error getting current location")
         locationService.stopUpdatingLocation()
         return nil
     }
@@ -131,9 +130,7 @@ class WeatherViewModel {
     }
     
     func getCurrentWeather() {
-        
         guard let currentLocation = getCurrentLocation() else {
-            print("Error getting current location")
             return
         }
         

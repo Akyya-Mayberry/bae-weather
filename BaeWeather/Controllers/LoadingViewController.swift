@@ -93,7 +93,6 @@ extension LoadingViewController: WeatherViewModelDelegate {
             self.loadingSpinner.stopAnimating()
             self.messageStackView.isHidden = false
             self.messageLabel.text = self.weatherError
-            print("loading weather returned an error: \(error)")
         }
     }
     
@@ -121,7 +120,6 @@ extension LoadingViewController: LocationServiceDelegate {
             self.loadingSpinner.stopAnimating()
             self.messageStackView.isHidden = false
             self.messageLabel.text = self.locationError
-            print("requesting current location returned an error: \(error)")
         }
     }
 }

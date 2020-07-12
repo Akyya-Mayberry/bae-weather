@@ -57,8 +57,6 @@ class WeatherViewController: UIViewController {
     
     @IBAction func didChangeWeatherBlock(_ sender: UISlider) {
         let index = Int(sender.value)
-        print("Slider new value: \(index)")
-        
         // TODO: Hourly forecast currently not available, will have
         // to use seed data or hold off on this
     }
@@ -116,8 +114,6 @@ class WeatherViewController: UIViewController {
                     DispatchQueue.main.async {
                         self.modelImageView.image = UIImage(contentsOfFile: weatherModelImage!.name)
                     }
-                } else {
-                    print("failed to get current weather model image")
                 }
             }
         }
@@ -130,7 +126,6 @@ extension WeatherViewController: WeatherViewModelDelegate {
     }
     
     func didUpdateWeather(_ weatherViewModel: WeatherViewModel) {
-        print("Weather view model gave view controller the delegate a weather update")
         updateUI()
     }
     
@@ -140,7 +135,6 @@ extension WeatherViewController: WeatherViewModelDelegate {
             self.refreshWeatherImageView.isHidden = false
             self.errorMessageView.isHidden = false
             self.errorLabel.text = self.weatherError
-            print("Error with viewModel fetching weather: \(error)")
         }
     }
 }

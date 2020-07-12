@@ -93,8 +93,6 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func didChangeUseDefaultPicsSwitch(_ sender: UISwitch) {
-        
-        print("did change default pic switch")
         modelImageViewModel.setDefaultImages(on: sender.isOn)
         
         if sender.isOn {
