@@ -7,5 +7,4 @@ target 'BaeWeather' do
 
   # Pods for BaeWeather
     pod 'Alamofire', '~> 5.0'
-
 end
