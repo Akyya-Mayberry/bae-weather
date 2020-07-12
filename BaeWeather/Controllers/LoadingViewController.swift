@@ -84,9 +84,7 @@ extension LoadingViewController: WeatherViewModelDelegate {
             
             let tabBarController = UITabBarController()
             tabBarController.viewControllers = [weatherVC, settingsVC]
-            tabBarController.modalPresentationStyle = .fullScreen
-            
-            self.present(tabBarController, animated: true, completion: nil)
+            (UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate).changeRootViewController(to: tabBarController)
         }
     }
     
@@ -98,7 +96,7 @@ extension LoadingViewController: WeatherViewModelDelegate {
             print("loading weather returned an error: \(error)")
         }
     }
-     
+    
     func didUpdateModelImageDetails(_ weatherViewModel: WeatherViewModel, modelImageViewModel: ModelImageViewModel) {
         //
     }

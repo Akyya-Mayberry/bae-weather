@@ -150,9 +150,7 @@ extension WeatherViewController: WeatherViewModelDelegate {
  **/
 extension WeatherViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         let touch = touches.first!
-        
         if touch.view == refreshWeatherImageView {
             refreshWeatherImageView.tintColor = .white
         }

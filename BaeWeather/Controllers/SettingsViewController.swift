@@ -52,7 +52,7 @@ class SettingsViewController: UIViewController {
     
     private var collections: [[WeatherModelImage?]] = [[]] {
         didSet {
-            createThumbnails()
+            loadThumbnailImages()
         }
     }
     
@@ -62,15 +62,14 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        getImages()
-        
+        DispatchQueue.main.async {
+            self.getImages()
+            
+        }
         collectionView.dataSource = self
         collectionView.delegate = self
         nameTextField.delegate = self
         modelImageViewModel.delegate = self
-        
-        updateUI()
         
         // temporary - sets default images
         modelSetImageViews.first?.select()
@@ -78,6 +77,8 @@ class SettingsViewController: UIViewController {
         
         // hides model name editing
         editNameStackView.isHidden = true
+        updateUI()
+        createThumbnails()
     }
     
     @IBAction func didChangeUseDefaultNameSwitch(_ sender: UISwitch) {
@@ -123,35 +124,34 @@ class SettingsViewController: UIViewController {
     }
     
     private func updateUI() {
-        DispatchQueue.main.async {
-            // TODO: move certain ui changes to funcs for reuse
-            
-            // enable/disable editing name field
-            if self.modelImageViewModel.isUsingDefaultName() {
-                self.nameTextField.isEnabled = false
-                self.nameTextField.text = ""
-                self.defaultNameSwitch.isOn = true
+        // TODO: move certain ui changes to funcs for reuse
+        guard self.modelImageViewModel != nil else {
+            return
+        }
+        // enable/disable editing name field
+        if self.modelImageViewModel.isUsingDefaultName() {
+            self.nameTextField.isEnabled = false
+            self.nameTextField.text = ""
+            self.defaultNameSwitch.isOn = true
+        } else {
+            self.nameTextField.isEnabled = true
+            self.defaultNameSwitch.isOn = false
+        }
+        
+        if self.modelImageViewModel.isUsingDefaultImages() {
+            self.defaultPicsSwitch.isOn = true
+        }
+        
+        // show/hide edit name view
+        self.editNameButton.isSelected = !self.editNameStackView.isHidden
+        self.modelNameLabel.text = ModelImageViewModel.getModelName()
+        
+        // sets selected thumbnail
+        for (index, modelView) in self.modelSetImageViews.enumerated() {
+            if index != self.modelImageViewModel.selectedThumbnailIndex {
+                modelView.deselect()
             } else {
-                self.nameTextField.isEnabled = true
-                self.defaultNameSwitch.isOn = false
-            }
-            
-            if self.modelImageViewModel.isUsingDefaultImages() {
-                self.defaultPicsSwitch.isOn = true
-            }
-            
-            // show/hide edit name view
-            self.editNameButton.isSelected = !self.editNameStackView.isHidden
-            
-            self.modelNameLabel.text = ModelImageViewModel.getModelName()
-            
-            // sets selected thumbnail
-            for (index, modelView) in self.modelSetImageViews.enumerated() {
-                if index != self.modelImageViewModel.selectedThumbnailIndex {
-                    modelView.deselect()
-                } else {
-                    modelView.select()
-                }
+                modelView.select()
             }
         }
     }
@@ -183,12 +183,18 @@ class SettingsViewController: UIViewController {
             modelView.typeOfWeather = typeOfWeather
             modelView.hideWeatherCategory(true)
             
-            let weatherModelImage = collections[0][index]
-            modelView.image = UIImage(contentsOfFile: weatherModelImage!.name)
-            
             // circular thumbnails
             modelView.layer.cornerRadius = (modelView.frame.size.height / 2)
             modelView.clipsToBounds = true
+        }
+    }
+    
+    private func loadThumbnailImages() {
+        for (index, modelView) in modelSetImageViews.enumerated() {
+            DispatchQueue.main.async {
+                let weatherModelImage = self.collections[0][index]
+                modelView.image = UIImage(contentsOfFile: weatherModelImage!.name)
+            }
         }
     }
     
@@ -223,8 +229,8 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
         
         modelView.typeOfWeather = modelImageDetails?.typeOfWeather
         modelView.delegate = self
-        modelView.weatherCategoryView.category = modelImageViewModel.getCategory(for: typeOfWeather)
-        modelView.weatherCategoryView.image = UIImage(named: modelImageViewModel.getIconName(for: typeOfWeather))!.withRenderingMode(
+        modelView.weatherCategoryView.category = modelImageViewModel.getCategory(for: typeOfWeather) as! String
+        modelView.weatherCategoryView.image = UIImage(named: (modelImageViewModel.getIconName(for: typeOfWeather)))!.withRenderingMode(
             UIImage.RenderingMode.alwaysTemplate)
         modelView.weatherCategoryView.tintColor = #colorLiteral(red: 1, green: 0.9265189341, blue: 0.6531018429, alpha: 1)
         
@@ -352,8 +358,8 @@ extension SettingsViewController {
             
             UIView.animate(withDuration: 0.5, animations: {
                 self.nameTextField.isHidden = hideEditFields
-                self.defaultNameSwitch.isOn = self.modelImageViewModel.isUsingDefaultName()
-                self.nameTextField.isEnabled = !self.modelImageViewModel.isUsingDefaultName()
+                self.defaultNameSwitch.isOn = ((self.modelImageViewModel.isUsingDefaultName()) != nil)
+                self.nameTextField.isEnabled = !(self.modelImageViewModel.isUsingDefaultName())
                 self.editNameStackView.isHidden = hideEditFields
                 
                 let modelNameHeight = self.modelNameViewHeightConstraint.constant
@@ -380,7 +386,7 @@ extension SettingsViewController {
         if button.tag == 2 {
             //            UIView.animate(withDuration: 0.5) {
             self.editImagesStackView.isHidden = !self.editImagesStackView.isHidden
-            self.defaultPicsSwitch.isOn = self.modelImageViewModel.isUsingDefaultImages()
+            self.defaultPicsSwitch.isOn = ((self.modelImageViewModel.isUsingDefaultImages()) != nil)
             //            }
         }
     }
