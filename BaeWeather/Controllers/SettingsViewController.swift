@@ -172,6 +172,7 @@ class SettingsViewController: UIViewController {
         if let image = image {
             imageSetView.image = image
         }
+        
         return imageSetView
     }
     
@@ -188,7 +189,11 @@ class SettingsViewController: UIViewController {
         for (index, modelView) in modelSetImageViews.enumerated() {
             DispatchQueue.main.async {
                 let weatherModelImage = self.collections[0][index]
-                modelView.image = UIImage(contentsOfFile: weatherModelImage!.name)
+                UIView.transition(with: modelView,
+                                  duration: 0.75 * Double((Double(index) + 0.5)),
+                                  options: .transitionCrossDissolve,
+                                  animations: { modelView.image = UIImage(contentsOfFile: weatherModelImage!.name) },
+                                  completion: nil)
                 modelView.layer.cornerRadius = modelView.bounds.size.height/2
                 modelView.clipsToBounds = true
                 self.view.layoutIfNeeded()
@@ -223,7 +228,17 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
         
         let typeOfWeather = WeatherCategory(rawValue: indexPath.row)!
         let modelImageDetails = collections[0][indexPath.row]
-        let modelView = createImageSet(using: UIImage(contentsOfFile: modelImageDetails!.name))
+        let image = UIImage(contentsOfFile: modelImageDetails!.name)
+        let modelView = createImageSet(using: nil)
+        
+        DispatchQueue.main.async {
+            UIView.transition(with: modelView,
+                              duration: 1.2,
+                              options: .transitionCrossDissolve,
+                              animations: { modelView.image = image },
+                              completion: nil)
+        }
+        
         
         modelView.typeOfWeather = modelImageDetails?.typeOfWeather
         modelView.delegate = self

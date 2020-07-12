@@ -76,33 +76,29 @@ class WeatherViewController: UIViewController {
     }
     
     private func updateUI() {
-        DispatchQueue.main.async {
-            guard self.weatherViewModel != nil, self.weatherViewModel.weather != nil else {
-                return
-            }
-            
-            self.loadWeatherModelImage()
-            
-            self.currentWeatherLabel.text = "\(self.weatherViewModel.currentTemp!)°"
-            self.currentDateLabel.text = self.weatherViewModel.currentDateAsString
-            self.lastTimeUpdatedLabel.text = self.weatherViewModel.lastUpdateTime
-            
-            self.modelNameLabel.text = "\(ModelImageViewModel.getModelName()) Weather"
-            self.locationLabel.text = self.weatherViewModel.location
-            
-            self.refreshWeatherImageView.isHidden = false
-            self.loadingSpinner.isHidden = true
-            self.refreshWeatherImageView.isHidden = false
-            self.errorMessageView.isHidden = true
+        guard self.weatherViewModel != nil, self.weatherViewModel.weather != nil else {
+            return
         }
+        
+        self.loadWeatherModelImage()
+        
+        self.currentWeatherLabel.text = "\(self.weatherViewModel.currentTemp!)°"
+        self.currentDateLabel.text = self.weatherViewModel.currentDateAsString
+        self.lastTimeUpdatedLabel.text = self.weatherViewModel.lastUpdateTime
+        
+        self.modelNameLabel.text = "\(ModelImageViewModel.getModelName()) Weather"
+        self.locationLabel.text = self.weatherViewModel.location
+        
+        self.refreshWeatherImageView.isHidden = false
+        self.loadingSpinner.isHidden = true
+        self.refreshWeatherImageView.isHidden = false
+        self.errorMessageView.isHidden = true
     }
     
     @objc func onUpdateModelName(_ notification: Notification) {
         if let modelInfo = notification.userInfo as? [String: String] {
             if let modelName = modelInfo["name"] {
-                DispatchQueue.main.async {
-                    self.modelNameLabel.text = "\(modelName) Weather"
-                }
+                self.modelNameLabel.text = "\(modelName) Weather"
             }
         }
     }

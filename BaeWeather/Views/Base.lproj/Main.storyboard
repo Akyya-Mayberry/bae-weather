@@ -16,9 +16,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="219" image="sample-hot" translatesAutoresizingMaskIntoConstraints="NO" id="c35-Vg-ELG" userLabel="Bae Image View">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="219" translatesAutoresizingMaskIntoConstraints="NO" id="c35-Vg-ELG" userLabel="Bae Image View">
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wzL-jh-eZG">
                                 <rect key="frame" x="15" y="59" width="384" height="165.5"/>
@@ -430,7 +430,7 @@
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MYM-0y-rvb">
                                         <rect key="frame" x="10" y="10" width="374" height="442"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="gZ1-qr-WTM">
                                             <size key="itemSize" width="408" height="573"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -972,7 +972,6 @@
         <image name="icon-hot" width="100" height="100"/>
         <image name="moon" catalog="system" width="128" height="121"/>
         <image name="navigation-filled-18dp-1" width="36" height="36"/>
-        <image name="sample-hot" width="1920" height="1280"/>
         <image name="save" width="100" height="100"/>
         <image name="settings" width="25" height="25"/>
         <image name="settings-filled" width="25" height="25"/>
