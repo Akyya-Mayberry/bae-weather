@@ -43,7 +43,7 @@ class ModelImageDetailsViewController: UIViewController {
         }
     }
     
-    var modelImageView: ModelImageView!
+    var modelImageView: ModelView!
     var weatherModelImage: WeatherModelImage!
     var delegate: ModelImageDetailsViewControllerDelegate?
     var modelImageViewModel = ModelImageViewModel()

@@ -20,7 +20,16 @@ class ModelView: UIView {
     
     private(set) var isSelected = false
     var delegate: ModelImageViewDelegate?
-    var typeOfWeather: WeatherCategory?
+    var typeOfWeather: WeatherCategory? {
+        get {
+            return TypeOfWeather.getCategory(for: weatherCategoryView.category)
+        }
+        set {
+            if newValue != nil {
+                weatherCategoryView.category = TypeOfWeather.getCategoryString(for: newValue!)
+            }
+        }
+    }
     
     var image: UIImage? {
         get { return modelImageView.image }
@@ -56,12 +65,12 @@ class ModelView: UIView {
     }
     
     func select() {
-        modelImageView.layer.opacity = 1
+        modelImageView.alpha = 1
         isSelected = true
     }
     
     func deselect() {
-        modelImageView.layer.opacity = 0.3
+        modelImageView.alpha = 0.3
         isSelected = false
     }
     

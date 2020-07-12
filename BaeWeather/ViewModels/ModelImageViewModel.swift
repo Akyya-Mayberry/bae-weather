@@ -208,6 +208,7 @@ class ModelImageViewModel {
         }
     }
     
+    // TODO: REMOVE
     func getCategory(for typeOfWeather: WeatherCategory) -> String {
         switch typeOfWeather {
         case .freezing:

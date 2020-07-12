@@ -12,7 +12,7 @@ class SettingsViewController: UIViewController {
     // MARK: - Properties
     
     @IBOutlet private weak var collectionView: UICollectionView!
-    @IBOutlet var modelSetImageViews: [ModelImageView]!
+    @IBOutlet var modelSetImageViews: [ModelView]!
     @IBOutlet weak var defaultNameSwitch: UISwitch!
     @IBOutlet weak var defaultPicsSwitch: UISwitch!
     @IBOutlet weak var editNameStackView: UIStackView!
@@ -26,7 +26,6 @@ class SettingsViewController: UIViewController {
         didSet {
             let editImage = UIImage(named: "edit-filled")
             let editTintedImage = editImage?.withRenderingMode(.alwaysTemplate)
-            
             editNameButton.setImage(editTintedImage, for: .normal)
             editNameButton.imageView?.contentMode = .scaleAspectFit
             editNameButton.tintColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
@@ -37,7 +36,6 @@ class SettingsViewController: UIViewController {
         didSet {
             let editImage = UIImage(named: "edit-filled")
             let editTintedImage = editImage?.withRenderingMode(.alwaysTemplate)
-            
             editImagesButton.setImage(editTintedImage, for: .normal)
             editImagesButton.imageView?.contentMode = .scaleAspectFit
             editImagesButton.tintColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
@@ -146,23 +144,27 @@ class SettingsViewController: UIViewController {
         
         // sets selected thumbnail
         for (index, modelView) in self.modelSetImageViews.enumerated() {
+            view.layoutIfNeeded()
             if index != self.modelImageViewModel.selectedThumbnailIndex {
                 modelView.deselect()
             } else {
                 modelView.select()
             }
+            modelView.layer.cornerRadius = modelView.bounds.size.height/2
+            modelView.clipsToBounds = true
+            view.layoutIfNeeded()
         }
     }
     
-    private func createImageSet(using image: UIImage?) -> ModelImageView {
+    private func createImageSet(using image: UIImage?) -> ModelView {
         
         // TODO: the height includes a hardcoded number which is
         // the autolayout constraints of model view superviews.
         // This should not be hardcoded.
         
-        let imageSetView = ModelImageView(frame: CGRect(x: 0, y: 0,
-                                                        width: collectionView.frame.width,
-                                                        height: collectionView.frame.height + 36))
+        let imageSetView = ModelView(frame: CGRect(x: 0, y: 0,
+                                                   width: collectionView.frame.width,
+                                                   height: collectionView.frame.height + 36))
         
         imageSetView.clipsToBounds = true
         imageSetView.contentMode = .scaleAspectFill
@@ -170,7 +172,6 @@ class SettingsViewController: UIViewController {
         if let image = image {
             imageSetView.image = image
         }
-        
         return imageSetView
     }
     
@@ -180,10 +181,6 @@ class SettingsViewController: UIViewController {
             modelView.delegate = self
             modelView.typeOfWeather = typeOfWeather
             modelView.hideWeatherCategory(true)
-            
-            // circular thumbnails
-            modelView.layer.cornerRadius = (modelView.frame.size.height / 2)
-            modelView.clipsToBounds = true
         }
     }
     
@@ -192,6 +189,9 @@ class SettingsViewController: UIViewController {
             DispatchQueue.main.async {
                 let weatherModelImage = self.collections[0][index]
                 modelView.image = UIImage(contentsOfFile: weatherModelImage!.name)
+                modelView.layer.cornerRadius = modelView.bounds.size.height/2
+                modelView.clipsToBounds = true
+                self.view.layoutIfNeeded()
             }
         }
     }
@@ -244,7 +244,7 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
 }
 
 extension SettingsViewController: ModelImageViewDelegate {
-    func didTapModelImageView(_ modelImageView: ModelImageView) {
+    func didTapModelImageView(_ modelImageView: ModelView) {
         
         if (modelImageView.superview?.isKind(of: UICollectionViewCell.self))! {
             
@@ -257,14 +257,11 @@ extension SettingsViewController: ModelImageViewDelegate {
             
             show(modelImageDetailsVC, sender: self)
         } else {
-            DispatchQueue.main.async {
-                self.updateUI()
-                modelImageView.select()
-                self.modelImageViewModel.selectedThumbnailIndex = modelImageView.typeOfWeather!.rawValue
-                
-                let indexPath = IndexPath(row: modelImageView.typeOfWeather!.rawValue, section: 0)
-                self.collectionView.scrollToItem(at: indexPath, at: [.centeredHorizontally], animated: true)
-            }
+            modelImageView.select()
+            modelImageViewModel.selectedThumbnailIndex = modelImageView.typeOfWeather!.rawValue
+            updateUI()
+            let indexPath = IndexPath(row: modelImageView.typeOfWeather!.rawValue, section: 0)
+            collectionView.scrollToItem(at: indexPath, at: [.centeredHorizontally], animated: true)
         }
         
     }
@@ -373,8 +370,6 @@ extension SettingsViewController {
                     } else {
                         self.nameTextField.resignFirstResponder()
                     }
-                    
-                    // allows animation of view constraint changes
                     self.view.layoutIfNeeded()
                 }
             }
@@ -382,7 +377,6 @@ extension SettingsViewController {
         
         // edit images
         if button.tag == 2 {
-            //            UIView.animate(withDuration: 0.5) {
             self.editImagesStackView.isHidden = !self.editImagesStackView.isHidden
             self.defaultPicsSwitch.isOn = ((self.modelImageViewModel.isUsingDefaultImages()) != nil)
             //            }

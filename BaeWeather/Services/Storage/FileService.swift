@@ -78,7 +78,7 @@ class FileService {
         do {
             try data.write(to: itemUrl)
             return (true, itemUrl)
-        } catch let e {
+        } catch {
             return (false, nil)
         }
     }
