@@ -77,6 +77,31 @@ class WeatherViewModel {
         return (weather?.date.getTimeAsString())!
     }
     
+    var lowTempString: String {
+        guard weather != nil else {
+            return "--"
+        }
+        return String(describing: weather!.low)
+    }
+    
+    var highTempString: String {
+        guard weather != nil else {
+            return "--"
+        }
+        return String(describing: weather!.high)
+    }
+    
+    var lowHighTempString: String {
+        return "L\(lowTempString)°/H\(highTempString)°"
+    }
+    
+    var tempsString: String {
+        guard weather != nil else {
+            return "--°"
+        }
+        return "\(currentTemp!)°\(lowHighTempString)"
+    }
+    
     // MARK: - Methods
     
     init(weather: Weather?) {
@@ -124,7 +149,7 @@ class WeatherViewModel {
                 let date = Date()
                 let currentHourBlock = HourlyWeatherViewModel.getCurrentWeatherBlockUsing(date: date)
                 
-                self.weather = Weather(date: date, temperature: Int(data.main.temp), hourlyTemps: [:], city: city, state: state, country: data.sys.country, currentHourBlock: currentHourBlock)
+                self.weather = Weather(date: date, temperature: Int(data.main.temp), low: Int(data.main.temp_min), high: Int(data.main.temp_max), hourlyTemps: [:], city: city, state: state, country: data.sys.country, currentHourBlock: currentHourBlock)
             }
         }
     }
@@ -190,7 +215,7 @@ extension WeatherViewModel {
     static func makeWeather(from weatherData: WeatherData) -> Weather {
         let currentHourBlock = HourlyWeatherViewModel.getCurrentWeatherBlockUsing(date: Date())
         
-        let weather = Weather(date: Date(), temperature: Int(weatherData.main.temp), hourlyTemps: [:], city: weatherData.name, state: "", country: weatherData.sys.country, currentHourBlock: currentHourBlock)
+        let weather = Weather(date: Date(), temperature: Int(weatherData.main.temp), low: Int(weatherData.main.temp_min), high: Int(weatherData.main.temp_max), hourlyTemps: [:], city: weatherData.name, state: "", country: weatherData.sys.country, currentHourBlock: currentHourBlock)
         
         return weather
     }
