@@ -76,13 +76,18 @@ class WeatherViewController: UIViewController {
     }
     
     private func updateUI() {
-        guard self.weatherViewModel != nil, self.weatherViewModel.weather != nil else {
+        guard self.weatherViewModel != nil, let _ = self.weatherViewModel.weather else {
             return
         }
         
         self.loadWeatherModelImage()
-        
-        self.currentWeatherLabel.text = "\(self.weatherViewModel.currentTemp!)°"
+        let font = UIFont.systemFont(ofSize: 89.0, weight: .regular)
+        let attributedString = NSMutableAttributedString(string: weatherViewModel.tempsString,
+                                                         attributes: [NSAttributedString.Key.font: font])
+        let boldFontAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20.0), NSAttributedString.Key.foregroundColor: UIColor.white]
+        let range = (weatherViewModel.tempsString as NSString).range(of: weatherViewModel.lowHighTempString)
+        attributedString.addAttributes(boldFontAttribute, range: range)
+        self.currentWeatherLabel.attributedText = attributedString
         self.currentDateLabel.text = self.weatherViewModel.currentDateAsString
         self.lastTimeUpdatedLabel.text = self.weatherViewModel.lastUpdateTime
         

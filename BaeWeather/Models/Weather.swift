@@ -40,6 +40,8 @@ enum WeatherBlockTime: Int, CaseIterable, Comparable, Codable {
 struct Weather: Codable {
     let date: Date
     let temperature: Int
+    let low: Int
+    let high: Int
     let hourlyTemps: [Int: Int]
     let city: String
     let state: String
@@ -55,6 +57,8 @@ struct WeatherData: Codable {
 
 struct Main: Codable {
     let temp: Float
+    let temp_min: Float
+    let temp_max: Float
 }
 
 struct Sys: Codable {
