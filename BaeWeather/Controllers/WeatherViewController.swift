@@ -89,7 +89,7 @@ class WeatherViewController: UIViewController {
         self.currentDateLabel.text = self.weatherViewModel.currentDateAsString
         self.lastTimeUpdatedLabel.text = self.weatherViewModel.lastUpdateTime
         
-        self.modelNameLabel.text = "\(ModelImageViewModel.getModelName()) Weather"
+        self.modelNameLabel.text = "\(ModelImageViewModel.getModelName()) 🥰 Weather"
         self.locationLabel.text = self.weatherViewModel.location
         
         self.refreshWeatherImageView.isHidden = false
@@ -101,7 +101,7 @@ class WeatherViewController: UIViewController {
     @objc func onUpdateModelName(_ notification: Notification) {
         if let modelInfo = notification.userInfo as? [String: String] {
             if let modelName = modelInfo["name"] {
-                self.modelNameLabel.text = "\(modelName) Weather"
+                self.modelNameLabel.text = "\(modelName) 🥰 Weather"
             }
         }
     }

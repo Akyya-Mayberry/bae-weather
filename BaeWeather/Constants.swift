@@ -30,7 +30,7 @@ struct Constants {
             WeatherModelImage(0, name: "abstract-hot", weatherCategory: .hot, isDefault: true)
         ]
         
-        static let modelName = "Bae 🥰"
+        static let modelName = "Bae"
         static let numberOfImageCoections = 1
         static let numberOfImagesInSet = 4
         static let location = (city: "Fresno", state: "California")
