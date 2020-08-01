@@ -164,11 +164,9 @@ class SettingsViewController: UIViewController {
         
         let imageSetView = ModelView(frame: CGRect(x: 0, y: 0,
                                                    width: collectionView.frame.width,
-                                                   height: collectionView.frame.height + 36))
+                                                   height: collectionView.frame.height))
         
         imageSetView.clipsToBounds = true
-        imageSetView.contentMode = .scaleAspectFill
-        
         if let image = image {
             imageSetView.image = image
         }
@@ -192,10 +190,14 @@ class SettingsViewController: UIViewController {
                 UIView.transition(with: modelView,
                                   duration: 0.75 * Double((Double(index) + 0.5)),
                                   options: .transitionCrossDissolve,
-                                  animations: { modelView.image = UIImage(contentsOfFile: weatherModelImage!.name) },
+                                  animations: {
+                                    modelView.image = UIImage(contentsOfFile: weatherModelImage!.name)
+                                    modelView.image?.resizableImage(withCapInsets: UIEdgeInsets(top: 80, left: 80, bottom: 80, right: 80), resizingMode: .stretch)
+                },
                                   completion: nil)
                 modelView.layer.cornerRadius = modelView.bounds.size.height/2
                 modelView.clipsToBounds = true
+                modelView.image?.resizableImage(withCapInsets: UIEdgeInsets(top: 80, left: 80, bottom: 80, right: 80), resizingMode: .stretch)
                 self.view.layoutIfNeeded()
             }
         }

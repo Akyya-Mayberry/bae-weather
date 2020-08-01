@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -16,18 +16,19 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="413" height="295"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="192"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="765" verticalCompressionResistancePriority="771" translatesAutoresizingMaskIntoConstraints="NO" id="gT0-tu-gfZ">
-                    <rect key="frame" x="0.0" y="44" width="413" height="251"/>
+                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="gT0-tu-gfZ">
+                    <rect key="frame" x="0.0" y="44" width="414" height="148"/>
+                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <gestureRecognizers/>
                     <connections>
                         <outletCollection property="gestureRecognizers" destination="M4l-Kg-Odr" appends="YES" id="Ohn-k2-H7u"/>
                     </connections>
                 </imageView>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lsf-7A-jW8" customClass="WeatherCategoryView" customModule="BaeWeather" customModuleProvider="target">
-                    <rect key="frame" x="300" y="64" width="108" height="108"/>
+                    <rect key="frame" x="301" y="64" width="108" height="108"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="Lsf-7A-jW8" secondAttribute="height" multiplier="1:1" id="txx-dd-PQB"/>
@@ -35,18 +36,17 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="gT0-tu-gfZ" secondAttribute="bottom" id="0cg-2b-MFb"/>
-                <constraint firstItem="gT0-tu-gfZ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="BqP-Hx-Gu3"/>
-                <constraint firstItem="gT0-tu-gfZ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="PNv-5N-GGi"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="gT0-tu-gfZ" secondAttribute="trailing" id="POM-L0-dJg"/>
+                <constraint firstItem="gT0-tu-gfZ" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="1aH-ea-Hyz"/>
                 <constraint firstItem="Lsf-7A-jW8" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="X33-0j-kXu"/>
+                <constraint firstItem="gT0-tu-gfZ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="gRK-kt-Xyl"/>
+                <constraint firstItem="gT0-tu-gfZ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="hQq-Ez-316"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Lsf-7A-jW8" secondAttribute="trailing" constant="5" id="ha6-G0-YnA"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="gT0-tu-gfZ" secondAttribute="trailing" id="zUs-E2-8Lb"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="102.17391304347827" y="-97.433035714285708"/>
+            <point key="canvasLocation" x="159.42028985507247" y="-276.5625"/>
         </view>
         <tapGestureRecognizer id="M4l-Kg-Odr">
             <connections>

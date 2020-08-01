@@ -33,7 +33,10 @@ class ModelView: UIView {
     
     var image: UIImage? {
         get { return modelImageView.image }
-        set { modelImageView.image = newValue }
+        set { modelImageView.image = newValue
+            
+                 modelImageView.image?.resizableImage(withCapInsets: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8), resizingMode: .stretch)
+        }
     }
     
     // MARK: - Properties

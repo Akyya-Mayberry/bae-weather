@@ -24,14 +24,14 @@ struct Constants {
         ]
         
         static let weatherModelImages = [
-            WeatherModelImage(0, name: "sample-freezing", weatherCategory: .freezing),
-            WeatherModelImage(0, name: "sample-cold", weatherCategory: .cold),
-            WeatherModelImage(0, name: "sample-warm", weatherCategory: .warm),
-            WeatherModelImage(0, name: "sample-hot", weatherCategory: .hot)
+            WeatherModelImage(0, name: "abstract-freezing", weatherCategory: .freezing, isDefault: true),
+            WeatherModelImage(0, name: "abstract-cold", weatherCategory: .cold, isDefault: true),
+            WeatherModelImage(0, name: "abstract-warm", weatherCategory: .warm, isDefault: true),
+            WeatherModelImage(0, name: "abstract-hot", weatherCategory: .hot, isDefault: true)
         ]
         
-        static let modelName = "Bae"
-        static let numberOfImageCollections = 1
+        static let modelName = "Bae 🥰"
+        static let numberOfImageCoections = 1
         static let numberOfImagesInSet = 4
         static let location = (city: "Fresno", state: "California")
         

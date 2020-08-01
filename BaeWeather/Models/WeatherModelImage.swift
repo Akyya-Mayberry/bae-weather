@@ -17,11 +17,13 @@ struct WeatherModelImage: Codable {
     private(set) var name: String
     private(set) var typeOfWeather: WeatherCategory
     private(set) var date: Date
+    var isDefault: Bool
     
-    init(_ collectionId: Int, name: String, weatherCategory: WeatherCategory) {
+    init(_ collectionId: Int, name: String, weatherCategory: WeatherCategory, isDefault: Bool) {
         self.collectionId = collectionId
         self.name = name
         self.typeOfWeather = weatherCategory
         self.date = Date()
+        self.isDefault = isDefault
     }
 }

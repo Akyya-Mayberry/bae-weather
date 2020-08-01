@@ -64,7 +64,7 @@ class ModelImageViewModel {
             
             getStoredWeatherModelImage(name: imageName) { (imageUrl) in
                 if let imageUrl = imageUrl {
-                    let weatherModelImage = WeatherModelImage(0, name: imageUrl.path, weatherCategory: typeOfWeather)
+                    let weatherModelImage = WeatherModelImage(0, name: imageUrl.path, weatherCategory: typeOfWeather, isDefault: false)
                     completion(weatherModelImage)
                 } else {
                     completion(nil)
@@ -94,8 +94,8 @@ class ModelImageViewModel {
                     // ex. 1-image.png is image used for cold (1) weather
                     let fileName = imageUrl.lastPathComponent
                     let weatherCategory = Int((fileName.components(separatedBy: "-")[0]))
-                    
-                    let weatherModelImage = WeatherModelImage(0, name: imageUrl.path, weatherCategory: WeatherCategory(rawValue: weatherCategory!)!)
+                    let isDefaultImage = currentSettings?.defaultImagesInUse
+                    let weatherModelImage = WeatherModelImage(0, name: imageUrl.path, weatherCategory: WeatherCategory(rawValue: weatherCategory!)!, isDefault: (isDefaultImage != nil))
                     images.append(weatherModelImage)
                 } else {
                     images.append(nil)
