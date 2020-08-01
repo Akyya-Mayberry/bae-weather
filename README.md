@@ -2,6 +2,8 @@
 
 Bae Weather is a weather app that you can personalize. Users are provided with the current weather for their location. The app offers four simple, but convenient weather conditions that are based on a provided temperature. Each of the conditions hot, warm, cold, and freezing includes a weather model photo that can be customized with your bae, kiddos, pets etc.
 
+Try out the app on Testflight: [https://testflight.apple.com/join/tMWToymn] 
+
 ![Bae Weather Demo](bae-weather-demo4.gif)
 
 # Implemented Features
